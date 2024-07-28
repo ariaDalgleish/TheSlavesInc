@@ -4,16 +4,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public float playerSpeed = 2.0f;
-    public float jumpHeight = 1.0f;
-    public float gravityValue = -9.81f;
+    [SerializeField]
+    private float playerSpeed = 2.0f;
+    [SerializeField]
+    private float jumpHeight = 1.0f;
+    [SerializeField]
+    private float gravityValue = -9.81f;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
     private Vector2 movementInput = Vector2.zero;
-    private bool jumped = false;
+    private bool jump = false;
 
     private void Start()
     {
@@ -27,10 +30,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.ReadValue<bool>();
-        jumped = context.action.triggered;
+        if (context.performed)
+        {
+            jump = true;
+        }
+        else if (context.canceled)
+        {
+            jump = false;
+        }
     }
-
 
     void Update()
     {
@@ -49,9 +57,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Changes the height position of the player..
-        if (jumped && groundedPlayer)
+        if (jump && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            jump = false; // Reset jump flag
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;

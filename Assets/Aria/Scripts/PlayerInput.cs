@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    /*
+    
      [SerializeField] int playerID; //This is the playerID that it will search for
 
      //Below references are just to visualise inputs
@@ -132,5 +132,5 @@ public class PlayerInput : MonoBehaviour
      {
          analogStick.localPosition = analogInput * 20; //135 is the multipler to make it go all the way to the edge
      }
-    */
+    
 }
