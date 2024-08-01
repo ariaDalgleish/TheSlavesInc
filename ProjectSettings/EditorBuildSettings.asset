@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Kiki/Stages/Stage1.unity
+    guid: 7874b2a5da7fc5a4cb8ae6d7e02758e6
+  - enabled: 1
+    path: Assets/Kiki/Stages/LoadingScene.unity
+    guid: b650841cd29a2f94dba86c24641e8383
+  - enabled: 1
+    path: Assets/Kiki/Stages/Stage2.unity
+    guid: 74929610f9c7ff443a2b996a0bbda75e
   m_configObjects: {}
