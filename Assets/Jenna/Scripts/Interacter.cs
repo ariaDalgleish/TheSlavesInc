@@ -28,6 +28,11 @@ public class Interacter : MonoBehaviour
         puzzlePanel.SetActive(!puzzlePanel.activeSelf);
     }
 
+    public void HidePuzzlePanel()
+    {
+        puzzlePanel.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
