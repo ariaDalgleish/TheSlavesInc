@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEditor.Build.Content;
 
 public class ElementScript : MonoBehaviour
 {
 
-    public Image oldImage;
-    public Sprite newImage;
+    public Image targetImage;
+    public Sprite[] newImages;
+    public Sprite targetSprite;
+    public GameManager gameManager;
+
+    private int currentIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +29,14 @@ public class ElementScript : MonoBehaviour
 
     public void ImageChange()
     {
-        oldImage.sprite = newImage;
+        if (newImages.Length == 0) return;
+        targetImage.sprite = newImages[currentIndex];   
+
+        currentIndex = (currentIndex+1) % newImages.Length;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ImageChange();
     }
 }
