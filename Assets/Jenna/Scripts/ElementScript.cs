@@ -11,7 +11,7 @@ public class ElementScript : MonoBehaviour
     public Image targetImage;
     public Sprite[] newImages;
     public Sprite targetSprite;
-    public GameManager gameManager;
+ 
 
     private int currentIndex = 0;
 
