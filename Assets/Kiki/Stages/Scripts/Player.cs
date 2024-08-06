@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,14 +25,14 @@ public class Player : MonoBehaviour
         direction = direction.normalized;
         print(direction);
 
-        transform.position += direction *Time.deltaTime*moveSpeed ;
+        transform.position += direction * Time.deltaTime * moveSpeed;
 
         if (direction != Vector3.zero)
         {
-            transform.forward =Vector3.Slerp(transform.forward, direction, Time.deltaTime * rotateSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, direction, Time.deltaTime * rotateSpeed);
             //transform.forward = direction;
         }
-        
+
 
     }
 }
