@@ -11,7 +11,8 @@ public class ElementScript : MonoBehaviour
     public Image targetImage;
     public Sprite[] newImages;
     public Sprite targetSprite;
- 
+    public GameManager gameManager;
+
 
     private int currentIndex = 0;
 
@@ -39,4 +40,11 @@ public class ElementScript : MonoBehaviour
     {
         ImageChange();
     }
+
+    public void SetInitialImage(Sprite initialSprite, Sprite target)
+    {
+        targetImage.sprite = initialSprite;
+        targetSprite = target;
+    }
 }
+

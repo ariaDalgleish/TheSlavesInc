@@ -5985,7 +5985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1210150099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6848,6 +6848,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93e807ddfcd12ee408dac0748e4e8124, type: 3}
   - {fileID: 21300000, guid: ba2d719367adcb645a124eea01574989, type: 3}
   targetSprite: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &1351756135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7359,6 +7360,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93e807ddfcd12ee408dac0748e4e8124, type: 3}
   - {fileID: 21300000, guid: ba2d719367adcb645a124eea01574989, type: 3}
   targetSprite: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &1414484503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7655,6 +7657,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93e807ddfcd12ee408dac0748e4e8124, type: 3}
   - {fileID: 21300000, guid: ba2d719367adcb645a124eea01574989, type: 3}
   targetSprite: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &1470646394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7922,6 +7925,7 @@ MonoBehaviour:
   targetImage: {fileID: 0}
   newImages: []
   targetSprite: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &1516979374
 GameObject:
   m_ObjectHideFlags: 0
