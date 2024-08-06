@@ -98,6 +98,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JoinButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef7c78a9-8cca-4b1d-86a4-dfc3d527a5c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""StartButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dfe901c-1a26-498b-a5ba-944a73895fcb"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9564e18-5d79-4ed8-accb-5c36ece1dd10"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -336,6 +367,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_MasterActions_SouthButton = m_MasterActions.FindAction("SouthButton", throwIfNotFound: true);
         m_MasterActions_EastButton = m_MasterActions.FindAction("EastButton", throwIfNotFound: true);
         m_MasterActions_StartButton = m_MasterActions.FindAction("StartButton", throwIfNotFound: true);
+        m_MasterActions_JoinButton = m_MasterActions.FindAction("JoinButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +437,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MasterActions_SouthButton;
     private readonly InputAction m_MasterActions_EastButton;
     private readonly InputAction m_MasterActions_StartButton;
+    private readonly InputAction m_MasterActions_JoinButton;
     public struct MasterActionsActions
     {
         private @InputControls m_Wrapper;
@@ -417,6 +450,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @SouthButton => m_Wrapper.m_MasterActions_SouthButton;
         public InputAction @EastButton => m_Wrapper.m_MasterActions_EastButton;
         public InputAction @StartButton => m_Wrapper.m_MasterActions_StartButton;
+        public InputAction @JoinButton => m_Wrapper.m_MasterActions_JoinButton;
         public InputActionMap Get() { return m_Wrapper.m_MasterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -450,6 +484,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @StartButton.started += instance.OnStartButton;
             @StartButton.performed += instance.OnStartButton;
             @StartButton.canceled += instance.OnStartButton;
+            @JoinButton.started += instance.OnJoinButton;
+            @JoinButton.performed += instance.OnJoinButton;
+            @JoinButton.canceled += instance.OnJoinButton;
         }
 
         private void UnregisterCallbacks(IMasterActionsActions instance)
@@ -478,6 +515,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @StartButton.started -= instance.OnStartButton;
             @StartButton.performed -= instance.OnStartButton;
             @StartButton.canceled -= instance.OnStartButton;
+            @JoinButton.started -= instance.OnJoinButton;
+            @JoinButton.performed -= instance.OnJoinButton;
+            @JoinButton.canceled -= instance.OnJoinButton;
         }
 
         public void RemoveCallbacks(IMasterActionsActions instance)
@@ -505,5 +545,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnSouthButton(InputAction.CallbackContext context);
         void OnEastButton(InputAction.CallbackContext context);
         void OnStartButton(InputAction.CallbackContext context);
+        void OnJoinButton(InputAction.CallbackContext context);
     }
 }
