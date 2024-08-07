@@ -11,6 +11,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] string gameVersion;
     string connectionStatus;
 
+    public int playerID;
+
     private void Awake()
     {
         if (instance == null)
@@ -62,6 +64,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         connectionStatus = "Room Joined";
+        playerID = PhotonNetwork.PlayerList.Length - 1;
+        connectionStatus = $"playerID : {playerID}";
+
+        SpawnPlayer();
+    }
+
+    void SpawnPlayer()
+    {
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
 
     private void OnGUI()
