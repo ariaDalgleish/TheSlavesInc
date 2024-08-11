@@ -2,10 +2,23 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
     public GameObject LevelFinishedScreen;
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            // If no instance exists, set this as the instance and don't destroy it on load
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // An instance already exists, destroy this object
+            Destroy(gameObject);
+        }
+
         LevelFinishedScreen.SetActive(false);
     }
 
