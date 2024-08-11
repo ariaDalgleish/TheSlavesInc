@@ -6,6 +6,9 @@ TagManager:
   tags:
   - WordType
   - VisualType
+  - Ground
+  - Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX
