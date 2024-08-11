@@ -25,12 +25,12 @@ public class Interacter : MonoBehaviour
 
         }
 
-        if (!puzzlePanel.activeSelf) // If the puzzle panel is not active
+       /* if (!puzzlePanel.activeSelf) // If the puzzle panel is not active
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
+        }*/
+    } 
 
     private void TogglePuzzlePanel()
     {
@@ -46,7 +46,7 @@ public class Interacter : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Player"))
         {

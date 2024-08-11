@@ -29,7 +29,7 @@ public class DynamicGlow : MonoBehaviour
 
         // Calculate the distance from the player to the object
         float distance = Vector3.Distance(playerTransform.position, transform.position);
-        Debug.Log($"Distance to player: {distance}");
+        //Debug.Log($"Distance to player: {distance}");
 
         // Calculate emission intensity based on distance
         float intensity = Mathf.Lerp(minEmissionIntensity, maxEmissionIntensity, 1 - (distance / detectionRange));
@@ -38,6 +38,6 @@ public class DynamicGlow : MonoBehaviour
         // Set the emission intensity of the material
         Color emissionColor = Color.white * intensity;
         material.SetColor("_EmissionColor", emissionColor);
-        Debug.Log($"Emission Intensity: {intensity}");
+        //Debug.Log($"Emission Intensity: {intensity}");
     }
 }
