@@ -41,7 +41,7 @@ public class ElementScript : MonoBehaviour
         ImageChange();
     }
 
-    public void SetInitialImage(Sprite initialSprite, Sprite target)
+    public void SetInitialImage(Sprite initialSprite, Sprite target) 
     {
         targetImage.sprite = initialSprite;
         targetSprite = target;

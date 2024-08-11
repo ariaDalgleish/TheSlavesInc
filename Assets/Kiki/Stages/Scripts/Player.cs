@@ -21,9 +21,9 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertiacl = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0, vertiacl);
-        print(direction);
+       // print(direction);
         direction = direction.normalized;
-        print(direction);
+        //print(direction);
 
         transform.position += direction * Time.deltaTime * moveSpeed;
 

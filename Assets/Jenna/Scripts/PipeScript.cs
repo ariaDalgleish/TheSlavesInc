@@ -18,7 +18,7 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
         interacter = FindObjectOfType<Interacter>(); // Find the Interacter script in the scene
         int rand = Random.Range(0, rotations.Length);
         transform.eulerAngles = new Vector3(0, 0, rotations[rand]);
-        Debug.Log("Initial Rotation: " + transform.eulerAngles.z);
+       // Debug.Log("Initial Rotation: " + transform.eulerAngles.z);
 
         CheckIfPlaced();
     }
