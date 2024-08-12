@@ -5,58 +5,35 @@ using UnityEngine.UI;
 
 public class SolarPanel : MonoBehaviour
 {
-    public Slider gaugeBar; // Reference to the UI Slider that acts as the gauge bar
-    public float fillSpeed = 0.2f; // Speed at which the gauge fills up
-    public float decaySpeed = 0.1f; // Speed at which the gauge decreases
+    public Image gaugeBar;
+    public float Gauge = 0f;
+    public float MaxGauge = 100f;
+    public float Charging = 25f;
+    public float DecreaseSpeed = 60f;
 
-    private bool isFilling = false; // Whether the gauge is currently filling
-
+    private bool isFull = false; //track if the gauge has reached 100
 
     void Update()
     {
-        // Check if both A and B buttons are pressed
-        if (Input.GetKeyDown(KeyCode.V) && Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKey(KeyCode.V) && !isFull)
         {
-            isFilling = true; // Start filling the gauge
+            Gauge += (MaxGauge / 3.5f) * Time.deltaTime;
+            if (Gauge >= MaxGauge)
+            {
+                Gauge = MaxGauge;
+                isFull = true;
+                Debug.Log("completed!");
+            }
         }
-        else
+        else if (!isFull) //when v is not pressed
         {
-            isFilling = false; // Stop filling the gauge
+            Gauge -= DecreaseSpeed * Time.deltaTime;
+            if(Gauge < 0) Gauge = 0;
         }
-
-        // Fill or decrease the gauge based on the button press state
-        if (isFilling)
-        {
-            FillGauge();
-        }
-        else
-        {
-            DecreaseGauge();
-        }
+        gaugeBar.fillAmount = Gauge / MaxGauge;
     }
 
-    void FillGauge()
-    {
-        // Increase the gauge value while A and B buttons are pressed
-        if (gaugeBar.value < 1)
-        {
-            gaugeBar.value += fillSpeed * Time.deltaTime; // Increase the gauge value over time
-            Debug.Log("Filling Gauge: " + gaugeBar.value); // Debug message for filling
-        }
-        else
-        {
-            Debug.Log("Gauge is fully filled! Task complete!"); // Log message when the gauge is fully filled
-        }
-    }
 
-    void DecreaseGauge()
-    {
-        // Decrease the gauge value when A and B buttons are not pressed
-        if (gaugeBar.value > 0)
-        {
-            gaugeBar.value -= decaySpeed * Time.deltaTime; // Decrease the gauge value over time
-            Debug.Log("Decreasing Gauge: " + gaugeBar.value); // Debug message for decreasing
-        }
-    }
+
 
 }

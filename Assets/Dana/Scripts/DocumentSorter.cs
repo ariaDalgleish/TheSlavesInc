@@ -38,12 +38,11 @@ public class DocumentSorter : MonoBehaviour
 
         Transform currentDocument = documentPile.GetChild(0); // Get the top document
 
-        // Check if the current document's tag matches the expected type
+      
         if (currentDocument.CompareTag(type))
         {
-            // Move the document to the appropriate stack
             currentDocument.SetParent(type == "WordType" ? wordStack : visualStack);
-            currentDocument.localPosition = Vector3.zero; // Reset the document's position
+            currentDocument.localPosition = Vector3.zero;
             currentDocument.SetAsLastSibling(); // Move the document to the end of the stack
 
             // Check if all documents have been moved
@@ -54,16 +53,8 @@ public class DocumentSorter : MonoBehaviour
         }
         else
         {
-            // Log a message if the wrong key is pressed and start the pause coroutine
             Debug.Log("Wrong key pressed!");
-            StartCoroutine(PauseGame(1f)); // Pause for 1 second
         }
     }
 
-    IEnumerator PauseGame(float duration)
-    {
-        isPaused = true; // Set the game to paused
-        yield return new WaitForSeconds(duration); // Wait for the specified duration
-        isPaused = false; // Unpause the game
-    }
 }
