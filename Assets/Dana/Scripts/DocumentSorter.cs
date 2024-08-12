@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DocumentSorter : MonoBehaviour
+public class DocumentSorter : MonoBehaviour, IPuzzle
 {
     public Transform documentPile;
     public Transform wordStack;
@@ -30,6 +30,20 @@ public class DocumentSorter : MonoBehaviour
             SortDocument("VisualType"); // Sort the document as a visual type
         }
     }
+
+    public void ResetPuzzle()
+    {
+        foreach (Transform document in wordStack)
+        {
+            document.SetParent(documentPile);
+        }
+        foreach (Transform document in visualStack)
+        {
+            document.SetParent(documentPile);
+        }
+        Debug.Log("Document Sorter reset.");
+    }
+
 
     void SortDocument(string type)
     {

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SolarPanel : MonoBehaviour
+public class SolarPanel : MonoBehaviour, IPuzzle
 {
     public Image gaugeBar;
-    public float Gauge = 0f;
+    public float Gauge;
     public float MaxGauge = 100f;
     public float Charging = 25f;
     public float DecreaseSpeed = 60f;
-
     private bool isFull = false; //track if the gauge has reached 100
 
     void Update()
@@ -37,9 +36,7 @@ public class SolarPanel : MonoBehaviour
     {
         Gauge = 0f;
         isFull= false;
-        if (gaugeBar != null)
-        {
-            gaugeBar.fillAmount = 0f;
-        }
+        gaugeBar.fillAmount = 0f;
+        Debug.Log("SolarPanel puzzle reset.");
     }
 }

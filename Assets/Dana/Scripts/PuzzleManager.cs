@@ -8,6 +8,8 @@ public class PuzzleManager : MonoBehaviour
     public Transform player;  // Assign this via the Inspector to your player object
     private bool isPuzzleActive = false;
     private SolarPanel solarPanel;
+    private IPuzzle currentPuzzle;
+
 
     private Player playerScript; // Reference to the Player script
 
@@ -16,10 +18,11 @@ public class PuzzleManager : MonoBehaviour
         if (puzzlePanel != null)
         {
             puzzlePanel.SetActive(false);
-            solarPanel = puzzlePanel.GetComponent<SolarPanel>();
-            if (solarPanel == null)
+            currentPuzzle = puzzlePanel.GetComponent<IPuzzle>();
+
+            if (currentPuzzle == null)
             {
-                Debug.LogError("solar panel script not found on the puzzlepanel");
+                Debug.LogError("No IPuzzle script found on the puzzlePanel.");
             }
         }
         else
@@ -27,8 +30,6 @@ public class PuzzleManager : MonoBehaviour
             Debug.LogError("puzzle panel is not assigned in the inspector");
         }
 
-
-        // Attempt to get the Player script from the player GameObject
         playerScript = player.GetComponent<Player>();
 
         if (playerScript == null)
@@ -54,12 +55,12 @@ public class PuzzleManager : MonoBehaviour
 
     void TogglePuzzlePanel()
     {
-        if (puzzlePanel != null && solarPanel !=null)
+        if (puzzlePanel != null && currentPuzzle !=null)
         {
             isPuzzleActive = true;
             puzzlePanel.SetActive(true);
             FreezePlayer();
-            solarPanel.ResetPuzzle(); //reset puzzle when toggle the panel
+            currentPuzzle.ResetPuzzle(); //reset puzzle when toggle the panel
         }
  
     }
