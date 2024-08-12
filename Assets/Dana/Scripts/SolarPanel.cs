@@ -33,4 +33,13 @@ public class SolarPanel : MonoBehaviour
         gaugeBar.fillAmount = Gauge / MaxGauge;
     }
 
+    public void ResetPuzzle()
+    {
+        Gauge = 0f;
+        isFull= false;
+        if (gaugeBar != null)
+        {
+            gaugeBar.fillAmount = 0f;
+        }
+    }
 }

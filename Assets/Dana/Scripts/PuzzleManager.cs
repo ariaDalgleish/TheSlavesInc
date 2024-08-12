@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-
     public GameObject puzzlePanel;
-    public Transform player;
-    public float interactDistance = 3f; //distance within which the player can interact with objects
-    private bool isPuzzleActive = false; //track if the puzzle is active
+    public Transform player;  // Assign this via the Inspector to your player object
+    public float interactDistance = 3f;
+    private bool isPuzzleActive = false;
+    private SolarPanel solarPanel;
 
-    Playerrr playerScript; //actual player movement script
-
+    private Playerrr playerScript; // Reference to the Player script
 
     void Start()
     {
+        if (puzzlePanel != null)
+        {
+            puzzlePanel.SetActive(false);
+            solarPanel = puzzlePanel.GetComponent<SolarPanel>();
+            if (solarPanel == null)
+            {
+                Debug.LogError("solar panel script not found on the puzzlepanel");
+            }
+        }
+        else
+        {
+            Debug.LogError("puzzle panel is not assigned in the inspector");
+        }
+
+
+        // Attempt to get the Player script from the player GameObject
         playerScript = player.GetComponent<Playerrr>();
 
         if (playerScript == null)
@@ -26,14 +40,13 @@ public class PuzzleManager : MonoBehaviour
 
     void Update()
     {
-        //check distance between player and the puzzle object
         if (Vector3.Distance(player.position, transform.position) <= interactDistance)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if(!isPuzzleActive)
+                if (!isPuzzleActive)
                 {
-                    OpenPuzzlePanel();
+                    TogglePuzzlePanel();
                 }
                 else
                 {
@@ -41,22 +54,25 @@ public class PuzzleManager : MonoBehaviour
                 }
             }
         }
-
     }
 
-    void OpenPuzzlePanel()
+    void TogglePuzzlePanel()
     {
-        isPuzzleActive = true;
-        puzzlePanel.SetActive(true);
-        FreezePlayer();
+        if (puzzlePanel != null && solarPanel !=null)
+        {
+            isPuzzleActive = true;
+            puzzlePanel.SetActive(true);
+            FreezePlayer();
+            solarPanel.ResetPuzzle(); //reset puzzle when toggle the panel
+        }
+ 
     }
-
 
     void ClosePuzzlePanel()
     {
         isPuzzleActive = false;
         puzzlePanel.SetActive(false);
-        UnFreezePlayer();
+        UnfreezePlayer();
     }
 
     void FreezePlayer()
@@ -64,19 +80,19 @@ public class PuzzleManager : MonoBehaviour
         if (playerScript != null)
         {
             playerScript.enabled = false;
-            Debug.Log("player frozen");
+            Debug.Log("Player frozen.");
         }
-
     }
 
-    void UnFreezePlayer()
+    void UnfreezePlayer()
     {
         if (playerScript != null)
         {
             playerScript.enabled = true;
-            Debug.Log("player unfrozen");
+            Debug.Log("Player unfrozen.");
         }
     }
-
-
 }
+
+
+
