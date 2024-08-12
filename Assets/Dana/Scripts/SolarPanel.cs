@@ -15,9 +15,9 @@ public class SolarPanel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.V) && !isFull)
+        if (Input.GetKey(KeyCode.V) && (Input.GetKey(KeyCode.B) && !isFull))
         {
-            Gauge += (MaxGauge / 3.5f) * Time.deltaTime;
+            Gauge += (MaxGauge / 3f) * Time.deltaTime;
             if (Gauge >= MaxGauge)
             {
                 Gauge = MaxGauge;
@@ -32,8 +32,5 @@ public class SolarPanel : MonoBehaviour
         }
         gaugeBar.fillAmount = Gauge / MaxGauge;
     }
-
-
-
 
 }
