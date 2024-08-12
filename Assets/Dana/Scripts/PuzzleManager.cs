@@ -6,11 +6,10 @@ public class PuzzleManager : MonoBehaviour
 {
     public GameObject puzzlePanel;
     public Transform player;  // Assign this via the Inspector to your player object
-    public float interactDistance = 3f;
     private bool isPuzzleActive = false;
     private SolarPanel solarPanel;
 
-    private Playerrr playerScript; // Reference to the Player script
+    private Player playerScript; // Reference to the Player script
 
     void Start()
     {
@@ -30,7 +29,7 @@ public class PuzzleManager : MonoBehaviour
 
 
         // Attempt to get the Player script from the player GameObject
-        playerScript = player.GetComponent<Playerrr>();
+        playerScript = player.GetComponent<Player>();
 
         if (playerScript == null)
         {
@@ -40,18 +39,15 @@ public class PuzzleManager : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(player.position, transform.position) <= interactDistance)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (!isPuzzleActive)
             {
-                if (!isPuzzleActive)
-                {
-                    TogglePuzzlePanel();
-                }
-                else
-                {
-                    ClosePuzzlePanel();
-                }
+                TogglePuzzlePanel();
+            }
+            else
+            {
+                ClosePuzzlePanel();
             }
         }
     }
