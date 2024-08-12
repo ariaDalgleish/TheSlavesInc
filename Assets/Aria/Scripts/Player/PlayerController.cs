@@ -1,9 +1,12 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    PhotonView photonView;
+
     [SerializeField]
     private float playerSpeed = 2.0f;
     [SerializeField]
@@ -20,28 +23,46 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        photonView = GetComponent<PhotonView>();
+        controller = GetComponent<CharacterController>();
+
+        // Enable the script only if this is the local player
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        if (photonView.IsMine)
+        {
+            movementInput = context.ReadValue<Vector2>(); // Read the movement input from the player input script and store it in the movement variable
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (photonView.IsMine)
         {
-            jump = true;
-        }
-        else if (context.canceled)
-        {
-            jump = false;
+            if (context.performed)
+            {
+                jump = true;
+            }
+            else if (context.canceled)
+            {
+                jump = false;
+            }
         }
     }
 
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return; // Ensure this script only runs for the local player
+        }
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -56,7 +77,7 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.forward = move;
         }
 
-        // Changes the height position of the player..
+        // Changes the height position of the player
         if (jump && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);

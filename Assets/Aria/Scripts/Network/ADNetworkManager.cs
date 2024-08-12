@@ -1,17 +1,15 @@
 using Photon.Pun;
-using Photon;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using System.Globalization;
 
-public class NetworkManager : MonoBehaviourPunCallbacks
+public class ADNetworkManager : MonoBehaviourPunCallbacks
 {
-    public static NetworkManager instance;
+    public ADNetworkManager instance;
     [SerializeField] string gameVersion;
     string connectionStatus;
 
-    public int playerID;
+    public int PlayerID;
+
 
     private void Awake()
     {
@@ -28,15 +26,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        OnConnectToServer();
+        OnConnectedToServer();
     }
 
-    private void OnConnectToServer()
+    private void OnConnectedToServer()
     {
-        connectionStatus = "Connecting to Server";
+        connectionStatus = "Connected to server";
 
+        //Set the game version - only players with the same game version can play together
         PhotonNetwork.GameVersion = gameVersion;
 
+        //Connect to the Photon server
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -50,29 +50,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        connectionStatus = "Lobby Joined";
+        connectionStatus = "Joined Lobby";
+
         PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        connectionStatus = "Failed to join room";
+        connectionStatus = "failed to join room";
         PhotonNetwork.CreateRoom("New Room");
-        connectionStatus = "Creating Room";
+        connectionStatus = "Creating new room";
     }
 
     public override void OnJoinedRoom()
     {
         connectionStatus = "Room Joined";
-        playerID = PhotonNetwork.PlayerList.Length - 1;
-        connectionStatus = $"playerID : {playerID}";
+        PlayerID = PhotonNetwork.PlayerList.Length - 1;
+        connectionStatus = $"Player ID : {PlayerID}";
 
         SpawnPlayer();
     }
 
-    void SpawnPlayer()
+    private void SpawnPlayer()
     {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate("AriaPlayer", Vector3.zero, Quaternion.identity);
     }
 
     private void OnGUI()
