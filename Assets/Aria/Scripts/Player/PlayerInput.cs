@@ -1,9 +1,12 @@
 //This script is used as an example of how to recieve inputs from a single device
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
     
+    //PhotonView photonView;
+
      [SerializeField] int playerID; //This is the playerID that it will search for
 
      //Below references are just to visualise inputs
@@ -21,10 +24,23 @@ public class PlayerInput : MonoBehaviour
 
      private void Start()
      {
-         //At the start we will create a callback using the delegate within the InputManager script
-         //This will check for the PlayerJoin input to be pressed
-         InputManager.instance.onPlayerJoined += AssignInputs;
-     }
+        /*
+        photonView = GetComponent<PhotonView>(); // Getting the photon view component
+        if (photonView.IsMine)
+        {
+            
+        }
+        else
+        {
+               enabled = false;
+        }
+        */
+
+        InputManager.instance.onPlayerJoined += AssignInputs;
+        //At the start we will create a callback using the delegate within the InputManager script
+        //This will check for the PlayerJoin input to be pressed
+
+    }
 
      private void OnDisable()
      {
