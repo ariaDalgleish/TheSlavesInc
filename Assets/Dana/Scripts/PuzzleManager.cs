@@ -7,6 +7,7 @@ public class PuzzleManager : MonoBehaviour
     public GameObject puzzlePanel;
     public Transform player;  // Assign this via the Inspector to your player object
     private bool isPuzzleActive = false;
+    public float interactDistance = 3f;
     private SolarPanel solarPanel;
     private IPuzzle currentPuzzle;
 
