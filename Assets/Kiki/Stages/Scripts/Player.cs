@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
+    PhotonView photonView;
+
     public float normalSpeed = 9f; // The default speed of the player
     private float currentSpeed;    // The current speed of the player
     private float rotateSpeed = 10f;
@@ -11,11 +14,21 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        currentSpeed = normalSpeed; // Initialize the current speed
-        UpdateSpeedText(); // Initialize speed display
-        Debug.Log("Player script started. Current speed: " + currentSpeed);
-    }
+        photonView = GetComponent<PhotonView>();
 
+        if (photonView.IsMine)
+        {
+            GetComponent<Collider>().enabled = true;
+            GetComponent<Rigidbody>().useGravity = true;
+            currentSpeed = normalSpeed; // Initialize the current speed
+            UpdateSpeedText(); // Initialize speed display
+            Debug.Log("Player script started. Current speed: " + currentSpeed);
+        }
+        else
+        {
+            enabled = false;
+        }
+    }
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
