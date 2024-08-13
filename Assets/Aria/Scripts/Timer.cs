@@ -7,7 +7,10 @@ using UnityEngine.UIElements;
 
 public class Timer : MonoBehaviour
 {
+    
+    // Reference to the UIManager script
     public UIManager uIManager;
+    // Reference to the TextMeshProUGUI component
     public TextMeshProUGUI timerText;
     public float timeValue = 90;
     public bool timerIsRunning = false;
@@ -18,25 +21,24 @@ public class Timer : MonoBehaviour
         timerIsRunning = true;
     }
 
-    //Update is called once per frame
     void Update()
     {
         if (timerIsRunning)
         {
-            if (timeValue > 0)
+            if (timeValue > 0) 
             {
-                timeValue -= Time.deltaTime;
+                timeValue -= Time.deltaTime; // Decrease the time value by the time that has passed since the last frame
             }
             else
             {
                 Debug.Log("Time has run out!");
                 timeValue = 0;
                 timerIsRunning = false;
-                uIManager.LevelFinished();
+                uIManager.LevelFinished(); // Call the LevelFinished method from the UIManager script
 
             }
 
-            DisplayTime(timeValue);
+            DisplayTime(timeValue); 
         }
 
        

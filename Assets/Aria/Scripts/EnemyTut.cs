@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyTut : MonoBehaviour
 {
-
+    /*
     public Transform player;
     NavMeshAgent agent;
     public float currentDistance;
@@ -120,4 +120,5 @@ public class EnemyTut : MonoBehaviour
         }
 
     }
+    */
 }
