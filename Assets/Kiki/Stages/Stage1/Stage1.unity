@@ -2042,6 +2042,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6570696799752836581, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
+        type: 3}
+      propertyPath: puzzleClearPanel
+      value: 
+      objectReference: {fileID: 769074455}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3623,6 +3628,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolarPanelPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 5197806304140349601, guid: cc12aca4e8245b04d8940faefc283316,
+        type: 3}
+      propertyPath: puzzleClearPanel
+      value: 
+      objectReference: {fileID: 769074455}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
