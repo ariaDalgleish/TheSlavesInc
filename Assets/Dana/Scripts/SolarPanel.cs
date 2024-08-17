@@ -23,7 +23,7 @@ public class SolarPanel : MonoBehaviour, IPuzzle
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.V) && (Input.GetKey(KeyCode.B) && !isFull))
+        if (Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.B) && !isFull))
         {
             Gauge += (MaxGauge / 3f) * Time.deltaTime;
             if (Gauge >= MaxGauge)

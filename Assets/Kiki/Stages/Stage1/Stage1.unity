@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1207559247}
+  doorController: {fileID: 0}
 --- !u!1 &103416871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3215482143572262138, guid: 41318a1fa28024c48bbcfb676755e809,
@@ -2467,7 +2468,7 @@ PrefabInstance:
     - target: {fileID: 5092486158467259237, guid: 073ed3d40f820e6408b5c1a3756ca75e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -3628,6 +3629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolarPanelPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 1816378202269829874, guid: cc12aca4e8245b04d8940faefc283316,
+        type: 3}
+      propertyPath: m_text
+      value: Hold G+B
+      objectReference: {fileID: 0}
     - target: {fileID: 5197806304140349601, guid: cc12aca4e8245b04d8940faefc283316,
         type: 3}
       propertyPath: puzzleClearPanel
@@ -3795,6 +3801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 216798729}
+  doorController: {fileID: 0}
 --- !u!1 &1864011524
 GameObject:
   m_ObjectHideFlags: 0
@@ -4088,6 +4095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 671757821}
+  doorController: {fileID: 0}
 --- !u!1 &1904882100
 GameObject:
   m_ObjectHideFlags: 0
@@ -4401,6 +4409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1807461991}
+  doorController: {fileID: 0}
 --- !u!1001 &1070313438625127081
 PrefabInstance:
   m_ObjectHideFlags: 0
