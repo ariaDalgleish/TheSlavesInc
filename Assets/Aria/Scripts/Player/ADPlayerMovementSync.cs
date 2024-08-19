@@ -78,6 +78,12 @@ namespace Photon.Pun.UtilityScripts
                 //Update remote player (smooth this, this looks good, at the cost of some accuracy)
                 if (elevator != null)
                 {
+                    /*
+                    Vector3 localPos = elevator.TransformPoint(correctPlayerLocalPos);
+                    localPos.x = transform.localPosition.x; // Retain the original X position
+                    localPos.z = transform.localPosition.z; // Retain the original Z position
+                    transform.localPosition = Vector3.Lerp(transform.localPosition, localPos, Time.deltaTime * this.SmoothingDelay);
+                    */
                     transform.localPosition = Vector3.Lerp(transform.localPosition, elevator.TransformPoint(correctPlayerLocalPos), Time.deltaTime * this.SmoothingDelay);
                 }
                 else

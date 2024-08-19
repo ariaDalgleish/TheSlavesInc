@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteraction : MonoBehaviour
+public class ADPlayerInteraction : MonoBehaviour
 {
     PhotonView photonView;
     ADPlayerInputControls playerControls;

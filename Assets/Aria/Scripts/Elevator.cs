@@ -23,7 +23,7 @@ public class Elevator : MonoBehaviour
                 posY -= Time.deltaTime;
             }
 
-            posY = Mathf.Clamp(posY,0,4);
+            posY = Mathf.Clamp(posY, -4.2f, 4);
             elevatorPos.y = posY;
 
             yield return null;

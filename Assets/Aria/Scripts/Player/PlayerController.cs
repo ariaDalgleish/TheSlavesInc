@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
 
-    private CharacterController controller;
+    private CharacterController controller; 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>(); 
 
         // Enable the script only if this is the local player
         if (!photonView.IsMine)
@@ -69,12 +69,14 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+
+
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y); // Get the movement input from the player input script
+        controller.Move(move * Time.deltaTime * playerSpeed); // Move the player based on the input
 
         if (move != Vector3.zero)
         {
-            gameObject.transform.forward = move;
+            gameObject.transform.forward = move; // Rotate the player to face the direction of movements
         }
 
         // Changes the height position of the player
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
             jump = false; // Reset jump flag
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        playerVelocity.y += gravityValue * Time.deltaTime; // Apply gravity to the player
+        controller.Move(playerVelocity * Time.deltaTime); // Apply gravity to the player controller
     }
 }
