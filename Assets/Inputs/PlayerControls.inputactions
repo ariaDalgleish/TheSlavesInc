@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Player",
+            "name": "BaseControls",
             "id": "1ebbdee7-efc5-450a-b4d6-5b7524fb5101",
             "actions": [
                 {
@@ -18,6 +18,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "625f927f-975e-4fe5-92ac-ce6f3b26bfb4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "36c0f5d1-a67e-4923-bb4f-5bce976daee0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -110,6 +119,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e8bd243-bce7-44b8-b96a-cecc1c39fb4f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "413b10b7-0e04-4f81-9a7e-d3a4744ad121",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

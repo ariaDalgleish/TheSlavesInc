@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Bullet
   - Wall
+  - Elevator
   layers:
   - Default
   - TransparentFX

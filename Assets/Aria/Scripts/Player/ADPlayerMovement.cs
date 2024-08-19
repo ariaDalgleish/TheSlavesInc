@@ -1,12 +1,10 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class ADlayerMovement : MonoBehaviour
+public class ADPlayerMovement : MonoBehaviour
 {
-    /* This script is responsible for the movement of the player. It reads the input from the player input script and moves the player accordingly. 
-     * 
     PhotonView photonView;
-    PlayerInputControls playerInputs;
+    ADPlayerInputControls playerControls;
     Rigidbody rb;
     Vector2 movement;
     [SerializeField] Transform visuals;
@@ -14,16 +12,13 @@ public class ADlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed;
     float rotY;
 
-
-
-    // Start is called before the first frame update
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
         if (photonView.IsMine)
         {
             rb = GetComponent<Rigidbody>();
-            playerInputs = GetComponent<PlayerInputControls>();
+            playerControls = GetComponent<ADPlayerInputControls>();
         }
         else
         {
@@ -31,15 +26,14 @@ public class ADlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        movement = playerInputs.masterControls.BaseControls.Movement.ReadValue<Vector2>(); // Read the movement input from the player input script and store it in the movement variable 
+        movement = playerControls.BaseControls.BaseControls.Movement.ReadValue<Vector2>(); // Ensure you reference the correct action name
     }
 
     private void FixedUpdate()
     {
-        Vector3 moveDirection = visuals.forward * movement.y * Time.deltaTime* speed *100; // Move the player forward and backward
+        Vector3 moveDirection = visuals.forward * movement.y * Time.deltaTime * speed * 100; // Move the player forward and backward
         moveDirection.y = rb.velocity.y; // Keep the player grounded
 
         rotY += movement.x * Time.deltaTime * rotationSpeed * 100; // Rotate the player left and right
@@ -47,5 +41,4 @@ public class ADlayerMovement : MonoBehaviour
         rb.velocity = moveDirection; // Apply the movement to the player
         visuals.localEulerAngles = new Vector3(0, rotY, 0); // Apply the rotation to the player
     }
-    */
 }

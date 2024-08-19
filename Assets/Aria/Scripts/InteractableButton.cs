@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class InteractableButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    PhotonView photonView;
+    public bool holdingButton;
+
+    private void Start()
     {
-        
+        photonView = GetComponent<PhotonView>();
+               
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void ButtonPressed()
     {
-        
+        holdingButton = true;
+        photonView.RPC("RecieveButtonPressed", RpcTarget.Others);
+    }
+
+    public void ButtonReleased()
+    {
+        holdingButton = false;
+        photonView.RPC("RecieveButtonReleased", RpcTarget.Others);
+    }
+
+    [PunRPC]
+    public void RecieveButtonPressed()
+    {
+        holdingButton = true;
+    }
+
+    [PunRPC]
+    public void RecieveButtonReleased()
+    {
+        holdingButton = false;
     }
 }

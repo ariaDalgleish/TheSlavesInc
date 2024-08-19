@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ADNetworkManager : MonoBehaviourPunCallbacks
 {
@@ -70,11 +71,11 @@ public class ADNetworkManager : MonoBehaviourPunCallbacks
 
         SpawnPlayer();
     }
-
     private void SpawnPlayer()
     {
         PhotonNetwork.Instantiate("AriaPlayer", Vector3.zero, Quaternion.identity);
     }
+
 
     private void OnGUI()
     {

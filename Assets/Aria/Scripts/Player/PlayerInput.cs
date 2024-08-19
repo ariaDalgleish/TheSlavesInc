@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    
+    /*
     //PhotonView photonView;
 
      [SerializeField] int playerID; //This is the playerID that it will search for
@@ -34,7 +34,7 @@ public class PlayerInput : MonoBehaviour
         {
                enabled = false;
         }
-        */
+        
 
         InputManager.instance.onPlayerJoined += AssignInputs;
         //At the start we will create a callback using the delegate within the InputManager script
@@ -148,5 +148,5 @@ public class PlayerInput : MonoBehaviour
      {
          analogStick.localPosition = analogInput * 20; //135 is the multipler to make it go all the way to the edge
      }
-    
+    */
 }
