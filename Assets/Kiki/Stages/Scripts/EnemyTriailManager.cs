@@ -3,27 +3,32 @@ using System.Collections;
 
 public class EnemyTrailManager : MonoBehaviour
 {
-    public GameObject trailArea; // Prefab with the TrailRenderer and BoxCollider
-    public float trailDuration = 3f; // Duration for which the trail remains
+    public GameObject trailAreaPrefab; // Prefab with TrailRenderer and BoxCollider
+    public float trailSpawnInterval = 1f; // Interval at which trails are spawned
 
     private void Start()
     {
-        StartCoroutine(SpawnTrail());
+        StartCoroutine(SpawnTrails());
     }
 
-    private IEnumerator SpawnTrail()
+    private IEnumerator SpawnTrails()
     {
         while (true)
         {
             // Instantiate the trail prefab
-            GameObject trail = Instantiate(trailArea, transform.position, Quaternion.identity);
-            trail.transform.parent = transform; 
+            GameObject trail = Instantiate(trailAreaPrefab, transform.position, Quaternion.identity);
+            trail.transform.position = transform.position; // Ensure it’s positioned correctly
+            trail.transform.parent = transform; // Optional: Make it a child of the enemy
 
-            // Wait for the duration of the trail
-            yield return new WaitForSeconds(trailDuration);
+            // Wait for the trail duration
+            yield return new WaitForSeconds(trail.GetComponent<TrailRenderer>().time);
 
             // Destroy the trail GameObject
             Destroy(trail);
+
+            // Wait for the next spawn
+            yield return new WaitForSeconds(trailSpawnInterval);
         }
     }
 }
+

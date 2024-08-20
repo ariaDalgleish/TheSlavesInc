@@ -15,6 +15,7 @@ public class ADPlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck; // A transform positioned at the player's feet to check for ground
     private bool groundedPlayer;
     private bool jump = false;
+    private float currentSpeed;
 
     private void Awake()
     {
@@ -23,6 +24,9 @@ public class ADPlayerMovement : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
             playerControls = GetComponent<ADPlayerInputControls>();
+            currentSpeed = speed; // Initialize the current speed
+            //Debug.Log("Player script started. Current speed: " + currentSpeed);
+
         }
         else
         {
@@ -43,8 +47,33 @@ public class ADPlayerMovement : MonoBehaviour
             jump = true;
         }
     }
-
     private void FixedUpdate()
+    {
+        // Calculate movement direction based on input
+        Vector3 moveDirection = new Vector3(movement.x, 0, movement.y).normalized;
+
+        // Apply movement
+        Vector3 movementVelocity = moveDirection * currentSpeed * Time.deltaTime * 100;
+        movementVelocity.y = rb.velocity.y; // Retain the current vertical velocity
+
+        // Rotate towards the movement direction
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            visuals.rotation = Quaternion.Lerp(visuals.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        // Apply jump force if jump is true and the player is grounded
+        if (jump && groundedPlayer)
+        {
+            movementVelocity.y = jumpForce;
+            jump = false; // Reset jump flag
+        }
+
+        rb.velocity = movementVelocity; // Apply movement to the Rigidbody
+    }
+
+    /*private void FixedUpdate()
     {
         // Calculate movement direction based on input
         Vector3 moveDirection = new Vector3(movement.x, 0, movement.y).normalized;
@@ -69,4 +98,17 @@ public class ADPlayerMovement : MonoBehaviour
 
         rb.velocity = movementVelocity; // Apply movement to the Rigidbody
     }
+    */
+    public void SetSpeed(float factor)
+    {
+        currentSpeed = speed * factor;
+        Debug.Log("Speed Set to: " + currentSpeed + " (Factor: " + factor + ")");
+    }
+
+    public void ResetSpeed()
+    {
+        currentSpeed = speed;
+        Debug.Log("Speed Reset to Normal: " + currentSpeed);
+    }
+       
 }
