@@ -2171,8 +2171,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5391837928396662476, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1267917410}
   m_SourcePrefab: {fileID: 100100000, guid: 0a9fa145fcde3bc4fbab7826e8a1308c, type: 3}
+--- !u!1 &1267917409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5391837928396662476, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1267917408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1267917410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267917409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00601992835dcb0468852da355fa101d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetDelay: 10
+  resetReadySpriteRenderer: {fileID: 1796927654}
+  resetReadySprite: {fileID: 21300000, guid: 813d41e7d99184c459bfa7616b1c995c, type: 3}
+  spritePosition: {x: 21.2, y: 4, z: -10}
+  spriteScale: {x: 0.35, y: 0.35, z: 1}
 --- !u!1 &1300031069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,9 +2884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a76ea839673a5848aaaff20b0a28501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trailArea: {fileID: 4226376635600614221, guid: f7c77e26fb8799446bc55bbe560d0ca5,
-    type: 3}
-  trailDuration: 3
+  trailAreaPrefab: {fileID: 0}
+  trailSpawnInterval: 1
 --- !u!135 &1755764670
 SphereCollider:
   m_ObjectHideFlags: 0

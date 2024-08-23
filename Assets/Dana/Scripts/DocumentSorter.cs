@@ -8,23 +8,36 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
     public Transform wordStack;
     public Transform visualStack;
 
-    private int initialDocumentCount;
-    private bool isPaused = false;
-
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
     private bool puzzleCompleted = false; // Track if the puzzle has been completed
 
+    private PuzzleResetManager resetManager; // Reference to the reset manager
+
+    // List to store original positions and parents
+    private List<Vector3> originalPositions = new List<Vector3>();
+    private List<Transform> originalParents = new List<Transform>();
+    private List<Transform> documentReferences = new List<Transform>();
+
     void Start()
     {
-        initialDocumentCount = documentPile.childCount;
+        resetManager = FindObjectOfType<PuzzleResetManager>(); // Find the reset manager in the scene
+        Debug.Log("Puzzle Reset Manager found" + (resetManager != null));
+
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
+        Debug.Log("Initial document count: " + documentPile.childCount);
+
+        // Store the original positions and parents of all documents in the pile
+        foreach (Transform document in documentPile)
+        {
+            originalPositions.Add(document.localPosition);
+            originalParents.Add(document.parent);
+            documentReferences.Add(document);
+        }
     }
 
     void Update()
     {
-        if (isPaused) return;
-
-        if(Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             SortDocument("WordType"); // Sort the document as a word type
         }
@@ -43,56 +56,54 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
 
     public void ResetPuzzle()
     {
-        foreach (Transform document in wordStack)
+        Debug.Log("Resetting puzzle...");
+
+        for (int i = 0; i < documentReferences.Count; i++)
         {
-            document.SetParent(documentPile);
+            Transform document = documentReferences[i];
+            document.SetParent(originalParents[i]); // 원래 부모로 복귀
+            document.localPosition = originalPositions[i]; // 원래 위치로 복귀
+            Debug.Log("Document reset: " + document.name);
         }
-        foreach (Transform document in visualStack)
-        {
-            document.SetParent(documentPile);
-        }
+
+        puzzleCompleted = false; // 퍼즐을 다시 풀 수 있도록 설정
         Debug.Log("Document Sorter reset.");
     }
 
 
     void SortDocument(string type)
     {
-        // Get the current document at the top of the pile
-        if (documentPile.childCount == 0) return; // If no documents left, return
+        if (documentPile.childCount == 0)
+        {
+            Debug.Log("No more documents to sort");
+            return;
+        }
 
         Transform currentDocument = documentPile.GetChild(0); // Get the top document
+        Debug.Log("Current document tag: " + currentDocument.tag);
 
-      
         if (currentDocument.CompareTag(type))
         {
             currentDocument.SetParent(type == "WordType" ? wordStack : visualStack);
             currentDocument.localPosition = Vector3.zero;
             currentDocument.SetAsLastSibling(); // Move the document to the end of the stack
 
+            Debug.Log("Document moved to " + (type == "WordType" ? "Word Stack" : "VisualStack"));
+
             // Check if all documents have been moved
             if (documentPile.childCount == 0)
             {
                 ShowPuzzleClearScreen();
                 Debug.Log("Game Cleared!");
+                resetManager.StartResetCoroutine(this); // Start the reset coroutine via the reset manager
             }
         }
         else
         {
-            Debug.Log("Wrong key pressed!");
+            Debug.Log("Wrong key pressed! Expected tag: " + type + ", but got: " + currentDocument.tag);
         }
     }
 
-    public void CheckPuzzleCompletion()
-    {
-        if (puzzleCompleted) return; // Avoid re-checking if already complete
-
-        if (isPaused)
-        {
-            Debug.Log("Puzzle Completed!");
-            puzzleCompleted = true;
-            ShowPuzzleClearScreen();
-        }
-    }
     private void ShowPuzzleClearScreen()
     {
         if (puzzleClearPanel != null)
@@ -108,5 +119,4 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
             puzzleClearPanel.SetActive(false);
         }
     }
-
 }
