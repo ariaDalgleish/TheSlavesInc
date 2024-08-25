@@ -171,11 +171,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 199662002864400539, guid: ae8ab2647f2393245b8305db4d2bd144,
+        type: 3}
+      propertyPath: resetManager
+      value: 
+      objectReference: {fileID: 216798734}
     - target: {fileID: 506313115826457582, guid: ae8ab2647f2393245b8305db4d2bd144,
         type: 3}
       propertyPath: puzzleClearPanel
       value: 
       objectReference: {fileID: 769074455}
+    - target: {fileID: 1099458180015674321, guid: ae8ab2647f2393245b8305db4d2bd144,
+        type: 3}
+      propertyPath: resetManager
+      value: 
+      objectReference: {fileID: 216798734}
+    - target: {fileID: 2909534584976566326, guid: ae8ab2647f2393245b8305db4d2bd144,
+        type: 3}
+      propertyPath: resetManager
+      value: 
+      objectReference: {fileID: 216798734}
     - target: {fileID: 4059125168407890250, guid: ae8ab2647f2393245b8305db4d2bd144,
         type: 3}
       propertyPath: m_Pivot.x
@@ -281,10 +296,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElementPuzzle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8219941576218372729, guid: ae8ab2647f2393245b8305db4d2bd144, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4355935727817930501, guid: ae8ab2647f2393245b8305db4d2bd144,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 216798734}
   m_SourcePrefab: {fileID: 100100000, guid: ae8ab2647f2393245b8305db4d2bd144, type: 3}
 --- !u!1 &83950733
 GameObject:
@@ -537,6 +557,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 71264753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &216798734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216798729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f704c2ac4d01e3438695d08cd3f411b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetDelay: 5
+  resetReadySprite: {fileID: 1796927653}
 --- !u!1 &258363953 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2053935679421749937, guid: 41318a1fa28024c48bbcfb676755e809,
@@ -4454,7 +4488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2016546778
 Transform:
   m_ObjectHideFlags: 0

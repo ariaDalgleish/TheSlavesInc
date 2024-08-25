@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +8,17 @@ public class GameManager : MonoBehaviour
     public Image[] topImages; // Array of top images
     public ElementScript[] bottomImageScripts; // Array of ElementScripts for bottom images
     public Sprite[] allSprites; // Array of all possible sprites
-    public GameObject puzzleClearPanel; //Reference to the puzzle clear panel
+    public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
 
     private bool puzzleCompleted = false;
+    private PRMElement resetManager;
 
     private void Start()
     {
         SetupPuzzle();
-        puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initally
+        puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
+
+        resetManager = FindObjectOfType<PRMElement>(); // Find the PRMElement script in the scene
     }
 
     private void Update()
@@ -108,7 +110,7 @@ public class GameManager : MonoBehaviour
         {
             if (elementScript.targetImage.sprite != elementScript.targetSprite)
             {
-                return; // puzzle is not yet completed
+                return; // Puzzle is not yet completed
             }
         }
 
@@ -117,6 +119,11 @@ public class GameManager : MonoBehaviour
         ShowPuzzleClearScreen();
         DisableAllBottomImages();
 
+        // Call the ResetPuzzle method from the reset manager after puzzle is completed
+        if (resetManager != null)
+        {
+            resetManager.ResetPuzzle();
+        }
     }
 
     // Show the puzzle clear panel
@@ -146,3 +153,4 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
