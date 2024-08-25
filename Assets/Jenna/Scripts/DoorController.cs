@@ -18,7 +18,7 @@ public class DoorController : MonoBehaviour
 
     public void OpenDoor(bool open)
     {
-        photonView.RPC("RecieveOpenDoor", RpcTarget.Others);
+        /*photonView.RPC("RecieveOpenDoor", RpcTarget.Others);*/
         StopAllCoroutines();
         if (open)
         {
