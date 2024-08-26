@@ -3,9 +3,10 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public GameObject trailPrefab; // Prefab with the TrailRenderer and BoxCollider
+    public GameObject trailPrefab; // Prefab with TrailRenderer and BoxCollider
     public float moveSpeed = 2f; // Enemy movement speed
     public float changeDirectionTime = 2f; // Time to change direction
+    public float trailSpawnInterval = 1f; // Interval at which trails are spawned
     public float trailDuration = 3f; // Duration the trail stays
 
     private float changeDirectionTimer;
@@ -50,6 +51,9 @@ public class EnemyMovement : MonoBehaviour
 
             // Destroy the trail GameObject
             Destroy(trail);
+
+            // Wait for the next spawn
+            yield return new WaitForSeconds(trailSpawnInterval);
         }
     }
 }

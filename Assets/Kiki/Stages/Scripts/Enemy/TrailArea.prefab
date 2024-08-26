@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 8, y: 1, z: 8}
   m_Center: {x: -0.8456143, y: 1.246994, z: 3.3177}
 --- !u!114 &7492639272222075642
 MonoBehaviour:
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f6913d676a5264a809525717adb822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDownFactor: 0.5
-  slowDownDuration: 5
+  slowdownFactor: 0.5
+  slowdownDuration: 2
 --- !u!96 &51705320479031234
 TrailRenderer:
   serializedVersion: 3
