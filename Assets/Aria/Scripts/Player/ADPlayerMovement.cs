@@ -8,7 +8,7 @@ public class ADPlayerMovement : MonoBehaviour
     Rigidbody rb;
     Vector2 movement;
     [SerializeField] Transform visuals;
-    [SerializeField] float speed;
+    [SerializeField] public float speed; // ÐÞ¸ÄÎª public
     [SerializeField] float rotationSpeed;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] LayerMask groundLayer; // Layer mask to identify the ground
@@ -73,32 +73,6 @@ public class ADPlayerMovement : MonoBehaviour
         rb.velocity = movementVelocity; // Apply movement to the Rigidbody
     }
 
-    /*private void FixedUpdate()
-    {
-        // Calculate movement direction based on input
-        Vector3 moveDirection = new Vector3(movement.x, 0, movement.y).normalized;
-
-        // Apply movement
-        Vector3 movementVelocity = moveDirection * speed * Time.deltaTime * 100;
-        movementVelocity.y = rb.velocity.y; // Retain the current vertical velocity
-
-        // Rotate towards the movement direction
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            visuals.rotation = Quaternion.Lerp(visuals.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
-
-        // Apply jump force if jump is true and the player is grounded
-        if (jump && groundedPlayer)
-        {
-            movementVelocity.y = jumpForce;
-            jump = false; // Reset jump flag
-        }
-
-        rb.velocity = movementVelocity; // Apply movement to the Rigidbody
-    }
-    */
     public void SetSpeed(float factor)
     {
         currentSpeed = speed * factor;
@@ -110,5 +84,4 @@ public class ADPlayerMovement : MonoBehaviour
         currentSpeed = speed;
         Debug.Log("Speed Reset to Normal: " + currentSpeed);
     }
-       
 }
