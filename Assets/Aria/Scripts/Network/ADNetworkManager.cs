@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class ADNetworkManager : MonoBehaviourPunCallbacks
 {
+    //[SyncVar]
+    private string displayName = "Loading...";
     public ADNetworkManager instance;
     [SerializeField] string gameVersion;
     string connectionStatus;
 
     public int PlayerID;
 
+    
 
     private void Awake()
     {
@@ -80,6 +83,12 @@ public class ADNetworkManager : MonoBehaviourPunCallbacks
     private void OnGUI()
     {
         GUILayout.Label(connectionStatus);
+    }
+
+
+    public void SetDisplayName(string displayName)
+    {
+        this.displayName = displayName;
     }
 
 }

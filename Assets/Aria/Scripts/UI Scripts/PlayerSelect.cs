@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {
-    /*
+    
     public int playerID;
 
     [SerializeField] ADGameManager gameManager;
@@ -17,7 +17,7 @@ public class PlayerSelect : MonoBehaviour
 
     [Header ("UI Elements")]
     [SerializeField] Image characterImage;
-    [SerializeField] TextMeshProUGUI characterText;
+    
     [SerializeField] TMP_InputField playerInputField;
 
     int currentCharacter = 0;
@@ -53,7 +53,7 @@ public class PlayerSelect : MonoBehaviour
     public void SetCharacter(int id)
     {
         characterImage.sprite = characterSelect.characters[id].characterSprite;
-        characterText.text = characterSelect.characters[id].characterName;
+        
     }
 
     public void Confirm()
@@ -61,5 +61,5 @@ public class PlayerSelect : MonoBehaviour
         playerName = playerInputField.text;
         gameManager.SetPlayer(playerID, currentCharacter, playerName);
     }
-    */
+    
 }

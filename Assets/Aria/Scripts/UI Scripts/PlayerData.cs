@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData 
 {
-    /*
+   
     public string playerName; // Stores player name
     public int playerID; // Stores player ID
     public int characterIndex; // Stores characters choice
@@ -22,5 +22,5 @@ public class PlayerData
     {
         characterIndex = index;
     }
-    */
+    
 }
