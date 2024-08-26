@@ -101,13 +101,13 @@ public class ADPlayerMovement : MonoBehaviour
     */
     public void SetSpeed(float factor)
     {
-        currentSpeed = speed * factor;
+        //currentSpeed = speed * factor;
         Debug.Log("Speed Set to: " + currentSpeed + " (Factor: " + factor + ")");
     }
 
     public void ResetSpeed()
     {
-        currentSpeed = speed;
+        //currentSpeed = speed;
         Debug.Log("Speed Reset to Normal: " + currentSpeed);
     }
        
