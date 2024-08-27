@@ -4,25 +4,26 @@ using UnityEngine;
 public class ADPlayerMovement : MonoBehaviour
 {
     PhotonView photonView;
+
     ADPlayerInputControls playerControls;
     Rigidbody rb;
     Vector2 movement;
     [SerializeField] Transform visuals;
     [SerializeField] public float speed;
     [SerializeField] float rotationSpeed;
-    [SerializeField] float jumpForce = 5f;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform groundCheck;
-    private bool groundedPlayer;
-    private bool jump = false;
+      
+    
     private float currentSpeed;
     private float slowdownEndTime;
 
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+
         if (photonView.IsMine)
         {
+            GetComponent<Collider>().enabled = true;
+            GetComponent<Rigidbody>().useGravity = true;
             rb = GetComponent<Rigidbody>();
             playerControls = GetComponent<ADPlayerInputControls>();
             currentSpeed = speed; // Initialize the current speed
@@ -37,12 +38,7 @@ public class ADPlayerMovement : MonoBehaviour
     {
         movement = playerControls.BaseControls.BaseControls.Movement.ReadValue<Vector2>();
 
-        groundedPlayer = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
-
-        if (groundedPlayer && playerControls.BaseControls.BaseControls.Jump.triggered)
-        {
-            jump = true;
-        }
+        
 
         if (Time.time > slowdownEndTime)
         {
@@ -63,11 +59,7 @@ public class ADPlayerMovement : MonoBehaviour
             visuals.rotation = Quaternion.Lerp(visuals.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
-        if (jump && groundedPlayer)
-        {
-            movementVelocity.y = jumpForce;
-            jump = false;
-        }
+        
 
         rb.velocity = movementVelocity;
     }

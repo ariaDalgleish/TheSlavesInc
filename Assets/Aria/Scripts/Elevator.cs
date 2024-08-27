@@ -4,7 +4,7 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     public InteractableButton button;
-    float posY;
+    float posX;
     Vector3 elevatorPos;
 
     // Start is called before the first frame update
@@ -16,15 +16,15 @@ public class Elevator : MonoBehaviour
         {
             if (button.holdingButton)
             {
-                posY += Time.deltaTime;
+                posX += Time.deltaTime;
             }
             else
             {
-                posY -= Time.deltaTime;
+                posX -= Time.deltaTime;
             }
 
-            posY = Mathf.Clamp(posY, -4.2f, 4);
-            elevatorPos.y = posY;
+            posX = Mathf.Clamp(posX, -5.18f, -8.81f);
+            elevatorPos.x = posX;
 
             yield return null;
         }

@@ -177,11 +177,6 @@ MonoBehaviour:
   visuals: {fileID: 8758258577615199453}
   speed: 3
   rotationSpeed: 5
-  jumpForce: 5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheck: {fileID: 8257156910059829337}
 --- !u!114 &2741658684929343343
 MonoBehaviour:
   m_ObjectHideFlags: 0
