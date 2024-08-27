@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Wall
   - Elevator
+  - Puzzle
   layers:
   - Default
   - TransparentFX

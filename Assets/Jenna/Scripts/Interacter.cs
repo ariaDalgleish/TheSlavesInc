@@ -9,7 +9,7 @@ public class Interacter : MonoBehaviour
 {
     public GameObject puzzlePanel;
     private bool isPlayerInRange = false;
-    public DoorController doorController;
+    
 
     private void Start()
     {
@@ -25,14 +25,7 @@ public class Interacter : MonoBehaviour
             TogglePuzzlePanel(); // Calls the TogglePuzzlePanel method
         }
 
-        if (puzzlePanel.activeSelf && Input.GetKeyDown(KeyCode.V))
-        {
-            doorController.OpenDoor(true);
-        }
-        else if (puzzlePanel.activeSelf && Input.GetKeyUp(KeyCode.V))
-        {
-            doorController.OpenDoor(false);
-        }
+       
 
 
         /* if (!puzzlePanel.activeSelf) // If the puzzle panel is not active
@@ -45,9 +38,10 @@ public class Interacter : MonoBehaviour
     private void TogglePuzzlePanel()
     {
 
-        puzzlePanel.SetActive(!puzzlePanel.activeSelf); 
-        Cursor.visible = true; // Makes the cursor visible
-        Cursor.lockState = CursorLockMode.None; // Unlocks the cursor from the center of the screen
+        bool isActive = !puzzlePanel.activeSelf;
+        puzzlePanel.SetActive(isActive);
+        Cursor.visible = isActive; // Makes the cursor visible only when the panel is active
+        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked; // Unlocks the cursor from the center of the screen
     }
 
     public void HidePuzzlePanel()

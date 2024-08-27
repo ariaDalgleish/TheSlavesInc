@@ -388,7 +388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1207559247}
-  doorController: {fileID: 0}
 --- !u!114 &100441778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ElementPuzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392787329806296023, guid: ae8ab2647f2393245b8305db4d2bd144,
+        type: 3}
+      propertyPath: m_TagString
+      value: Puzzle
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8219941576218372729, guid: ae8ab2647f2393245b8305db4d2bd144, type: 3}
@@ -3129,6 +3133,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5391837928396662476, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Puzzle
+      objectReference: {fileID: 0}
     - target: {fileID: 6570696799752836581, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
         type: 3}
       propertyPath: puzzleClearPanel
@@ -3963,7 +3972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 872203840}
-  doorController: {fileID: 1048980706}
 --- !u!136 &1797075897
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4335,6 +4343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DataSendingPuzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903291534829562597, guid: 41318a1fa28024c48bbcfb676755e809,
+        type: 3}
+      propertyPath: m_TagString
+      value: Puzzle
       objectReference: {fileID: 0}
     - target: {fileID: 5856458051505128798, guid: 41318a1fa28024c48bbcfb676755e809,
         type: 3}
@@ -4822,6 +4835,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolarPanelPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 1464448436193136873, guid: cc12aca4e8245b04d8940faefc283316,
+        type: 3}
+      propertyPath: m_TagString
+      value: Puzzle
+      objectReference: {fileID: 0}
     - target: {fileID: 1816378202269829874, guid: cc12aca4e8245b04d8940faefc283316,
         type: 3}
       propertyPath: m_text
@@ -4995,7 +5013,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 128490450}
-  doorController: {fileID: 0}
 --- !u!114 &1860146385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5235,7 +5252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 671757821}
-  doorController: {fileID: 0}
 --- !u!114 &1882484472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5656,7 +5672,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1807461991}
-  doorController: {fileID: 0}
 --- !u!114 &2101115187
 MonoBehaviour:
   m_ObjectHideFlags: 0
