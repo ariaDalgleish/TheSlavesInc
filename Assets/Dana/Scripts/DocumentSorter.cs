@@ -61,12 +61,12 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
         for (int i = 0; i < documentReferences.Count; i++)
         {
             Transform document = documentReferences[i];
-            document.SetParent(originalParents[i]); // 원래 부모로 복귀
-            document.localPosition = originalPositions[i]; // 원래 위치로 복귀
+            document.SetParent(originalParents[i]);
+            document.localPosition = originalPositions[i];
             Debug.Log("Document reset: " + document.name);
         }
 
-        puzzleCompleted = false; // 퍼즐을 다시 풀 수 있도록 설정
+        puzzleCompleted = false;
         Debug.Log("Document Sorter reset.");
     }
 
