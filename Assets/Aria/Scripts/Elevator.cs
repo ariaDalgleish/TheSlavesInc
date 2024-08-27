@@ -14,7 +14,7 @@ public class Elevator : MonoBehaviour
 
         while (true)
         {
-            if (button.holdingButton)
+            if (button.holdingButton == false)
             {
                 posX += Time.deltaTime;
             }
@@ -23,7 +23,7 @@ public class Elevator : MonoBehaviour
                 posX -= Time.deltaTime;
             }
 
-            posX = Mathf.Clamp(posX, -5.18f, -8.81f);
+            posX = Mathf.Clamp(posX, -8.81f, -5.18f);
             elevatorPos.x = posX;
 
             yield return null;
