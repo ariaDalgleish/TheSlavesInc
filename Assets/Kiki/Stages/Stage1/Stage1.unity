@@ -388,6 +388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1207559247}
+  playerMovement: {fileID: 1092196058125862766, guid: ce16068742456f5448cd1dd34b6aa383,
+    type: 3}
 --- !u!114 &100441778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3972,6 +3974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 872203840}
+  playerMovement: {fileID: 0}
 --- !u!136 &1797075897
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5013,6 +5016,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 128490450}
+  playerMovement: {fileID: 1092196058125862766, guid: ce16068742456f5448cd1dd34b6aa383,
+    type: 3}
 --- !u!114 &1860146385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5252,6 +5257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 671757821}
+  playerMovement: {fileID: 1092196058125862766, guid: ce16068742456f5448cd1dd34b6aa383,
+    type: 3}
 --- !u!114 &1882484472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5672,6 +5679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1807461991}
+  playerMovement: {fileID: 1092196058125862766, guid: ce16068742456f5448cd1dd34b6aa383,
+    type: 3}
 --- !u!114 &2101115187
 MonoBehaviour:
   m_ObjectHideFlags: 0

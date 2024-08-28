@@ -1,7 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class DragDropPuzzleManager : MonoBehaviour
@@ -11,32 +7,46 @@ public class DragDropPuzzleManager : MonoBehaviour
     public int minObjectsToShow = 4;
     public int maxObjectsToShow = 5;
 
-    public GameObject puzzlePanel;
-    public GameObject puzzleClearPanel; // Assign the PuzzleClearPanel in the Inspector
     private bool puzzleCompleted = false; // Track if the puzzle has been completed
+
+    public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
 
 
     private void Start()
     {
         SetRandomLeftObjects();
-        puzzleClearPanel.SetActive(false); // Ensure the clear panel is hidden initially
+        puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
     }
 
     private void Update()
     {
-        // Allow the player to open/close the puzzle panel with 'E' key
+        if (!puzzleCompleted && VisibleObjectsLocked())
+        {
+            puzzleCompleted = true;
+            ShowPuzzleClearScreen();
+            Debug.Log("puzzle cleared!");
+        }
+
+        // Check for 'E' key press to hide the panel
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (puzzlePanel.activeSelf)
-            {
-                puzzlePanel.SetActive(false);
-            }
-            else if (!puzzleCompleted)
-            {
-                puzzlePanel.SetActive(true);
-            }
+            HidePuzzleClearScreen();
         }
     }
+
+    private bool VisibleObjectsLocked()
+    {
+        foreach (GameObject obj in toDrag)
+        {
+            DragDropPuzzle dragDropPuzzle = obj.GetComponent<DragDropPuzzle>();
+            if (dragDropPuzzle.targetObject.activeSelf && !dragDropPuzzle.IsLocked())  //check if the right side objects is linked to an active leftside object, and is locked
+            {
+                return false; //if any visible object isnt locked, return false
+            }
+        }
+        return true; //all visible objects are locked
+    }
+
 
     public void SetRandomLeftObjects()
     {
@@ -62,39 +72,6 @@ public class DragDropPuzzleManager : MonoBehaviour
 
     }
 
-    public void ResetPuzzle()
-    {
-        foreach (GameObject obj in toDrag)
-        {
-            obj.GetComponent<DragDropPuzzle>().UnlockObject();
-        }
-        puzzleCompleted = false;
-        Debug.Log("Puzzle reset.");
-        SetRandomLeftObjects();
-    }
-
-    public bool AreAllObjectsLocked()
-    {
-        foreach (GameObject obj in toDrag)
-        {
-            if (!obj.GetComponent<DragDropPuzzle>().IsLocked())
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void CheckPuzzleCompletion()
-    {
-        if (AreAllObjectsLocked())
-        {
-            Debug.Log("Puzzle Completed!");
-            puzzleCompleted = true;
-            ShowPuzzleClearScreen();
-        }
-    }
-
     private void ShowPuzzleClearScreen()
     {
         if (puzzleClearPanel != null)
@@ -102,4 +79,13 @@ public class DragDropPuzzleManager : MonoBehaviour
             puzzleClearPanel.SetActive(true);
         }
     }
+
+    public void HidePuzzleClearScreen()
+    {
+        if (puzzleClearPanel != null)
+        {
+            puzzleClearPanel.SetActive(false);
+        }
+    }
+
 }

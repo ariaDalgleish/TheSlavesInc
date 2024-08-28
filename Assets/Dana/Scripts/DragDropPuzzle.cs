@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,7 +10,7 @@ public class DragDropPuzzle : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     private void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = transform.position; //save the initial position
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -36,12 +33,6 @@ public class DragDropPuzzle : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             transform.position = targetObject.transform.position;
             isLocked = true;
-
-            DragDropPuzzleManager dragDropPuzzleManager = FindObjectOfType<DragDropPuzzleManager>();
-            if (dragDropPuzzleManager != null && dragDropPuzzleManager.AreAllObjectsLocked())
-            {
-                Debug.Log("puzzle cleared!");
-            }
         }
         else
         {
