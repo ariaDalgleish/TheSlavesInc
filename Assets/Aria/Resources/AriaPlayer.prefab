@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 8758258577615199453}
-  speed: 3
+  speed: 3.5
   rotationSpeed: 5
 --- !u!114 &2741658684929343343
 MonoBehaviour:
