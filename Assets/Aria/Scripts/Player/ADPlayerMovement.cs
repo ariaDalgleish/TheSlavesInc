@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 
 public class ADPlayerMovement : MonoBehaviour
@@ -11,8 +12,14 @@ public class ADPlayerMovement : MonoBehaviour
     [SerializeField] Transform visuals;
     [SerializeField] public float speed;
     [SerializeField] float rotationSpeed;
-      
+    [SerializeField] private TrailRenderer tr;
     
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashDuration = 0.2f;
+    private float dashCooldown = 2f;
+    private Vector3 moveDirection;
     private float currentSpeed;
     private float slowdownEndTime;
 
@@ -36,7 +43,9 @@ public class ADPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        movement = playerControls.BaseControls.BaseControls.Movement.ReadValue<Vector2>();
+        if(isDashing) return;
+
+        movement = playerControls.BaseControls.BaseControls.Movement.ReadValue<Vector2>(); // Get the movement input
 
         
 
@@ -44,22 +53,28 @@ public class ADPlayerMovement : MonoBehaviour
         {
             ResetSpeed();
         }
+
+        if (playerControls.BaseControls.BaseControls.Dash.triggered && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     private void FixedUpdate()
     {
-        Vector3 moveDirection = new Vector3(movement.x, 0, movement.y).normalized;
+        if(isDashing) return;
 
-        Vector3 movementVelocity = moveDirection * currentSpeed * Time.deltaTime * 100;
-        movementVelocity.y = rb.velocity.y;
+        moveDirection = new Vector3(movement.x, 0, movement.y).normalized; // Normalize the movement vector
 
-        if (moveDirection != Vector3.zero)
+        Vector3 movementVelocity = moveDirection * currentSpeed * Time.deltaTime * 100; // Calculate the movement velocity
+        movementVelocity.y = rb.velocity.y; // Preserve the y velocity
+
+        if (moveDirection != Vector3.zero) // Rotate the player to face the movement direction
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             visuals.rotation = Quaternion.Lerp(visuals.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-
-        
+               
 
         rb.velocity = movementVelocity;
     }
@@ -78,5 +93,23 @@ public class ADPlayerMovement : MonoBehaviour
     public void ResetSpeed()
     {
         currentSpeed = speed;
+    }
+
+    private IEnumerator Dash() 
+    {
+        canDash = false;
+        isDashing = true;
+
+        Vector3 dashDirection = moveDirection != Vector3.zero ? moveDirection : visuals.forward; 
+        
+        rb.velocity = dashDirection * dashingPower;
+        tr.emitting = true;
+
+        yield return new WaitForSeconds(dashDuration);
+        tr.emitting = false;
+
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }

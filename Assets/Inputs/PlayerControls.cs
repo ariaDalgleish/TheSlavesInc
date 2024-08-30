@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Base Controls"",
+            ""name"": ""BaseControls"",
             ""id"": ""1ebbdee7-efc5-450a-b4d6-5b7524fb5101"",
             ""actions"": [
                 {
@@ -49,6 +49,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""36c0f5d1-a67e-4923-bb4f-5bce976daee0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""c74113f6-d63e-4b60-9f1e-e9136088164d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -165,6 +174,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9efa98a2-977a-41d1-a315-4554db107127"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -194,11 +214,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Base Controls
-        m_BaseControls = asset.FindActionMap("Base Controls", throwIfNotFound: true);
+        // BaseControls
+        m_BaseControls = asset.FindActionMap("BaseControls", throwIfNotFound: true);
         m_BaseControls_Movement = m_BaseControls.FindAction("Movement", throwIfNotFound: true);
         m_BaseControls_Jump = m_BaseControls.FindAction("Jump", throwIfNotFound: true);
         m_BaseControls_Interact = m_BaseControls.FindAction("Interact", throwIfNotFound: true);
+        m_BaseControls_Dash = m_BaseControls.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,12 +278,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Base Controls
+    // BaseControls
     private readonly InputActionMap m_BaseControls;
     private List<IBaseControlsActions> m_BaseControlsActionsCallbackInterfaces = new List<IBaseControlsActions>();
     private readonly InputAction m_BaseControls_Movement;
     private readonly InputAction m_BaseControls_Jump;
     private readonly InputAction m_BaseControls_Interact;
+    private readonly InputAction m_BaseControls_Dash;
     public struct BaseControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -270,6 +292,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_BaseControls_Movement;
         public InputAction @Jump => m_Wrapper.m_BaseControls_Jump;
         public InputAction @Interact => m_Wrapper.m_BaseControls_Interact;
+        public InputAction @Dash => m_Wrapper.m_BaseControls_Dash;
         public InputActionMap Get() { return m_Wrapper.m_BaseControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -288,6 +311,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IBaseControlsActions instance)
@@ -301,6 +327,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IBaseControlsActions instance)
@@ -341,5 +370,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
