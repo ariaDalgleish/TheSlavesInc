@@ -4,62 +4,64 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Animator transition;
-    public float transitionTime = 1f;  // Adjust this to the length of your transition animation
+    public Animator transition;  // Reference to the Animator controlling transition animations
+    public float transitionTime = 1f;  // Time duration for the transition animation
 
-    private void Update()
+    public void Update()
     {
-        // Check if the current scene is the score scene
+        // Check if the current scene is the "ScoreScene"
         if (SceneManager.GetActiveScene().name == "ScoreScene")
         {
-            // Listen for the 'Q' key press to load Stage 2
+            // If the player presses the 'Q' key, load Stage 2
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.Log("Q key pressed. Loading Stage 2...");
-                LoadStageTwo();
+                Debug.Log("Q key pressed. Loading Stage 2...");  // Log the keypress to the console
+                LoadStageTwo();  // Call the method to load Stage 2
             }
         }
     }
 
     public void LoadScoreScene()
     {
-        StartCoroutine(LoadLevelWithDelay(SceneManager.GetActiveScene().buildIndex + 1, 2f)); // Use the new overload for int index
+        // Start loading the next scene in the build index with a 2-second delay
+        StartCoroutine(LoadLevelWithDelay(SceneManager.GetActiveScene().buildIndex + 1, 2f));
     }
 
-    private void LoadStageTwo()
+    public void LoadStageTwo()
     {
-        StartCoroutine(LoadLevelWithDelay("Stage2", 0f)); // Replace "Stage2Scene" with your actual Stage 2 scene name
+        // Start loading the "Stage2" scene immediately with no delay
+        StartCoroutine(LoadLevelWithDelay("Stage2", 0f));  // Replace "Stage2" with your actual scene name
     }
 
-    // Overload for loading by scene name
-    private IEnumerator LoadLevelWithDelay(string sceneName, float delay)
+    // Coroutine to load a scene after a delay, using scene name
+    public IEnumerator LoadLevelWithDelay(string ScoreScene, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay);  // Wait for the specified delay before proceeding
 
-        // Play animation
+        // If a transition Animator is assigned, trigger the "Start" animation
         if (transition != null)
         {
-            transition.SetTrigger("Start");
-            yield return new WaitForSeconds(transitionTime);
+            transition.SetTrigger("Start");  // Play the transition animation
+            yield return new WaitForSeconds(transitionTime);  // Wait for the duration of the animation
         }
 
-        // Load the specified scene by name
-        SceneManager.LoadScene(sceneName);
+        // Load the scene by its name
+        SceneManager.LoadScene(ScoreScene);
     }
 
-    // Overload for loading by scene index
-    private IEnumerator LoadLevelWithDelay(int sceneIndex, float delay)
+    // Coroutine to load a scene after a delay, using scene index
+    public IEnumerator LoadLevelWithDelay(int sceneIndex, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay);  // Wait for the specified delay before proceeding
 
-        // Play animation
+        // If a transition Animator is assigned, trigger the "Start" animation
         if (transition != null)
         {
-            transition.SetTrigger("Start");
-            yield return new WaitForSeconds(transitionTime);
+            transition.SetTrigger("Start");  // Play the transition animation
+            yield return new WaitForSeconds(transitionTime);  // Wait for the duration of the animation
         }
 
-        // Load the specified scene by index
+        // Load the scene by its index in the build settings
         SceneManager.LoadScene(sceneIndex);
     }
 }
