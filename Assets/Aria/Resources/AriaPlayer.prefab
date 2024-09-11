@@ -179,6 +179,7 @@ MonoBehaviour:
   speed: 3.5
   rotationSpeed: 5
   tr: {fileID: 7883232556052839101}
+  canMove: 1
 --- !u!114 &2741658684929343343
 MonoBehaviour:
   m_ObjectHideFlags: 0

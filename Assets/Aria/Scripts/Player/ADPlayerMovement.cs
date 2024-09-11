@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ADPlayerMovement : MonoBehaviour
@@ -13,7 +14,9 @@ public class ADPlayerMovement : MonoBehaviour
     [SerializeField] public float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] private TrailRenderer tr;
-    
+
+    public bool canMove = true;
+
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 24f;
@@ -40,14 +43,11 @@ public class ADPlayerMovement : MonoBehaviour
             enabled = false;
         }
     }
-
     private void Update()
     {
-        if(isDashing) return;
+        if (!canMove || isDashing) return;  // Stop movement if canMove is false or player is dashing
 
         movement = playerControls.BaseControls.BaseControls.Movement.ReadValue<Vector2>(); // Get the movement input
-
-        
 
         if (Time.time > slowdownEndTime)
         {
@@ -60,9 +60,11 @@ public class ADPlayerMovement : MonoBehaviour
         }
     }
 
+    
+
     private void FixedUpdate()
     {
-        if(isDashing) return;
+        if (!canMove || isDashing) return;  // Stop movement if canMove is false or player is dashing
 
         moveDirection = new Vector3(movement.x, 0, movement.y).normalized; // Normalize the movement vector
 
@@ -74,10 +76,11 @@ public class ADPlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             visuals.rotation = Quaternion.Lerp(visuals.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-               
 
         rb.velocity = movementVelocity;
     }
+
+  
 
     public void ApplySlowdown(float factor, float duration)
     {

@@ -26,7 +26,12 @@ public class PlayerSelect : MonoBehaviour
     {
         SetCharacter(currentCharacter);
     }
-    
+
+    public void SelectCharacter(int id)
+    {
+        currentCharacter = id;
+        SetCharacter(currentCharacter);
+    }
 
     public void NextCharacter()
     {
