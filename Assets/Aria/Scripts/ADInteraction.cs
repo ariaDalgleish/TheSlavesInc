@@ -42,7 +42,7 @@ public class ADInteraction : MonoBehaviour
     {
         if (playerControls != null)
         {
-            playerControls.BaseControls.BaseControls.MenuInteract.performed += OnInteractPerformed;
+            playerControls.BaseControls.BaseControls.Interact.performed += OnInteractPerformed;
         }
     }
 
