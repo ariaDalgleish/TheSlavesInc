@@ -23,18 +23,18 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadScoreScene()
     {
-        // Start loading the next scene in the build index with a 2-second delay
-        StartCoroutine(LoadLevelWithDelay(SceneManager.GetActiveScene().buildIndex + 1, 2f));
+        // Load the "ScoreScene" after Stage1 (you can adjust the delay if needed)
+        StartCoroutine(LoadLevelWithDelay("ScoreScene", 2f));  // Replace with the actual name of your score scene
     }
 
     public void LoadStageTwo()
     {
-        // Start loading the "Stage2" scene immediately with no delay
-        StartCoroutine(LoadLevelWithDelay("Stage2", 0f));  // Replace "Stage2" with your actual scene name
+        // Start loading the "Stage2" scene immediately
+        StartCoroutine(LoadLevelWithDelay("Stage2", 0f));  // Replace with the actual name of Stage 2
     }
 
     // Coroutine to load a scene after a delay, using scene name
-    public IEnumerator LoadLevelWithDelay(string ScoreScene, float delay)
+    public IEnumerator LoadLevelWithDelay(string sceneName, float delay)
     {
         yield return new WaitForSeconds(delay);  // Wait for the specified delay before proceeding
 
@@ -46,22 +46,6 @@ public class LevelLoader : MonoBehaviour
         }
 
         // Load the scene by its name
-        SceneManager.LoadScene(ScoreScene);
-    }
-
-    // Coroutine to load a scene after a delay, using scene index
-    public IEnumerator LoadLevelWithDelay(int sceneIndex, float delay)
-    {
-        yield return new WaitForSeconds(delay);  // Wait for the specified delay before proceeding
-
-        // If a transition Animator is assigned, trigger the "Start" animation
-        if (transition != null)
-        {
-            transition.SetTrigger("Start");  // Play the transition animation
-            yield return new WaitForSeconds(transitionTime);  // Wait for the duration of the animation
-        }
-
-        // Load the scene by its index in the build settings
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
     }
 }
