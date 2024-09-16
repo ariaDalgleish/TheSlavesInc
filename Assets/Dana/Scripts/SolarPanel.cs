@@ -17,6 +17,8 @@ public class SolarPanel : MonoBehaviour
     public bool isFull = false; //track if the gauge has reached 100
     public bool puzzleCompleted = false; // Track if the puzzle has been completed
 
+    public DurabilitySystem durabilitySystem; // Reference to the DurabilitySystem
+
     private void Start()
     {
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
@@ -41,6 +43,9 @@ public class SolarPanel : MonoBehaviour
             {
                 Gauge = MaxGauge;
                 isFull = true;
+
+                durabilitySystem.IncreaseDurability(); // Increase Durability when puzzle is completed' above the 'Debug.Log("Puzzle cleared!");
+
                 Debug.Log("Puzzle Completed!");
                 puzzleCompleted = true;
                 ShowPuzzleClearScreen();

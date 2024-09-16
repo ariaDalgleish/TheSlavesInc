@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Sprite[] allSprites; // Array of all possible sprites
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
 
+    public DurabilitySystem durabilitySystem; // Reference to the DurabilitySystem
+
     private bool puzzleCompleted = false;
 
     private void Start()
@@ -112,6 +114,8 @@ public class GameManager : MonoBehaviour
                 return; // Puzzle is not yet completed
             }
         }
+
+        durabilitySystem.IncreaseDurability(); // Increase Durability when puzzle is completed' above the 'Debug.Log("Puzzle cleared!");
 
         Debug.Log("Puzzle Completed!");
         puzzleCompleted = true;

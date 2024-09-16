@@ -9,6 +9,9 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
     public Transform visualStack;
 
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
+
+    public DurabilitySystem durabilitySystem; // Reference to the DurabilitySystem
+
     private bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     private PuzzleResetManager resetManager; // Reference to the reset manager
@@ -94,6 +97,9 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
             if (documentPile.childCount == 0)
             {
                 ShowPuzzleClearScreen();
+
+                durabilitySystem.IncreaseDurability(); // Increase Durability when puzzle is completed' above the 'Debug.Log("Puzzle cleared!");
+
                 Debug.Log("Game Cleared!");
                 resetManager.StartResetCoroutine(this); // Start the reset coroutine via the reset manager
             }
