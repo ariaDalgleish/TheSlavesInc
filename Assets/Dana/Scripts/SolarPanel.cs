@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SolarPanel : MonoBehaviour, IPuzzle
+public class SolarPanel : MonoBehaviour
 {
     public Image gaugeBar;
     public float Gauge = 0f;
@@ -12,13 +12,24 @@ public class SolarPanel : MonoBehaviour, IPuzzle
     public float DecreaseSpeed = 60f;
 
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
+    public PRMSolar resetManager; // Reference to the PRMSolar script for resetting
 
-    private bool isFull = false; //track if the gauge has reached 100
-    private bool puzzleCompleted = false; // Track if the puzzle has been completed
+    public bool isFull = false; //track if the gauge has reached 100
+    public bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     private void Start()
     {
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
+
+        // If resetManager is not assigned in the inspector, try to find it
+        if (resetManager == null)
+        {
+            resetManager = GetComponentInParent<PRMSolar>();
+        }
+        if (resetManager == null)
+        {
+            Debug.LogError("Reset manager not found!");
+        }
     }
 
     void Update()
@@ -33,6 +44,17 @@ public class SolarPanel : MonoBehaviour, IPuzzle
                 Debug.Log("Puzzle Completed!");
                 puzzleCompleted = true;
                 ShowPuzzleClearScreen();
+
+                // Start the reset coroutine in PRMSolar after puzzle completion
+                if (resetManager != null)
+                {
+                    Debug.Log("Starting reset coroutine from SolarPanel script...");
+                    resetManager.StartResetCoroutine();
+                }
+                else
+                {
+                    Debug.LogError("Reset manager not found!");
+                }
             }
         }
         else if (!isFull) //when v is not pressed
@@ -57,6 +79,12 @@ public class SolarPanel : MonoBehaviour, IPuzzle
             Debug.Log("Puzzle Completed!");
             puzzleCompleted = true;
             ShowPuzzleClearScreen();
+
+            // Start the reset coroutine in PRMSolar after puzzle completion
+            if (resetManager == null)
+            {
+                resetManager.StartResetCoroutine();
+            }
         }
     }
     private void ShowPuzzleClearScreen()
@@ -74,13 +102,4 @@ public class SolarPanel : MonoBehaviour, IPuzzle
             puzzleClearPanel.SetActive(false);
         }
     }
-
-    public void ResetPuzzle()
-    {
-        Gauge = 0f;
-        isFull= false;
-        gaugeBar.fillAmount = 0f;
-        Debug.Log("SolarPanel puzzle reset.");
-    }
-
 }
