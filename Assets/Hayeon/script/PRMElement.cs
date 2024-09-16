@@ -1,54 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PRMElement : MonoBehaviour
 {
-    public float resetDelay = 5f; // Time to wait before resetting the puzzle
-    public GameObject resetReadySprite; // The sprite that indicates the puzzle is ready to play again
+    public ElementScript[] elementScripts; // Reference to the ElementScript components
+    public GameManager gameManager; // Reference to the GameManager
+    public float resetDelay = 5; // Delay before puzzle resets
 
-    private ElementScript[] elementScripts;
+    private bool resetInProgress = false; // To prevent multiple reset triggers
 
-    private void Awake()
+    private void Start()
     {
-        elementScripts = GetComponentsInChildren<ElementScript>(); // Find all ElementScripts within the parent canvas
+        if (elementScripts == null || elementScripts.Length == 0)
+        {
+            elementScripts = GetComponentsInChildren<ElementScript>();
+        }
+
+        // Optionally, find the GameManager in the parent
+        if (gameManager == null)
+        {
+            gameManager = GetComponentInParent<GameManager>();
+        }
     }
 
-    public void ResetPuzzle()
+    public void StartResetCoroutine()
     {
-        StartCoroutine(ResetPuzzleWithDelay());
+        if (!resetInProgress) // Only start the timer if it's not already in progress
+        {
+            StartCoroutine(ResetPuzzleWithDelay());
+        }
     }
 
     private IEnumerator ResetPuzzleWithDelay()
     {
-        yield return new WaitForSeconds(resetDelay); // Wait for the reset delay
+        Debug.Log("waiting for reset delay...");
+        resetInProgress = true;
 
-        HashSet<int> usedIndexes = new HashSet<int>(); // To keep track of used sprite indexes
+        // wait for the reset delay
+        Debug.Log("Waiting for " + resetDelay + " seconds...");
+        yield return new WaitForSeconds(resetDelay);
 
-        foreach (var elementScript in elementScripts)
+        // Reset each ElementScript to its initial state
+        foreach (ElementScript element in elementScripts)
         {
-            int randomIndex;
-            do
-            {
-                randomIndex = Random.Range(0, elementScript.newImages.Length);
-            } while (usedIndexes.Contains(randomIndex)); // Ensure a different sprite is chosen
-
-            usedIndexes.Add(randomIndex); // Mark this index as used
-            elementScript.SetInitialImage(elementScript.newImages[randomIndex], elementScript.newImages[randomIndex]);
-
-            elementScript.ResetElement(); // Reset each element in the puzzle
+            Debug.Log("Resetting puzzle...");
+            element.ResetElement();
         }
 
-        ShowResetReadySprite(); // Show the sprite indicating the puzzle is ready
+        // Reset the GameManager to set up the puzzle again
+        Debug.Log("Resetting the GameManager...");
+        gameManager.SetupPuzzle();
+
+        resetInProgress = false; // Reset process completed, allow for future resets
+        Debug.Log("Reset completed.");
     }
 
-    private void ShowResetReadySprite()
-    {
-        if (resetReadySprite != null)
-        {
-            resetReadySprite.SetActive(true); // Show the reset ready sprite
-        }
-    }
+
 }
 
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class ElementScript : MonoBehaviour, IPointerClickHandler
 {
@@ -19,6 +18,7 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
     private Sprite initialSprite; // Store the initial sprite for resetting
 
     public PRMElement resetManager;
+
     private void Start()
     {
         // Find the reset manager script in the Puzzle Panel
@@ -41,7 +41,6 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
             puzzleCompleted = true; // Mark the puzzle as completed
             gameManager?.CheckPuzzleCompletion(); // Notify GameManager
         }
-
     }
 
     // Handle pointer clicks
@@ -52,34 +51,36 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
     }
 
     // Set the initial image and target sprite
-    public void SetInitialImage(Sprite initialSprite, Sprite target)
+    public void SetInitialImage(Sprite initialImage, Sprite target)
     {
-        targetImage.sprite = initialSprite;
+        // Null check for initialImage
+        if (initialImage == null)
+        {
+            Debug.LogError("Initial image is null in SetInitialImage!");
+            return;
+        }
+
+        initialSprite = initialImage;
         targetSprite = target;
+        targetImage.sprite = initialSprite;
+
+        Debug.Log("Initial image set successfully.");
     }
 
-    // Method to disable interaction
+    // Disable interaction
     public void DisableInteraction()
     {
         interactable = false;
-        
     }
 
-    public void EnableInteraction()
-    {
-        interactable = true;
-    }
-
-    // IPuzzle interface implementation
+    // Reset the element to its initial state
     public void ResetElement()
     {
-        Debug.Log("ResetElement called for " + gameObject.name);
-
-        // Reset the sprite to the initial sprite or perform other reset logic here
-        currentIndex = 0; // Reset the index
-        targetImage.sprite = initialSprite; // Reset the sprite to the initial image
-
-        // Re-enable interaction if it was disabled
+        Debug.Log("Element reset to initial state");
+        targetImage.sprite = initialSprite;
+        currentIndex = 0;
         interactable = true;
+        puzzleCompleted = false; // Reset puzzle completed state
     }
 }
+

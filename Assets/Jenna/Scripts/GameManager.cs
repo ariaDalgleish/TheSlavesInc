@@ -11,14 +11,11 @@ public class GameManager : MonoBehaviour
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
 
     private bool puzzleCompleted = false;
-    private PRMElement resetManager;
 
     private void Start()
     {
         SetupPuzzle();
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
-
-        resetManager = FindObjectOfType<PRMElement>(); // Find the PRMElement script in the scene
     }
 
     private void Update()
@@ -87,6 +84,8 @@ public class GameManager : MonoBehaviour
         {
             bottomImageScripts[i].SetInitialImage(selectedBottomSprites[i], selectedTopSprites[i]);
         }
+
+        puzzleCompleted = false;
     }
 
     // Method to shuffle a list
@@ -119,10 +118,11 @@ public class GameManager : MonoBehaviour
         ShowPuzzleClearScreen();
         DisableAllBottomImages();
 
-        // Call the ResetPuzzle method from the reset manager after puzzle is completed
+        PRMElement resetManager = GetComponentInParent<PRMElement>();
         if (resetManager != null)
         {
-            resetManager.ResetPuzzle();
+            Debug.Log("Starting reset timer...");
+            resetManager.StartResetCoroutine();
         }
     }
 
