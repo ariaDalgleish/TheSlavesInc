@@ -1,16 +1,20 @@
+using Cinemachine.Examples;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class CharacterMenu : MonoBehaviourPun, IInteractable
 {
     [SerializeField] private GameObject menu;
-    [SerializeField] private ADPlayerMovement playerMovement;
+    public ADPlayerMovement player;
     private bool isMenuActive = false; // Initialize to false to start with menu closed
 
     void Start()
     {
-        menu.SetActive(isMenuActive); // Ensure menu starts closed
+        menu.SetActive(isMenuActive);
     }
+
+    
 
     public void OnInteract()
     {
@@ -30,9 +34,9 @@ public class CharacterMenu : MonoBehaviourPun, IInteractable
         isMenuActive = !isMenuActive;
         menu.SetActive(isMenuActive);
 
-        if (playerMovement != null)
+        if (player != null)
         {
-            playerMovement.canMove = !isMenuActive;
+            player.canMove = !isMenuActive;
         }
 
         photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
@@ -46,9 +50,9 @@ public class CharacterMenu : MonoBehaviourPun, IInteractable
             isMenuActive = false;
             menu.SetActive(false);
 
-            if (playerMovement != null)
+            if (player != null)
             {
-                playerMovement.canMove = true;
+                player.canMove = true;
             }
 
             photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
@@ -61,9 +65,9 @@ public class CharacterMenu : MonoBehaviourPun, IInteractable
         isMenuActive = state;
         menu.SetActive(isMenuActive);
 
-        if (playerMovement != null)
+        if (player != null)
         {
-            playerMovement.canMove = !isMenuActive;
+            player.canMove = !isMenuActive;
         }
     }
 }
