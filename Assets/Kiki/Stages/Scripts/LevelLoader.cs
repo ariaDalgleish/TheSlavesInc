@@ -7,19 +7,20 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;  // Reference to the Animator controlling transition animations
     public float transitionTime = 1f;  // Time duration for the transition animation
 
-    public void Update()
+    void Update()
     {
-        // Check if the current scene is the "ScoreScene"
         if (SceneManager.GetActiveScene().name == "ScoreScene")
         {
-            // If the player presses the 'Q' key, load Stage 2
+            // Check for continuous press in the FixedUpdate
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.Log("Q key pressed. Loading Stage 2...");  // Log the keypress to the console
-                LoadStageTwo();  // Call the method to load Stage 2
+                LoadStageTwo();
             }
         }
     }
+
+
+
 
     public void LoadScoreScene()
     {
@@ -38,14 +39,11 @@ public class LevelLoader : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);  // Wait for the specified delay before proceeding
 
-        // If a transition Animator is assigned, trigger the "Start" animation
-        if (transition != null)
-        {
-            transition.SetTrigger("Start");  // Play the transition animation
-            yield return new WaitForSeconds(transitionTime);  // Wait for the duration of the animation
-        }
-
-        // Load the scene by its name
+        // Directly load the scene without transition
         SceneManager.LoadScene(sceneName);
     }
+
+
+    
+    
 }
