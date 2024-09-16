@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Elevator : MonoBehaviour
+public class DoorLeft : MonoBehaviour
 {
     public InteractableButton button;
     float posX;
@@ -23,7 +23,7 @@ public class Elevator : MonoBehaviour
                 posX -= Time.deltaTime;
             }
 
-            posX = Mathf.Clamp(posX, -8.81f, -5.18f);
+            posX = Mathf.Clamp(posX, -13.538f, -11.348f);
             elevatorPos.x = posX;
 
             yield return null;
