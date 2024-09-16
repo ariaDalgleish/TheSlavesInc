@@ -6670,7 +6670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d442c4be9e064244a1033769b8419b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   gameVersion: 0.2
   PlayerID: 0
 --- !u!1 &1204062675

@@ -7,13 +7,11 @@ public class ADNetworkManager : MonoBehaviourPunCallbacks
 {
     //[SyncVar]
     private string displayName = "Loading...";
-    public ADNetworkManager instance;
+    public static ADNetworkManager instance;
     [SerializeField] string gameVersion;
     string connectionStatus;
 
     public int PlayerID;
-
-    
 
     private void Awake()
     {
