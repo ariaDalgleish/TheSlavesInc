@@ -1,83 +1,55 @@
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ADPlayerInteraction : MonoBehaviour
 {
-    PhotonView photonView;
-    ADPlayerInputControls playerControls;
-    private InteractableButton currentInteraction;
-    public LayerMask layerMask;
-    [SerializeField] Transform visuals;
+    private IInteractable currentInteractable;
+    private ADPlayerInputControls playerControls;
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
-
-        if (photonView.IsMine)
-        {
-            playerControls = GetComponent<ADPlayerInputControls>();
-            InitialiseInputs();
-        }
-        else
-        {
-            enabled = false;
-        }
+        playerControls = GetComponent<ADPlayerInputControls>();
+        InitialiseInputs();
     }
 
     private void InitialiseInputs()
     {
-        playerControls.BaseControls.BaseControls.Interact.performed += Interact_performed;
-        playerControls.BaseControls.BaseControls.Interact.canceled += Interact_canceled;
+        playerControls.BaseControls.BaseControls.Interact.performed += InteractPerformed;
+        playerControls.BaseControls.BaseControls.Interact.canceled += InteractCanceled;
     }
 
-    private void Interact_canceled(InputAction.CallbackContext obj)
+    private void InteractPerformed(InputAction.CallbackContext context)
     {
-        if (currentInteraction != null)
+        if (currentInteractable != null)
         {
-            currentInteraction.ButtonReleased();
+            currentInteractable.OnInteract();
         }
     }
 
-    private void Interact_performed(InputAction.CallbackContext obj)
+    private void InteractCanceled(InputAction.CallbackContext context)
     {
-        if (currentInteraction != null)
+        if (currentInteractable != null)
         {
-            currentInteraction.ButtonPressed();
+            currentInteractable.OnStopInteract();
         }
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        RaycastCheck();
+        IInteractable interactable = other.GetComponent<IInteractable>();
+        if (interactable != null)
+        {
+            currentInteractable = interactable;
+        }
     }
 
-    private void RaycastCheck()
+    private void OnTriggerExit(Collider other)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 5f, layerMask)) // Raycast to check if the player is looking at an interactable button
+        IInteractable interactable = other.GetComponent<IInteractable>();
+        if (interactable != null && interactable == currentInteractable)
         {
-            InteractableButton button = hit.collider.GetComponent<InteractableButton>(); 
-            if (button != null)
-            {
-                currentInteraction = button;
-                if (playerControls.BaseControls.BaseControls.Interact.ReadValue<float>() > 0)
-                {
-                    button.ButtonPressed();
-                }
-                else
-                {
-                    button.ButtonReleased();
-                }
-            }
-        }
-        else
-        {
-            if (currentInteraction != null)
-            {
-                currentInteraction.ButtonReleased();
-                currentInteraction = null;
-            }
+            currentInteractable.OnStopInteract();
+            currentInteractable = null;
         }
     }
 }

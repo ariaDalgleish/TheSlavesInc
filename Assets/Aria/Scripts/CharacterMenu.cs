@@ -1,72 +1,69 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class CharacterMenu : MonoBehaviourPun
+public class CharacterMenu : MonoBehaviourPun, IInteractable
 {
-    [SerializeField] private GameObject menu;  // The character selection menu to enable/disable
-    [SerializeField] private ADPlayerMovement playerMovement;  // Reference to your player movement script
-    private ADPlayerInputControls playerControls;
-    private bool isPlayerInRange = false;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private ADPlayerMovement playerMovement;
+    private bool isMenuActive = false; // Initialize to false to start with menu closed
 
-    private void Start()
+    void Start()
     {
-        if (photonView.IsMine)
-        {
-            playerControls = GetComponent<ADPlayerInputControls>();
-            InitialiseInputs();
-        }
-        else
-        {
-            enabled = false;
-        }
+        menu.SetActive(isMenuActive); // Ensure menu starts closed
     }
 
-    private void InitialiseInputs()
+    public void OnInteract()
     {
-        playerControls.BaseControls.BaseControls.Interact.performed += OnInteractPerformed;
-    }
-
-    private void OnInteractPerformed(InputAction.CallbackContext context)
-    {
-        if (isPlayerInRange)
+        if (!isMenuActive) // Only open the menu if it's not already active
         {
             ToggleMenu();
         }
     }
 
-    private void Update()
+    public void OnStopInteract()
     {
-        if (photonView.IsMine)
-        {
-            // Update logic if needed
-        }
+        // Optional logic if needed when stopping interaction
     }
 
     private void ToggleMenu()
     {
-        bool isActive = menu.activeSelf;
-        menu.SetActive(!isActive);  // Toggle menu visibility
+        isMenuActive = !isMenuActive;
+        menu.SetActive(isMenuActive);
 
         if (playerMovement != null)
         {
-            playerMovement.canMove = isActive;  // Enable movement when the menu is closed
+            playerMovement.canMove = !isMenuActive;
+        }
+
+        photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
+    }
+
+    // Method to close the menu from the UI button
+    public void CloseMenu()
+    {
+        if (isMenuActive)
+        {
+            isMenuActive = false;
+            menu.SetActive(false);
+
+            if (playerMovement != null)
+            {
+                playerMovement.canMove = true;
+            }
+
+            photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    [PunRPC]
+    private void SyncMenuState(bool state)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-        }
-    }
+        isMenuActive = state;
+        menu.SetActive(isMenuActive);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (playerMovement != null)
         {
-            isPlayerInRange = false;
+            playerMovement.canMove = !isMenuActive;
         }
     }
 }
