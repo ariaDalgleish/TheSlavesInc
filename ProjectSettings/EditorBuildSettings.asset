@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Kiki/Stages/LoadingScene.unity
     guid: b650841cd29a2f94dba86c24641e8383
   - enabled: 1
@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Jenna/Scene/ScoreScene.unity
     guid: ff813ade92624c845a2e18e63643dd54
-  - enabled: 0
+  - enabled: 1
     path: Assets/Kiki/Stages/Stage2.unity
     guid: 74929610f9c7ff443a2b996a0bbda75e
   - enabled: 1
