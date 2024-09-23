@@ -18,6 +18,7 @@ public class SolarPanel : MonoBehaviour
     public bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     public DurabilitySystem durabilitySystem; // Reference to the DurabilitySystem
+    public Interacter interactor;
 
     private void Start()
     {
@@ -105,6 +106,7 @@ public class SolarPanel : MonoBehaviour
         if (puzzleClearPanel != null)
         {
             puzzleClearPanel.SetActive(false);
+            interactor.HidePuzzlePanel();
         }
     }
 }

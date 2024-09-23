@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 100441773}
   - component: {fileID: 100441777}
   - component: {fileID: 100441778}
+  - component: {fileID: 100441779}
   m_Layer: 0
   m_Name: Cube solarpanel
   m_TagString: Untagged
@@ -450,6 +451,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
+--- !u!114 &100441779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100441772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 8
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &103416871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3215482143572262138, guid: 41318a1fa28024c48bbcfb676755e809,
@@ -10052,6 +10075,7 @@ GameObject:
   - component: {fileID: 1481458440}
   - component: {fileID: 1481458439}
   - component: {fileID: 1481458438}
+  - component: {fileID: 1481458444}
   m_Layer: 0
   m_Name: Cube foodpantry
   m_TagString: Untagged
@@ -10188,6 +10212,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481458436}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1481458444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481458436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1530822236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11018,6 +11064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1707382868}
   - component: {fileID: 1707382869}
+  - component: {fileID: 1707382870}
   m_Layer: 5
   m_Name: FloatingText
   m_TagString: Untagged
@@ -11060,6 +11107,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1.7, z: 0.4}
+--- !u!114 &1707382870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707382867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 9
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1719911889
 GameObject:
   m_ObjectHideFlags: 0
@@ -12657,6 +12726,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197806304140349601, guid: cc12aca4e8245b04d8940faefc283316,
         type: 3}
+      propertyPath: interactor
+      value: 
+      objectReference: {fileID: 100441777}
+    - target: {fileID: 5197806304140349601, guid: cc12aca4e8245b04d8940faefc283316,
+        type: 3}
       propertyPath: resetManager
       value: 
       objectReference: {fileID: 0}
@@ -12979,6 +13053,7 @@ GameObject:
   - component: {fileID: 1860146383}
   - component: {fileID: 1860146384}
   - component: {fileID: 1860146385}
+  - component: {fileID: 1860146386}
   m_Layer: 0
   m_Name: Cube element
   m_TagString: Untagged
@@ -13115,6 +13190,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 3f686ac397e1a8a4080eef7a79aec53d, type: 2}
+--- !u!114 &1860146386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860146376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1871079903
 GameObject:
   m_ObjectHideFlags: 0
@@ -13235,6 +13332,7 @@ GameObject:
   - component: {fileID: 1882484468}
   - component: {fileID: 1882484471}
   - component: {fileID: 1882484472}
+  - component: {fileID: 1882484473}
   m_Layer: 0
   m_Name: Cube document
   m_TagString: Untagged
@@ -13354,6 +13452,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
+--- !u!114 &1882484473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882484466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1885948758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14928,6 +15048,7 @@ GameObject:
   - component: {fileID: 2101115183}
   - component: {fileID: 2101115186}
   - component: {fileID: 2101115187}
+  - component: {fileID: 2101115188}
   m_Layer: 0
   m_Name: Cube datasending
   m_TagString: Untagged
@@ -15047,6 +15168,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
+--- !u!114 &2101115188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101115181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &2127012981
 PrefabInstance:
   m_ObjectHideFlags: 0

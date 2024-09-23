@@ -7,7 +7,8 @@ public class ADPlayerInteraction : MonoBehaviour
     PhotonView photonView;
 
     private ADPlayerInputControls playerControls;
-    InteractableButton currentInteractable;
+    InteractableButton buttonInteractable;
+    CharacterMenu menuInteractable;
     public LayerMask layerMask;
     [SerializeField] Transform visuals;
 
@@ -21,6 +22,10 @@ public class ADPlayerInteraction : MonoBehaviour
         }
         else
         {
+            gameObject.tag = "Untagged";
+            GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().isKinematic = true;
             enabled = false;
         }
     }
@@ -33,17 +38,17 @@ public class ADPlayerInteraction : MonoBehaviour
 
     private void InteractPerformed(InputAction.CallbackContext context)
     {
-        if (currentInteractable != null)
+        if (buttonInteractable != null)
         {
-            currentInteractable.ButtonPressed();
+            buttonInteractable.ButtonPressed();
         }
     }
 
     private void InteractCanceled(InputAction.CallbackContext context)
     {
-        if (currentInteractable != null)
+        if (buttonInteractable != null)
         {
-            currentInteractable.ButtonReleased();
+            buttonInteractable.ButtonReleased();
         }
     }
 
@@ -56,14 +61,15 @@ public class ADPlayerInteraction : MonoBehaviour
             InteractableButton interactable = other.GetComponent<InteractableButton>();
             if (interactable != null)
             {
-                currentInteractable = interactable; // Store the current interactable
+                buttonInteractable = interactable; // Store the current interactable
             }
 
             // Check for CharacterMenu component
             CharacterMenu characterMenu = other.GetComponent<CharacterMenu>();
             if (characterMenu != null)
             {
-                // Handle menu interaction if needed
+                // menuInteractable = interactable; interactable = the layer? idk
+                // PlayerIsInRange ? 
             }
         }
     }
@@ -71,9 +77,9 @@ public class ADPlayerInteraction : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // Check if the exiting collider was the current interactable
-        if (other.GetComponent<InteractableButton>() == currentInteractable)
+        if (other.GetComponent<InteractableButton>() == buttonInteractable)
         {
-            currentInteractable = null; // Reset the current interactable
+            buttonInteractable = null; // Reset the current interactable
         }
         // Handle exit for CharacterMenu if needed
         if (other.GetComponent<CharacterMenu>() != null)

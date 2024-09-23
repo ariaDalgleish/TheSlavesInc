@@ -45,6 +45,8 @@ MonoBehaviour:
   - OnElevator
   - OffElevator
   - SyncMenuState
+  - PlayerInteracted
+  - StopInteraction
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
