@@ -23,7 +23,6 @@ public class ADPlayerInteraction : MonoBehaviour
         {
             enabled = false;
         }
-
     }
 
     private void InitialiseInputs()
@@ -47,15 +46,28 @@ public class ADPlayerInteraction : MonoBehaviour
             currentInteractable.ButtonReleased();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the other collider has an InteractableButton component
-        InteractableButton interactable = other.GetComponent<InteractableButton>();
-        if (interactable != null)
+        // Check if the other collider is on the Interactable layer
+        if (((1 << other.gameObject.layer) & layerMask) != 0)
         {
-            currentInteractable = interactable; // Store the current interactable
+            // Check for InteractableButton component
+            InteractableButton interactable = other.GetComponent<InteractableButton>();
+            if (interactable != null)
+            {
+                currentInteractable = interactable; // Store the current interactable
+            }
+
+            // Check for CharacterMenu component
+            CharacterMenu characterMenu = other.GetComponent<CharacterMenu>();
+            if (characterMenu != null)
+            {
+                // Handle menu interaction if needed
+            }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         // Check if the exiting collider was the current interactable
@@ -63,7 +75,10 @@ public class ADPlayerInteraction : MonoBehaviour
         {
             currentInteractable = null; // Reset the current interactable
         }
+        // Handle exit for CharacterMenu if needed
+        if (other.GetComponent<CharacterMenu>() != null)
+        {
+            // Additional logic if required
+        }
     }
-
 }
- 

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 
 public class Interacter : MonoBehaviour
 {
+    PhotonView pV;
+
     public GameObject puzzlePanel;
    
     private bool isPlayerInRange = false;  //track if player is within interaction range
@@ -15,7 +18,12 @@ public class Interacter : MonoBehaviour
 
     private void Start()
     {
-        puzzlePanel.SetActive(false);
+        pV = GetComponent<PhotonView>();
+
+        if (pV.IsMine)
+        {
+            puzzlePanel.SetActive(false);
+        }
        
     }
 
