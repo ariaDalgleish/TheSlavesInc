@@ -1,15 +1,26 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class CharacterMenu : MonoBehaviourPun
+public class CharacterMenu : MonoBehaviour
 {
+    PhotonView photonView;
+
     [SerializeField] private GameObject menu;
     private bool isMenuActive = false;
     private bool isPlayerInRange = false;
 
     void Start()
     {
-        menu.SetActive(isMenuActive);
+        photonView = GetComponent<PhotonView>();
+
+        if (photonView.IsMine)
+        {
+            menu.SetActive(isMenuActive);
+        }
+        else
+        {
+            enabled = false; // Disable this script for other players
+        }
     }
 
     void Update()
@@ -40,27 +51,19 @@ public class CharacterMenu : MonoBehaviourPun
 
     private void DisablePlayerMovement()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        ADPlayerMovement movementScript = photonView.GetComponent<ADPlayerMovement>();
+        if (movementScript != null)
         {
-            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
-            if (movementScript != null)
-            {
-                movementScript.canMove = false; // Disable player movement
-            }
+            movementScript.canMove = false; // Disable player movement
         }
     }
 
     private void EnablePlayerMovement()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        ADPlayerMovement movementScript = photonView.GetComponent<ADPlayerMovement>();
+        if (movementScript != null)
         {
-            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
-            if (movementScript != null)
-            {
-                movementScript.canMove = true; // Enable player movement
-            }
+            movementScript.canMove = true; // Enable player movement
         }
     }
 

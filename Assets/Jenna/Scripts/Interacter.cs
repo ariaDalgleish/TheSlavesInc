@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,23 @@ using UnityEngine.UI;
 
 public class Interacter : MonoBehaviour
 {
+    PhotonView pV;
+
     public GameObject puzzlePanel;
-    public ADPlayerMovement playerMovement; //reference to player movement script
+   
     private bool isPlayerInRange = false;  //track if player is within interaction range
     private bool isPanelActive = false; //track if the puzzle panel is currently active
 
 
     private void Start()
     {
-        puzzlePanel.SetActive(false);
-        playerMovement.enabled = true;
+        pV = GetComponent<PhotonView>();
+
+        if (pV.IsMine)
+        {
+            puzzlePanel.SetActive(false);
+        }
+       
     }
 
     private void Update()
@@ -40,22 +48,38 @@ public class Interacter : MonoBehaviour
 
         if (isPanelActive)
         {
-            FreezePlayerMovement();
+            DisablePlayerMovement();
         }
         else
         {
-            UnFreezePlayerMovement();
+            EnablePlayerMovement();
         }
     }
 
-    private void FreezePlayerMovement()
+    private void DisablePlayerMovement()
     {
-        Debug.Log("player is frozen,,,");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
+            if (movementScript != null)
+            {
+                movementScript.canMove = false; // Disable player movement
+            }
+        }
     }
 
-    private void UnFreezePlayerMovement()
+    private void EnablePlayerMovement()
     {
-        playerMovement.enabled = true;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
+            if (movementScript != null)
+            {
+                movementScript.canMove = true; // Enable player movement
+            }
+        }
     }
 
     public void HidePuzzlePanel()
@@ -79,7 +103,6 @@ public class Interacter : MonoBehaviour
             isPlayerInRange =false;
             puzzlePanel.SetActive(false );
             isPanelActive=false;
-            UnFreezePlayerMovement();
         }
     }
 
