@@ -1,8 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun.Demo.SlotRacer;
+using Photon.Pun;
 
 public class EnemyMovement : MonoBehaviour
 {
+    PhotonView photonView;
+
     public GameObject trailPrefab; // Prefab with TrailRenderer and BoxCollider
     public float moveSpeed = 2f; // Enemy movement speed
     public float changeDirectionTime = 2f; // Time to change direction
@@ -14,9 +18,23 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        changeDirectionTimer = changeDirectionTime;
-        movementDirection = RandomDirection();
-        StartCoroutine(SpawnTrail());
+        photonView = GetComponent<PhotonView>();
+        if (photonView.IsMine)
+        {
+            changeDirectionTimer = changeDirectionTime;
+            movementDirection = RandomDirection();
+            StartCoroutine(SpawnTrail());
+        }
+        else
+        {
+            GetComponent<EnemyTrailManager>().enabled = false;
+            GetComponent<SphereCollider>().enabled = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<TrailArea>().enabled = false;
+            enabled = false;
+        }
+       
     }
 
     private void Update()
