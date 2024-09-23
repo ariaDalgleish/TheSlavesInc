@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class InteractableButton : MonoBehaviour, IInteractable
+public class InteractableButton : MonoBehaviour
 {
     PhotonView photonView;
     public bool holdingButton;  // Keep this for elevator checks
@@ -11,17 +11,7 @@ public class InteractableButton : MonoBehaviour, IInteractable
         photonView = GetComponent<PhotonView>();
     }
 
-    // This will be triggered when the player interacts (e.g., presses the button)
-    public void OnInteract()
-    {
-        ButtonPressed();
-    }
-
-    // This will be triggered when the player stops interacting (e.g., releases the button)
-    public void OnStopInteract()
-    {
-        ButtonReleased();
-    }
+   
 
     public void ButtonPressed()
     {

@@ -1,61 +1,66 @@
-using Cinemachine.Examples;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 
-public class CharacterMenu : MonoBehaviourPun, IInteractable
+public class CharacterMenu : MonoBehaviourPun
 {
     [SerializeField] private GameObject menu;
-    public ADPlayerMovement player;
-    private bool isMenuActive = false; // Initialize to false to start with menu closed
+    private bool isMenuActive = false;
+    private bool isPlayerInRange = false;
 
     void Start()
     {
         menu.SetActive(isMenuActive);
     }
 
-    
-
-    public void OnInteract()
+    void Update()
     {
-        if (!isMenuActive) // Only open the menu if it's not already active
+        // Check if 'E' is pressed and the player is in range AND the menu is not active
+        if (isPlayerInRange && !isMenuActive && Input.GetKeyDown(KeyCode.E))
         {
-            ToggleMenu();
+            ToggleMenu(true); // Open the menu
         }
     }
 
-    public void OnStopInteract()
+    private void ToggleMenu(bool state)
     {
-        // Optional logic if needed when stopping interaction
-    }
-
-    private void ToggleMenu()
-    {
-        isMenuActive = !isMenuActive;
+        isMenuActive = state;
         menu.SetActive(isMenuActive);
 
-        if (player != null)
+        if (isMenuActive)
         {
-            player.canMove = !isMenuActive;
+            DisablePlayerMovement();
+        }
+        else
+        {
+            EnablePlayerMovement();
         }
 
         photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
     }
 
-    // Method to close the menu from the UI button
-    public void CloseMenu()
+    private void DisablePlayerMovement()
     {
-        if (isMenuActive)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            isMenuActive = false;
-            menu.SetActive(false);
-
-            if (player != null)
+            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
+            if (movementScript != null)
             {
-                player.canMove = true;
+                movementScript.canMove = false; // Disable player movement
             }
+        }
+    }
 
-            photonView.RPC("SyncMenuState", RpcTarget.Others, isMenuActive);
+    private void EnablePlayerMovement()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
+            if (movementScript != null)
+            {
+                movementScript.canMove = true; // Enable player movement
+            }
         }
     }
 
@@ -64,10 +69,26 @@ public class CharacterMenu : MonoBehaviourPun, IInteractable
     {
         isMenuActive = state;
         menu.SetActive(isMenuActive);
+    }
 
-        if (player != null)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) // Ensure to set the tag on your player prefab
         {
-            player.canMove = !isMenuActive;
+            isPlayerInRange = true;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+        }
+    }
+
+    public void CloseMenu() // Method to close the menu
+    {
+        ToggleMenu(false);
     }
 }

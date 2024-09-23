@@ -1,5 +1,5 @@
 using Photon.Pun;
-using System.Collections; // Ensure this is included
+using System.Collections; 
 using UnityEngine;
 
 public class ADPlayerMovement : MonoBehaviour
@@ -39,12 +39,14 @@ public class ADPlayerMovement : MonoBehaviour
             playerControls = GetComponent<ADPlayerInputControls>();
             animator = GetComponent<Animator>(); // Initialize Animator
             currentSpeed = speed;
+           
         }
         else
         {
             enabled = false;
         }
     }
+
 
     private void Update()
     {
@@ -108,13 +110,22 @@ public class ADPlayerMovement : MonoBehaviour
         Vector3 dashDirection = moveDirection != Vector3.zero ? moveDirection : visuals.forward;
 
         rb.velocity = dashDirection * dashingPower;
-        tr.emitting = true;
+
+        if (tr != null)
+        {
+            tr.emitting = true; // Start emitting
+        }
 
         yield return new WaitForSeconds(dashDuration);
-        tr.emitting = false;
+
+        if (tr != null)
+        {
+            tr.emitting = false; // Stop emitting
+        }
 
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+    
 }

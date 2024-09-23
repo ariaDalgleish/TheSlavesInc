@@ -1,15 +1,29 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ADPlayerInteraction : MonoBehaviour
 {
-    private IInteractable currentInteractable;
+    PhotonView photonView;
+
     private ADPlayerInputControls playerControls;
+    InteractableButton currentInteractable;
+    public LayerMask layerMask;
+    [SerializeField] Transform visuals;
 
     void Start()
     {
-        playerControls = GetComponent<ADPlayerInputControls>();
-        InitialiseInputs();
+        photonView = GetComponent<PhotonView>();
+        if (photonView.IsMine)
+        {
+            playerControls = GetComponent<ADPlayerInputControls>();
+            InitialiseInputs();
+        }
+        else
+        {
+            enabled = false;
+        }
+
     }
 
     private void InitialiseInputs()
@@ -22,7 +36,7 @@ public class ADPlayerInteraction : MonoBehaviour
     {
         if (currentInteractable != null)
         {
-            currentInteractable.OnInteract();
+            currentInteractable.ButtonPressed();
         }
     }
 
@@ -30,26 +44,26 @@ public class ADPlayerInteraction : MonoBehaviour
     {
         if (currentInteractable != null)
         {
-            currentInteractable.OnStopInteract();
+            currentInteractable.ButtonReleased();
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        IInteractable interactable = other.GetComponent<IInteractable>();
+        // Check if the other collider has an InteractableButton component
+        InteractableButton interactable = other.GetComponent<InteractableButton>();
         if (interactable != null)
         {
-            currentInteractable = interactable;
+            currentInteractable = interactable; // Store the current interactable
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the exiting collider was the current interactable
+        if (other.GetComponent<InteractableButton>() == currentInteractable)
+        {
+            currentInteractable = null; // Reset the current interactable
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        IInteractable interactable = other.GetComponent<IInteractable>();
-        if (interactable != null && interactable == currentInteractable)
-        {
-            currentInteractable.OnStopInteract();
-            currentInteractable = null;
-        }
-    }
 }
+ 
