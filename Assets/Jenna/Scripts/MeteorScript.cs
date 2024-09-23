@@ -7,8 +7,8 @@ public class MeteorScript : MonoBehaviour
     public float speed = 3f;              // Speed at which the meteor moves towards the spaceship
     public int meteorHealth = 20;         // Health of the meteor (Just set for 20 now, can change later)
     public float timeLimit = 5f;          // Time limit before the meteor hits the spaceship
-    private Vector2 targetPosition;       // Position of the spaceship
-    private bool isDestroyed = false;     // Flag to check if the meteor is already destroyed
+    public Vector2 targetPosition;       // Position of the spaceship
+    public bool isDestroyed = false;     // Flag to check if the meteor is already destroyed
 
     public PuzzleClearManager puzzleClearManager;  // Reference to the PuzzleClearManager script
 
@@ -62,5 +62,15 @@ public class MeteorScript : MonoBehaviour
         Debug.Log("Meteor hit the spaceship!");
         Destroy(gameObject);  // Destroy the meteor when it hits the spaceship
         //Will add more later when spaceship health bar sorts out
+    }
+
+    public void ResetPuzzle()
+    {
+        timeLimit = 5f;
+        meteorHealth = 20;
+        isDestroyed = false;
+
+        transform.position = new Vector2(0, 0);
+        Debug.Log("Meteor puzzle reset!");
     }
 }

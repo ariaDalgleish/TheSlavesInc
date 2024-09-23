@@ -46,4 +46,10 @@ public class MeteorInput : MonoBehaviour
         buttonImage.color = originalColor;  // Reset color
         buttonImage.transform.localScale = originalScale;  // Reset scale
     }
+
+    public void ResetInput()
+    {
+        ResetButton();
+        Debug.Log("Input reset!");
+    }
 }
