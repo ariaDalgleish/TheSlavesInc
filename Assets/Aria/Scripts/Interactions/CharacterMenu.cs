@@ -1,15 +1,23 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class CharacterMenu : MonoBehaviourPun
+public class CharacterMenu : MonoBehaviour
 {
+    PhotonView photonView;
+
     [SerializeField] private GameObject menu;
     private bool isMenuActive = false;
     private bool isPlayerInRange = false;
 
     void Start()
     {
-        menu.SetActive(isMenuActive);
+        photonView = GetComponent<PhotonView>();
+
+        if (photonView.IsMine)
+        {
+            menu.SetActive(isMenuActive);
+        }
+        else { enabled = false; }
     }
 
     void Update()
@@ -91,4 +99,5 @@ public class CharacterMenu : MonoBehaviourPun
     {
         ToggleMenu(false);
     }
+
 }
