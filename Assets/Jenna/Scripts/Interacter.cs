@@ -23,22 +23,14 @@ public class Interacter : MonoBehaviour
     {
         pV = GetComponent<PhotonView>();
         puzzlePanel.SetActive(false);
-        //if (pV.IsMine)
-        //{
-        //    puzzlePanel.SetActive(false);
-        //}
-
     }
 
     private void Update()
     {
-
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             TogglePuzzlePanel(); // Calls the TogglePuzzlePanel method
         }
-
-
     }
 
     [PunRPC]
