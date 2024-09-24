@@ -1,20 +1,17 @@
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
 
 public class Interacter : MonoBehaviour
 {
     PhotonView pV;
 
     public GameObject puzzlePanel;
-   
+    public Button closeButton; // Reference to the close button
+
     private bool isPlayerInRange = false;  //track if player is within interaction range
     private bool isPanelActive = false; //track if the puzzle panel is currently active
-
 
     private bool playerUsing;
     private int playerID = -1;
@@ -23,6 +20,9 @@ public class Interacter : MonoBehaviour
     {
         pV = GetComponent<PhotonView>();
         puzzlePanel.SetActive(false);
+
+        // Assign the ClosePuzzlePanel method to the button's onClick event
+        closeButton.onClick.AddListener(ClosePuzzlePanel);
     }
 
     private void Update()
@@ -57,7 +57,7 @@ public class Interacter : MonoBehaviour
         {
             return;
         }
-        if(ADNetworkManager.instance == null)
+        if (ADNetworkManager.instance == null)
         {
             Debug.Log("huh??");
         }
@@ -106,6 +106,17 @@ public class Interacter : MonoBehaviour
         }
     }
 
+    // Method to close the puzzle panel via the button
+    public void ClosePuzzlePanel()
+    {
+        puzzlePanel.SetActive(false);
+        pV.RPC("StopInteraction", RpcTarget.All);
+        EnablePlayerMovement();
+        isPanelActive = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public void HidePuzzlePanel()
     {
         puzzlePanel.SetActive(false);
@@ -113,7 +124,7 @@ public class Interacter : MonoBehaviour
         EnablePlayerMovement();
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -125,12 +136,9 @@ public class Interacter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange =false;
-            puzzlePanel.SetActive(false );
-            isPanelActive=false;
+            isPlayerInRange = false;
+            puzzlePanel.SetActive(false);
+            isPanelActive = false;
         }
     }
-
-
-
 }
