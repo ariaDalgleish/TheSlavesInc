@@ -109,13 +109,25 @@ public class Interacter : MonoBehaviour
     // Method to close the puzzle panel via the button
     public void ClosePuzzlePanel()
     {
+        // Deactivate the puzzle panel
         puzzlePanel.SetActive(false);
+
+        // Notify all players that the interaction has stopped using RPC (Remote Procedure Call)
         pV.RPC("StopInteraction", RpcTarget.All);
+
+        // Re-enable player movement after closing the panel
         EnablePlayerMovement();
+
+        // Mark the panel as inactive
         isPanelActive = false;
+
+        // Hide the cursor again after closing the panel
         Cursor.visible = false;
+
+        // Lock the cursor back to the center of the screen, commonly used in first-person games
         Cursor.lockState = CursorLockMode.Locked;
     }
+
 
     public void HidePuzzlePanel()
     {
