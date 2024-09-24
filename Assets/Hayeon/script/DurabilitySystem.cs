@@ -10,6 +10,7 @@ public class DurabilitySystem : MonoBehaviour
     public float currentDurability;
     public float decreaseSpeed = 5f; // Durability decrease rate per second
     public float increaseAmount = 25f; // Durability increase amount when a puzzle is solved
+    public bool isDecreasing = false; // Flag to control durability decrease
 
     private void Start()
     {
@@ -19,6 +20,9 @@ public class DurabilitySystem : MonoBehaviour
 
     private void Update()
     {
+        // Only decrease durability if the isDecreasing flag is true
+        if (!isDecreasing) return;
+
         if (currentDurability > 0)
         {
             currentDurability -= decreaseSpeed * Time.deltaTime;
@@ -31,6 +35,20 @@ public class DurabilitySystem : MonoBehaviour
             currentDurability = 0;
             // Trigger Game Over or other related actions
         }
+
+        Debug.Log("Durability is decreasing. Current durability: " + currentDurability); // Add log for debugging
+    }
+
+    public void StartDecreasingDurability()
+    {
+        isDecreasing = true; // Set the flag to start decreasing durability
+        Debug.Log("Durability decrease started.");
+    }
+
+    public void StopDecreasingDurability()
+    {
+        isDecreasing = false; // Set the flag to stop decreasing durability
+        Debug.Log("Durability decrease stopped.");
     }
 
     public void IncreaseDurability()
@@ -48,3 +66,5 @@ public class DurabilitySystem : MonoBehaviour
         durabilityBar.fillAmount = currentDurability / maxDurability;
     }
 }
+
+
