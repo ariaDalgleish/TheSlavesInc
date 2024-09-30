@@ -4607,7 +4607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1110178421}
-  remainingTime: 120
+  remainingTime: 20
   durabilitySystem: {fileID: 0}
 --- !u!114 &693222380
 MonoBehaviour:
@@ -12573,6 +12573,34 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!1 &1496246721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1103832152051032729, guid: 2cca4df7ff09f044c985eebdeea49ac7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5376937952662649710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1496246724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496246721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 9
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &1497164440
@@ -20853,7 +20881,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1103832152051032729, guid: 2cca4df7ff09f044c985eebdeea49ac7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1496246724}
   m_SourcePrefab: {fileID: 100100000, guid: 2cca4df7ff09f044c985eebdeea49ac7, type: 3}
 --- !u!23 &5477040182505884664
 MeshRenderer:
