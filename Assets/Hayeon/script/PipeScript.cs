@@ -62,12 +62,10 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
         if (Mathf.Approximately(currentRotation, targetRotation))
         {
             isPlaced = true;
-            Debug.Log("Pipe is correctly placed.");
         }
         else
         {
             isPlaced = false;
-            Debug.Log("Pipe is not correctly placed.");
         }
 
         // Check if all pipes are correctly placed

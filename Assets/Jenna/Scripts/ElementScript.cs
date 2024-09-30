@@ -64,7 +64,6 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
         targetSprite = target;
         targetImage.sprite = initialSprite;
 
-        Debug.Log("Initial image set successfully.");
     }
 
     // Disable interaction
