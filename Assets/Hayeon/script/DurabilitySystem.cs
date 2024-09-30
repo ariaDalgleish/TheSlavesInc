@@ -35,8 +35,6 @@ public class DurabilitySystem : MonoBehaviour
             currentDurability = 0;
             // Trigger Game Over or other related actions
         }
-
-        Debug.Log("Durability is decreasing. Current durability: " + currentDurability); // Add log for debugging
     }
 
     public void StartDecreasingDurability()
