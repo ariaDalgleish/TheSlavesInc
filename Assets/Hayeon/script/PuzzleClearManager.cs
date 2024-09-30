@@ -18,7 +18,6 @@ public class PuzzleClearManager : MonoBehaviour
         // Check for the 'E' key press to hide the puzzle clear panel
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E key pressed, attempting to hide the Puzzle Clear Screen.");
             HidePuzzleClearScreen();
         }
     }
