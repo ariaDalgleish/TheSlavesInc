@@ -12,20 +12,17 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
     public DurabilitySystem durabilitySystem; // Reference to DurabilitySystem
 
     private PhotonView photonView;
-    private LevelLoader levelLoader; // Reference to LevelLoader
-
     private bool isDurabilityStarted = false; // To ensure durability starts only once
 
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        levelLoader = FindObjectOfType<LevelLoader>(); // Find LevelLoader in the scene
         durabilitySystem = FindObjectOfType<DurabilitySystem>(); // Find DurabilitySystem 
 
         if (PhotonNetwork.IsMasterClient)
         {
             // Initialize timer only on the Master Client
-            remainingTime = 300f; // For example, 5 minutes
+            remainingTime = 300f; // Example: 5 minutes
             durabilitySystem.enabled = false; // Disable durability decrease initially
         }
     }
@@ -38,7 +35,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
             {
                 remainingTime -= Time.deltaTime;
 
-                if (remainingTime < 300f && !durabilitySystem.isDecreasing) // Whem timer starts, start durability decrease
+                if (remainingTime < 300f && !durabilitySystem.isDecreasing) // When timer starts, start durability decrease
                 {
                     durabilitySystem.StartDecreasingDurability(); // Enable durability decrease when timer starts
                     isDurabilityStarted = true;
@@ -51,8 +48,8 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
                 durabilitySystem.StopDecreasingDurability(); // Stop durability when time is up
                 Debug.Log("Time's up. Durability system deactivated.");
 
-                // Ensure the MasterClient triggers scene loading
-                levelLoader.LoadScoreScene();
+                // Use PhotonNetwork.LoadLevel to ensure all players move to the ScoreScene
+                PhotonNetwork.LoadLevel("ScoreScene"); // Use the actual name of the score scene
             }
         }
 
