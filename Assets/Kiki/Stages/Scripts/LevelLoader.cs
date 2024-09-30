@@ -7,6 +7,7 @@ using ExitGames.Client.Photon;  // This is needed for Photon hashtables
 
 public class LevelLoader : MonoBehaviourPunCallbacks
 {
+
     public Animator transition;  // Reference to the Animator controlling transition animations
     public float transitionTime = 1f;  // Time duration for the transition animation
     private bool qPressed = false;  // Track if the local player has pressed 'Q'
@@ -59,19 +60,19 @@ public class LevelLoader : MonoBehaviourPunCallbacks
         return true;  // All players have pressed 'Q'
     }
 
-    // This method can still be used to load the ScoreScene from Stage1
-    public void LoadScoreScene()
-    {
-        // Start loading the "ScoreScene" with a 2-second delay
-        StartCoroutine(LoadLevelWithDelay("ScoreScene", 2f));
-    }
+    //// This method can still be used to load the ScoreScene from Stage1
+    //public void LoadScoreScene()
+    //{
+    //    // Start loading the "ScoreScene" with a 2-second delay
+    //    StartCoroutine(LoadLevelWithDelay("ScoreScene", 2f));
+    //}
 
-    // Coroutine to load a scene after a delay, using scene name
-    public IEnumerator LoadLevelWithDelay(string sceneName, float delay)
-    {
-        yield return new WaitForSeconds(delay);  // Wait for the specified delay
+    //// Coroutine to load a scene after a delay, using scene name
+    //public IEnumerator LoadLevelWithDelay(string sceneName, float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);  // Wait for the specified delay
 
-        // Directly load the scene without transition
-        SceneManager.LoadScene(sceneName);
-    }
+    //    // Directly load the scene without transition
+    //    SceneManager.LoadScene(sceneName);
+    //}
 }
