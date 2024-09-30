@@ -1,28 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Photon.Pun;
 
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime;
+    [SerializeField] TextMeshProUGUI timerText; // UI element to display the timer
+    [SerializeField] float remainingTime = 300f; // Initial timer value (5 minutes)
 
     public DurabilitySystem durabilitySystem; // Reference to DurabilitySystem
 
-    private PhotonView photonView;
     private bool isDurabilityStarted = false; // To ensure durability starts only once
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
-        durabilitySystem = FindObjectOfType<DurabilitySystem>(); // Find DurabilitySystem 
+        durabilitySystem = FindObjectOfType<DurabilitySystem>(); // Find DurabilitySystem
 
         if (PhotonNetwork.IsMasterClient)
         {
-            // Initialize timer only on the Master Client
-            remainingTime = 300f; // Example: 5 minutes
+            // Only the Master Client controls the timer and durability system
+            remainingTime = 300f; // For example, 5 minutes
             durabilitySystem.enabled = false; // Disable durability decrease initially
         }
     }
@@ -31,58 +28,75 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            // MasterClient controls the timer countdown
             if (remainingTime > 0)
             {
                 remainingTime -= Time.deltaTime;
 
-                if (remainingTime < 300f && !durabilitySystem.isDecreasing) // When timer starts, start durability decrease
+                // Start the durability decrease when the timer starts
+                if (remainingTime < 300f && !durabilitySystem.isDecreasing)
                 {
-                    durabilitySystem.StartDecreasingDurability(); // Enable durability decrease when timer starts
+                    durabilitySystem.StartDecreasingDurability();
                     isDurabilityStarted = true;
                     Debug.Log("Timer started. Durability system activated.");
                 }
             }
             else
             {
+                // Time's up, stop durability and load the scene for everyone
                 remainingTime = 0;
-                durabilitySystem.StopDecreasingDurability(); // Stop durability when time is up
-                Debug.Log("Time's up. Durability system deactivated.");
+                durabilitySystem.StopDecreasingDurability();
+                Debug.Log("Time's up. Loading the ScoreScene.");
 
-                // Use PhotonNetwork.LoadLevel to ensure all players move to the ScoreScene
-                PhotonNetwork.LoadLevel("ScoreScene"); // Use the actual name of the score scene
+                // MasterClient tells all clients to load the ScoreScene
+                photonView.RPC("LoadScoreSceneForAll", RpcTarget.All);
             }
         }
 
-        // Synchronize the display on all clients
+        // Update the timer UI for all clients
         UpdateTimerUI();
     }
 
-    // Update the UI for the timer, including color change
+    // Update the timer display
     void UpdateTimerUI()
     {
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        // Change the text color to red when time reaches 0 for all clients
+        // Change the text color to red when time reaches 0
         if (remainingTime <= 0)
         {
             timerText.color = Color.red;
         }
     }
 
-    // This function is called to synchronize the remainingTime across the network
+    // Synchronize the timer across the network
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // The MasterClient writes the remaining time to the stream
+            // MasterClient sends the remaining time to other clients
             stream.SendNext(remainingTime);
         }
         else
         {
-            // Other clients read the remaining time from the stream
+            // Clients receive the remaining time from the MasterClient
             remainingTime = (float)stream.ReceiveNext();
         }
+    }
+
+    // Use Photon RPC to tell all players to load the ScoreScene
+    [PunRPC]
+    void LoadScoreSceneForAll()
+    {
+        // Load the ScoreScene for all players after 3 seconds
+        StartCoroutine(LoadSceneAfterDelay("ScoreScene", 3f));
+    }
+
+    IEnumerator LoadSceneAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for 3 seconds
+        PhotonNetwork.LoadLevel(sceneName); // Load the specified scene for all players
     }
 }
