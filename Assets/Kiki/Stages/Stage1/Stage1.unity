@@ -11723,7 +11723,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 769074459}
-  - {fileID: 1666726379}
+  - {fileID: 1890082740}
   - {fileID: 931006556}
   - {fileID: 1674352205}
   - {fileID: 1762080005}
@@ -15028,7 +15028,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1429416328}
+    m_TransformParent: {fileID: 1890082740}
     m_Modifications:
     - target: {fileID: 1229502764238345258, guid: 41318a1fa28024c48bbcfb676755e809,
         type: 3}
@@ -15734,6 +15734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575242650017277731, guid: 8bd8c784b04e45d478f24fd6ffdff319,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 348
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16647,6 +16652,54 @@ MonoBehaviour:
   sceneViewId: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &1890082739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890082740}
+  - component: {fileID: 1890082741}
+  m_Layer: 0
+  m_Name: Data Sending Puzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1890082740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890082739}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 973.52814, y: 542.9665, z: -3.6101832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1666726379}
+  m_Father: {fileID: 1429416328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1890082741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890082739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513c1c34d7363de47ad437bf8574530f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pipeScripts: []
+  puzzleClearManager: {fileID: 1666726375}
+  resetDelay: 5
 --- !u!1001 &1922911535
 PrefabInstance:
   m_ObjectHideFlags: 0

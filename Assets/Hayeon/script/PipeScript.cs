@@ -10,20 +10,20 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
 
     public float correctRotation;
     [SerializeField]
-    private bool isPlaced = false;
+    public bool isPlaced = false;
+    private bool puzzleCompleted = false; 
 
     private Interacter interacter; // Reference to the Interacter script
     private PuzzleClearManager puzzleClearManager; // Reference to the Puzzle Clear Manager
-    private bool puzzleCompleted = false; // Tracks if the puzzle is completed
+    private PRMDatasending resetManager; // Tracks if the puzzle is completed
 
     private void Start()
     {
         interacter = FindObjectOfType<Interacter>(); // Find the Interacter script in the scene
         puzzleClearManager = FindObjectOfType<PuzzleClearManager>(); // Find the Puzzle Clear Manager in the scene
+        resetManager = FindObjectOfType<PRMDatasending>();
 
-        int rand = Random.Range(0, rotations.Length);
-        transform.eulerAngles = new Vector3(0, 0, rotations[rand]);
-
+        RandomizePipeRotation();
         CheckIfPlaced();
     }
 
@@ -40,20 +40,32 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void ResetPipe()
+    {
+        RandomizePipeRotation();
+        isPlaced = false;
+        puzzleCompleted = false;
+        Debug.Log("Pipe has been reset.");
+    }
+
+    private void RandomizePipeRotation()
+    {
+        int rand = Random.Range(0, rotations.Length);
+        transform.eulerAngles = new Vector3(0, 0, rotations[rand]);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Pointer Click on Pipe");
         RotatePipe();
     }
 
     private void RotatePipe()
     {
         transform.Rotate(new Vector3(0, 0, 90));
-        Debug.Log("Rotated to: " + transform.eulerAngles.z);
         CheckIfPlaced();
     }
 
-    private void CheckIfPlaced()
+    public void CheckIfPlaced()
     {
         // Use modulo to handle the rotations and floating-point comparison
         float currentRotation = Mathf.Round(transform.eulerAngles.z % 360);
@@ -104,6 +116,12 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
         if (puzzleClearManager != null)
         {
             puzzleClearManager.ShowPuzzleClearScreen();
+        }
+
+        if (resetManager != null)
+        {
+            resetManager.StartResetCoroutine();
+            Debug.Log("Reset coroutine started.");
         }
     }
 }

@@ -38,7 +38,6 @@ public class PuzzleClearManager : MonoBehaviour
         if (puzzleClearPanel != null)
         {
             puzzleClearPanel.SetActive(false);
-            Debug.Log("Puzzle Clear Screen hidden.");
         }
     }
 }
