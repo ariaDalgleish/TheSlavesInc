@@ -54,6 +54,7 @@ public class ADNetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
+        //MenuManager.instance.OpenMenu("TitleMenu"); // Make sure menu is labelled correctly so it opens the Title Menu
         connectionStatus = "Joined Lobby";
 
         PhotonNetwork.JoinRandomRoom();

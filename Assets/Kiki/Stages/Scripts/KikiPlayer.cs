@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class Player : MonoBehaviour
+public class KikiPlayer : MonoBehaviour
 {
     PhotonView photonView;
 
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     }
 
     // Method to set the player's speed
-    public void SetSpeed(float factor) 
+    public void SetSpeed(float factor)
     {
         currentSpeed = normalSpeed * factor;
         Debug.Log("Speed Set to: " + currentSpeed + " (Factor: " + factor + ")");

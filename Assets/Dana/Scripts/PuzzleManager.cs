@@ -12,7 +12,7 @@ public class PuzzleManager : MonoBehaviour
     private IPuzzle currentPuzzle;
 
 
-    private Player playerScript; // Reference to the Player script
+    private KikiPlayer playerScript; // Reference to the Player script
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class PuzzleManager : MonoBehaviour
             Debug.LogError("puzzle panel is not assigned in the inspector");
         }
 
-        playerScript = player.GetComponent<Player>();
+        playerScript = player.GetComponent<KikiPlayer>();
 
         if (playerScript == null)
         {
@@ -56,14 +56,14 @@ public class PuzzleManager : MonoBehaviour
 
     void TogglePuzzlePanel()
     {
-        if (puzzlePanel != null && currentPuzzle !=null)
+        if (puzzlePanel != null && currentPuzzle != null)
         {
             isPuzzleActive = true;
             puzzlePanel.SetActive(true);
             FreezePlayer();
             currentPuzzle.ResetPuzzle(); //reset puzzle when toggle the panel
         }
- 
+
     }
 
     void ClosePuzzlePanel()

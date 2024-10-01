@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Aria/Scenes/Lobby.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Aria/Scenes/Menu.unity
+    guid: d83ba0dd83a0ec14dbd257ee0dd39c34
+  - enabled: 1
     path: Assets/Kiki/Stages/Stage1/Stage1.unity
     guid: 7874b2a5da7fc5a4cb8ae6d7e02758e6
   - enabled: 1
