@@ -57,12 +57,15 @@ public class Interacter : MonoBehaviour
         {
             return;
         }
-        if (ADNetworkManager.instance == null)
+        if (Launcher.instance == null)
         {
             Debug.Log("huh??");
         }
-        pV.RPC("PlayerInteracted", RpcTarget.All, ADNetworkManager.instance.PlayerID);
-        if (playerID == ADNetworkManager.instance.PlayerID)
+
+        // Photon View, Network script, PlayerID needed
+
+        pV.RPC("PlayerInteracted", RpcTarget.All, Launcher.instance.PlayerID);
+        if (playerID == Launcher.instance.PlayerID)
         {
             isPanelActive = !puzzlePanel.activeSelf; //properly toggle the panel's active state
             puzzlePanel.SetActive(isPanelActive);

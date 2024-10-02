@@ -5,13 +5,16 @@ using TMPro;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Linq;
+using System.Data;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
     public static Launcher instance;   
     [SerializeField] TMP_InputField roomNameInputField;
-    [SerializeField] string gameVersion;
-   
+    //[SerializeField] string gameVersion;
+    //private string displayName = "Loading...";
+
+    public int PlayerID;
 
     [SerializeField] TMP_Text errorText;
     [SerializeField] TMP_Text roomNameText;
@@ -77,6 +80,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.instance.OpenMenu("RoomMenu");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
+        PlayerID = PhotonNetwork.PlayerList.Length - 1;
+        
+
         // Clear previous player list items and populate with current players
         Player[] players = PhotonNetwork.PlayerList;
 
@@ -115,6 +121,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(info.Name);
         MenuManager.instance.OpenMenu("LoadingMenu");
 
+        //SpawnPlayer();
     }
 
     public void StartGame()
@@ -159,4 +166,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer); // Pass on set up from PlayerListItem script
     }
+
+
+    //private void SpawnPlayer()
+    //{
+    //    PhotonNetwork.Instantiate("AriaPlayer", Vector3.zero, Quaternion.identity);
+    //}
+
+    //public void SetDisplayName(string displayName)
+    //{
+    //    this.displayName = displayName;
+    //}
 }
