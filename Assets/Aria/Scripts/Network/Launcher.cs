@@ -127,6 +127,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         PhotonNetwork.LoadLevel(1); // Load scene 1 in build settings
+        Destroy(gameObject);
     }
 
     // Leave the current room

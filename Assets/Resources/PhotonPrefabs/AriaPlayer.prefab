@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SmoothingDelay: 10
-  visuals: {fileID: 8758258577615199453}
+  visuals: {fileID: 9139016891358579887}
   teleportDistance: 3
 --- !u!114 &1092196058125862766
 MonoBehaviour:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6b0d63686d634887ec558e6a14f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visuals: {fileID: 8758258577615199453}
+  visuals: {fileID: 9139016891358579887}
   speed: 3.5
   rotationSpeed: 5
   tr: {fileID: 7883232556052839101}

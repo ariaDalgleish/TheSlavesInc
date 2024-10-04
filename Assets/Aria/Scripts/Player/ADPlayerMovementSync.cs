@@ -70,11 +70,11 @@ namespace Photon.Pun.UtilityScripts
             if (!photonView.IsMine)
             {
                 float currentDistance = Vector3.Distance(transform.position, correctPlayerPos);
-                if(currentDistance >= teleportDistance)
+                if (currentDistance >= teleportDistance)
                 {
                     transform.position = correctPlayerPos;
                 }
-                
+
                 //Update remote player (smooth this, this looks good, at the cost of some accuracy)
                 if (elevator != null)
                 {
@@ -110,7 +110,7 @@ namespace Photon.Pun.UtilityScripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if(photonView.IsMine)
+            if (photonView.IsMine)
             {
                 if (other.gameObject.CompareTag("Elevator"))
                 {
@@ -119,7 +119,7 @@ namespace Photon.Pun.UtilityScripts
                     photonView.RPC("OnElevator", RpcTarget.Others, id);
                 }
             }
-            
+
         }
 
         private void OnTriggerExit(Collider other)
