@@ -23,6 +23,7 @@ public class ADPlayerInteraction : MonoBehaviour
         else
         {
             gameObject.tag = "Untagged";
+            GetComponent<Animator>().enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().isKinematic = true;
