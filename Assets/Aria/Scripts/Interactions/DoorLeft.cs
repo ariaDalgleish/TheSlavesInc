@@ -23,7 +23,7 @@ public class DoorLeft : MonoBehaviour
                 posX -= Time.deltaTime;
             }
 
-            posX = Mathf.Clamp(posX, 6.67f, 8.48f);
+            posX = Mathf.Clamp(posX, 6.2f, 7.624f);
             elevatorPos.x = posX;
 
             yield return null;
