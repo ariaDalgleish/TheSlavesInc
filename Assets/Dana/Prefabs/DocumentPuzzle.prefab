@@ -29,10 +29,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7267929329555074952}
-  - {fileID: 8261532190301807902}
-  - {fileID: 5826663765704594881}
   - {fileID: 732229378869569002}
+  - {fileID: 5826663765704594881}
+  - {fileID: 8261532190301807902}
+  - {fileID: 7267929329555074952}
   m_Father: {fileID: 5106989333645390823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3863989116209368668
@@ -145,7 +145,6 @@ RectTransform:
   - {fileID: 2162434940814369049}
   - {fileID: 4802042676062261251}
   - {fileID: 5137806407215113934}
-  - {fileID: 4802042676062261251}
   m_Father: {fileID: 4749464379402924892}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -206,6 +205,8 @@ MonoBehaviour:
   documentPile: {fileID: 3917526817988418993}
   wordStack: {fileID: 2162434940814369049}
   visualStack: {fileID: 5137806407215113934}
+  puzzleClearPanel: {fileID: 0}
+  durabilitySystem: {fileID: 0}
 --- !u!1 &5352822334541314608
 GameObject:
   m_ObjectHideFlags: 0
