@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
             GetComponent<TrailArea>().enabled = false;
             enabled = false;
         }
-       
+
     }
 
     private void Update()

@@ -2,64 +2,66 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
-using ExitGames.Client.Photon;  // This is needed for Photon hashtables
 
 public class LevelLoader : MonoBehaviourPunCallbacks
 {
-
-    public Animator transition;  // Reference to the Animator controlling transition animations
-    public float transitionTime = 1f;  // Time duration for the transition animation
-    private bool qPressed = false;  // Track if the local player has pressed 'Q'
+    public Animator transition;
+    public float transitionTime = 1f;
+    private bool qPressed = false;
+    private float timer = 0f;
+    private const float timeLimit = 300f; // 5 minutes in seconds
+    private bool isLoadingScene = false; // Prevent multiple loads
 
     void Update()
     {
-        // Ensure this logic runs only in the ScoreScene
+        timer += Time.deltaTime;
+
+        if (timer >= timeLimit && !isLoadingScene) // Check the timer and the loading flag
+        {
+            isLoadingScene = true; // Set loading flag
+            StartCoroutine(WaitAndLoadNextScene());
+            return;
+        }
+
         if (SceneManager.GetActiveScene().name == "ScoreScene")
         {
-            // If the player hasn't pressed 'Q' yet and presses it now
             if (!qPressed && Input.GetKeyDown(KeyCode.Q))
             {
                 qPressed = true;
-                Debug.Log("Player pressed Q. Notifying others.");
-
-                // Set custom property for the player to indicate they've pressed 'Q'
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "QPressed", true } });
             }
 
-            // Master client checks if all players have pressed 'Q'
-            if (AllPlayersPressedQ() && PhotonNetwork.IsMasterClient)
+            if (AllPlayersPressedQ() && PhotonNetwork.IsMasterClient && !isLoadingScene)
             {
+                isLoadingScene = true; // Set loading flag
                 StartCoroutine(WaitAndLoadNextScene());
             }
         }
     }
 
-    // Coroutine to wait for 3 seconds before loading Stage 2
     public IEnumerator WaitAndLoadNextScene()
     {
-        // Wait for 3 seconds before transitioning
-        yield return new WaitForSeconds(3f);
+        foreach (var enemy in FindObjectsOfType<EnemyMovement>())
+        {
+            Destroy(enemy.gameObject);
+        }
 
-        // The master client synchronizes the scene load for all players
-        PhotonNetwork.LoadLevel("Stage2");  // Load Stage2 for all players
+        yield return new WaitForSeconds(3f);
+        PhotonNetwork.LoadLevel("Stage2");
     }
 
-    // Check if all players have pressed the 'Q' key
     private bool AllPlayersPressedQ()
     {
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             object qPressedValue;
-            // If any player has not pressed 'Q' or the property is missing, return false
             if (!player.CustomProperties.TryGetValue("QPressed", out qPressedValue) || (bool)qPressedValue == false)
             {
-                return false;  // Not all players have pressed 'Q'
+                return false;
             }
         }
-        return true;  // All players have pressed 'Q'
+        return true;
     }
-
     //// This method can still be used to load the ScoreScene from Stage1
     //public void LoadScoreScene()
     //{
@@ -74,5 +76,4 @@ public class LevelLoader : MonoBehaviourPunCallbacks
 
     //    // Directly load the scene without transition
     //    SceneManager.LoadScene(sceneName);
-    //}
 }
