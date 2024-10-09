@@ -22,6 +22,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] GameObject musicMenu;
     public GameObject startButton;
 
     private void Awake()
@@ -57,7 +58,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        MenuManager.instance.OpenMenu("TitleMenu"); // Make sure menu is labelled correctly so it opens the Title Menu
+        MenuManager.instance.OpenMenu("TitleMenu");// Make sure menu is labelled correctly so it opens the Title Menu
+        musicMenu.SetActive(true);
         Debug.Log("Joined Lobby");
         PhotonNetwork.NickName = "Player" + Random.Range(0, 10000).ToString("0000"); // Provide random Nickname to player
     }
