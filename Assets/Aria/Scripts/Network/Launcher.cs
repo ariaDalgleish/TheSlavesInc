@@ -129,6 +129,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(1); // Load scene 1 in build settings
     }
 
+    public void LeaveGame()
+    {
+        Debug.Log("GameLeft");
+        Application.Quit();
+    }
     // Leave the current room
     public void LeaveRoom()
     {
