@@ -6,7 +6,7 @@ using Photon.Pun;
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] TextMeshProUGUI timerText; // UI element to display the timer
-    [SerializeField] float remainingTime = 10f; // Initial timer value (5 minutes)
+    [SerializeField] float remainingTime = 300f; // Initial timer value (5 minutes)
 
     public DurabilitySystem durabilitySystem; // Reference to DurabilitySystem
 
@@ -19,7 +19,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsMasterClient)
         {
             // Only the Master Client controls the timer and durability system
-            remainingTime = 10f; // For example, 5 minutes
+            remainingTime = 300f; // For example, 5 minutes
             durabilitySystem.enabled = false; // Disable durability decrease initially
         }
     }
