@@ -36,7 +36,7 @@ public class RoomManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex == 1)
+        if (scene.buildIndex == 1 || scene.buildIndex == 5)
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerControllerManager"), Vector3.zero, Quaternion.identity);
         }
