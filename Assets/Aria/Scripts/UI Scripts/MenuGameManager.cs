@@ -24,7 +24,7 @@ public class MenuGameManager : MonoBehaviour
             IsMenuOpened = true;
         }
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && !IsMenuOpened == true)
+        else if (Input.GetKeyDown(KeyCode.Escape) && IsMenuOpened == true)
         {
             
             health.SetActive(true);

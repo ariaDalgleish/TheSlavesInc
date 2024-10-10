@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Photon.Pun;
 
-public class EnemyMovement : MonoBehaviourPunCallbacks
+public class EnemyMovement : MonoBehaviour
 {
     private PhotonView photonView;
     public GameObject trailPrefab; // Prefab with TrailRenderer and BoxCollider

@@ -1252,7 +1252,6 @@ GameObject:
   - component: {fileID: 100441774}
   - component: {fileID: 100441773}
   - component: {fileID: 100441777}
-  - component: {fileID: 100441778}
   - component: {fileID: 100441779}
   m_Layer: 0
   m_Name: Cube solarpanel
@@ -1360,20 +1359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1207559247}
-  closeButton: {fileID: 440797231}
---- !u!114 &100441778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100441772}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5254dba041ab9324991e767f0ed097f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
 --- !u!114 &100441779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7053,7 +7038,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 440797232}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100441777}
+        m_TargetAssemblyTypeName: Interacter, Assembly-CSharp
+        m_MethodName: ClosePuzzlePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &440797232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10722,6 +10719,28 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1472757301}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &769074460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769074455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 16
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &780903406
 GameObject:
   m_ObjectHideFlags: 0
@@ -13773,6 +13792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 931006556}
   - component: {fileID: 931006557}
+  - component: {fileID: 931006558}
   m_Layer: 0
   m_Name: Element Puzzle
   m_TagString: Untagged
@@ -13811,6 +13831,28 @@ MonoBehaviour:
   elementScripts: []
   gameManager: {fileID: 346199454}
   resetDelay: 5
+--- !u!114 &931006558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931006555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 13
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &950107462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15888,7 +15930,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1054828097}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1882484471}
+        m_TargetAssemblyTypeName: Interacter, Assembly-CSharp
+        m_MethodName: ClosePuzzlePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1054828097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16745,11 +16799,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 693222383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 446.8, y: 205.2}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1110178424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19098,74 +19152,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1260733573}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1262786006
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1262786009}
-  - component: {fileID: 1262786008}
-  - component: {fileID: 1262786007}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1262786007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262786006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1262786008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262786006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1262786009
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262786006}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1267440667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19724,6 +19710,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1674352209}
+    - targetCorrespondingSourceObject: {fileID: 5391837928396662476, guid: 0a9fa145fcde3bc4fbab7826e8a1308c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1674352210}
   m_SourcePrefab: {fileID: 100100000, guid: 0a9fa145fcde3bc4fbab7826e8a1308c, type: 3}
 --- !u!4 &1277552700 stripped
 Transform:
@@ -21990,7 +21980,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 351675671}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5092486158467259237, guid: 073ed3d40f820e6408b5c1a3756ca75e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 769074460}
   m_SourcePrefab: {fileID: 100100000, guid: 073ed3d40f820e6408b5c1a3756ca75e, type: 3}
 --- !u!1 &1473719698
 GameObject:
@@ -22130,7 +22124,6 @@ GameObject:
   - component: {fileID: 1481458441}
   - component: {fileID: 1481458440}
   - component: {fileID: 1481458439}
-  - component: {fileID: 1481458438}
   - component: {fileID: 1481458444}
   m_Layer: 0
   m_Name: Cube foodpantry
@@ -22154,19 +22147,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 795131007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1481458438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481458436}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5254dba041ab9324991e767f0ed097f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
 --- !u!114 &1481458439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22180,7 +22160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 0}
-  closeButton: {fileID: 0}
 --- !u!114 &1481458440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23214,7 +23193,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1574627206}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2101115186}
+        m_TargetAssemblyTypeName: Interacter, Assembly-CSharp
+        m_MethodName: ClosePuzzlePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1574627206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24462,6 +24453,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetDelay: 10
+--- !u!114 &1674352210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485874145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 14
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1688083878
 GameObject:
   m_ObjectHideFlags: 0
@@ -28160,11 +28173,43 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 440797234}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1464448436193136873, guid: cc12aca4e8245b04d8940faefc283316,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1836265012}
     - targetCorrespondingSourceObject: {fileID: 3647248449767301512, guid: cc12aca4e8245b04d8940faefc283316,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1207559248}
   m_SourcePrefab: {fileID: 100100000, guid: cc12aca4e8245b04d8940faefc283316, type: 3}
+--- !u!1 &1836265011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1464448436193136873, guid: cc12aca4e8245b04d8940faefc283316,
+    type: 3}
+  m_PrefabInstance: {fileID: 1836265010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1836265012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836265011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 15
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1855121342
 GameObject:
   m_ObjectHideFlags: 0
@@ -28233,7 +28278,6 @@ GameObject:
   - component: {fileID: 1860146378}
   - component: {fileID: 1860146383}
   - component: {fileID: 1860146384}
-  - component: {fileID: 1860146385}
   - component: {fileID: 1860146386}
   m_Layer: 0
   m_Name: Cube element
@@ -28358,20 +28402,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 128490450}
-  closeButton: {fileID: 2132440509}
---- !u!114 &1860146385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860146376}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5254dba041ab9324991e767f0ed097f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: 3f686ac397e1a8a4080eef7a79aec53d, type: 2}
 --- !u!114 &1860146386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28684,7 +28714,6 @@ GameObject:
   - component: {fileID: 1882484469}
   - component: {fileID: 1882484468}
   - component: {fileID: 1882484471}
-  - component: {fileID: 1882484472}
   - component: {fileID: 1882484473}
   m_Layer: 0
   m_Name: Cube document
@@ -28792,20 +28821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 671757821}
-  closeButton: {fileID: 1054828096}
---- !u!114 &1882484472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882484466}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5254dba041ab9324991e767f0ed097f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
 --- !u!114 &1882484473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28838,6 +28853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890082740}
   - component: {fileID: 1890082741}
+  - component: {fileID: 1890082742}
   m_Layer: 0
   m_Name: Data Sending Puzzle
   m_TagString: Untagged
@@ -28876,6 +28892,28 @@ MonoBehaviour:
   pipeScripts: []
   puzzleClearManager: {fileID: 1666726375}
   resetDelay: 5
+--- !u!114 &1890082742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890082739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 12
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1894049623
 GameObject:
   m_ObjectHideFlags: 0
@@ -30728,7 +30766,6 @@ GameObject:
   - component: {fileID: 2101115184}
   - component: {fileID: 2101115183}
   - component: {fileID: 2101115186}
-  - component: {fileID: 2101115187}
   - component: {fileID: 2101115188}
   m_Layer: 0
   m_Name: Cube datasending
@@ -30836,20 +30873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePanel: {fileID: 1807461991}
-  closeButton: {fileID: 1574627205}
---- !u!114 &2101115187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101115181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5254dba041ab9324991e767f0ed097f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: d2e1d0473598aa84ca20cd6cdc17dd9a, type: 2}
 --- !u!114 &2101115188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31128,7 +31151,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2132440510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1860146384}
+        m_TargetAssemblyTypeName: Interacter, Assembly-CSharp
+        m_MethodName: ClosePuzzlePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2132440510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37109,7 +37144,6 @@ SceneRoots:
   - {fileID: 1855121343}
   - {fileID: 2611041740723026776}
   - {fileID: 1029241534}
-  - {fileID: 1262786009}
   - {fileID: 4787607244809527358}
   - {fileID: 545351509}
   - {fileID: 983411147}

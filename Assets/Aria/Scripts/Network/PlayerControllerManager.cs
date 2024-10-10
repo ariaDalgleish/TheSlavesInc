@@ -15,19 +15,19 @@ public class PlayerControllerManager : MonoBehaviour
     Player[] allPlayers; //Photon.Realtime
     int myNumberInRoom; // Figure out player number in room
 
-     void Awake()
+    void Awake()
      {
         photonView = GetComponent<PhotonView>();
 
         allPlayers = PhotonNetwork.PlayerList; // gets an array of all connected players in the room
         foreach (Player p in allPlayers) // loop goes through every player in the allPlayers array
         {
-            if (p != PhotonNetwork.LocalPlayer) 
+            if (p != PhotonNetwork.LocalPlayer)
             {
                 myNumberInRoom++;
             }
-        }        
-     }
+        }
+    }
 
     void Start()
     {

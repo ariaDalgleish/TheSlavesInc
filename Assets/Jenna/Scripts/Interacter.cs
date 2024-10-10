@@ -8,7 +8,7 @@ public class Interacter : MonoBehaviour
     PhotonView pV;
 
     public GameObject puzzlePanel;
-    public Button closeButton; // Reference to the close button
+    //public Button closeButton; // Reference to the close button
 
     private bool isPlayerInRange = false;  //track if player is within interaction range
     private bool isPanelActive = false; //track if the puzzle panel is currently active
@@ -22,7 +22,7 @@ public class Interacter : MonoBehaviour
         puzzlePanel.SetActive(false);
 
         // Assign the ClosePuzzlePanel method to the button's onClick event
-        closeButton.onClick.AddListener(ClosePuzzlePanel);
+        //closeButton.onClick.AddListener(ClosePuzzlePanel);
     }
 
     private void Update()
@@ -36,9 +36,11 @@ public class Interacter : MonoBehaviour
     [PunRPC]
     public void PlayerInteracted(int id)
     {
+        Debug.Log("RPC PlayerInteracted called. Player ID: " + id);
         playerUsing = true;
         if (playerID >= 0)
         {
+            Debug.Log("Another player is already interacting.");
             return;
         }
         playerID = id;
@@ -47,9 +49,11 @@ public class Interacter : MonoBehaviour
     [PunRPC]
     public void StopInteraction()
     {
+        Debug.Log("RPC StopInteraction called.");
         playerUsing = false;
         playerID = -1;
     }
+
 
     private void TogglePuzzlePanel()
     {
@@ -57,20 +61,20 @@ public class Interacter : MonoBehaviour
         {
             return;
         }
-        if (Launcher.instance == null)
-        {
-            Debug.Log("huh??");
-        }
 
-        // Photon View, Network script, PlayerID needed
+        Debug.Log("Toggling panel, PhotonView isMine: " + pV.IsMine);
 
         pV.RPC("PlayerInteracted", RpcTarget.All, Launcher.instance.PlayerID);
-        if (playerID == Launcher.instance.PlayerID)
+
+        if (PhotonNetwork.IsMasterClient || playerID == Launcher.instance.PlayerID)
         {
-            isPanelActive = !puzzlePanel.activeSelf; //properly toggle the panel's active state
+            Debug.Log("Panel interaction for Master Client or Player.");
+
+            isPanelActive = !puzzlePanel.activeSelf; // Properly toggle the panel's active state
             puzzlePanel.SetActive(isPanelActive);
-            Cursor.visible = isPanelActive; // Makes the cursor visible only when the panel is active
-            Cursor.lockState = isPanelActive ? CursorLockMode.None : CursorLockMode.Locked; // Unlocks the cursor from the center of the screen
+
+            Cursor.visible = isPanelActive; // Show cursor if the panel is active
+            Cursor.lockState = isPanelActive ? CursorLockMode.None : CursorLockMode.Locked; // Unlock cursor if the panel is active
 
             if (isPanelActive)
             {
@@ -82,6 +86,7 @@ public class Interacter : MonoBehaviour
             }
         }
     }
+
 
     private void DisablePlayerMovement()
     {
@@ -112,19 +117,26 @@ public class Interacter : MonoBehaviour
     // Method to close the puzzle panel via the button
     public void ClosePuzzlePanel()
     {
-        puzzlePanel.SetActive(false); // Deactivate the puzzle panel
-        pV.RPC("StopInteraction", RpcTarget.All);
-        EnablePlayerMovement(); // Reenable player movement after closing the panel
-        isPanelActive = false; // Mark the panel as inactive
-        Cursor.visible = false; // Hide the cursor again after closing the panel
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor back to the center of the screen
+        // Sync the action across all clients
+        pV.RPC("StopInteraction", RpcTarget.AllBuffered);
+
+        // Ensure that the logic is executed locally for the master client and the player
+        if (playerID == Launcher.instance.PlayerID || PhotonNetwork.IsMasterClient)
+        {
+            puzzlePanel.SetActive(false); // Deactivate the puzzle panel
+            EnablePlayerMovement(); // Reenable player movement after closing the panel
+            isPanelActive = false; // Mark the panel as inactive
+            //Cursor.visible = false; // Hide the cursor again after closing the panel
+            //Cursor.lockState = CursorLockMode.Locked; // Lock the cursor back to the center of the screen
+        }
     }
+
 
 
     public void HidePuzzlePanel()
     {
         puzzlePanel.SetActive(false);
-        pV.RPC("StopInteraction", RpcTarget.All);
+        pV.RPC("StopInteraction", RpcTarget.AllBuffered);
         EnablePlayerMovement();
     }
 
