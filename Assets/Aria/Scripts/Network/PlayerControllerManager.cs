@@ -2,20 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using System.IO;
+using System.Linq;
 
 public class PlayerControllerManager : MonoBehaviour
 {
-    PhotonView photonView; 
+    PhotonView photonView;
 
+    GameObject controller;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+    Player[] allPlayers; //Photon.Realtime
+    int myNumberInRoom; // Figure out player number in room
+
+     void Awake()
+     {
         photonView = GetComponent<PhotonView>();
-    }
 
-    // Update is called once per frame
+        allPlayers = PhotonNetwork.PlayerList; 
+        foreach (Player p in allPlayers) 
+        {
+            if (p != PhotonNetwork.LocalPlayer) 
+            {
+                myNumberInRoom++;
+            }
+        }        
+     }
+
     void Start()
     {
         if (photonView.IsMine)
@@ -27,6 +40,28 @@ public class PlayerControllerManager : MonoBehaviour
 
     void CreateController()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "AriaPlayer"), Vector3.zero, Quaternion.identity);
+        AssignPlayerToSpawnArea();
+    }
+
+    void AssignPlayerToSpawnArea()
+    {
+        GameObject spawnArea = GameObject.Find("SpawnArea");
+
+        if (spawnArea == null)
+        {
+            Debug.LogError("Spawn area not found");
+            return;
+        }
+
+        Transform spawnPoint = null;
+
+        spawnPoint = spawnArea.transform.GetChild(Random.Range(0, spawnArea.transform.childCount));
+
+        if (spawnPoint != null) 
+        {
+            controller = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "AriaPlayer"), spawnPoint.position, spawnPoint.rotation,0, new object[] { photonView.ViewID});
+            Debug.Log("Instantiated Player Controller at spawn point");
+        }
+
     }
 }
