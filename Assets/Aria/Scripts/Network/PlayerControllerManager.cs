@@ -19,8 +19,8 @@ public class PlayerControllerManager : MonoBehaviour
      {
         photonView = GetComponent<PhotonView>();
 
-        allPlayers = PhotonNetwork.PlayerList; 
-        foreach (Player p in allPlayers) 
+        allPlayers = PhotonNetwork.PlayerList; // gets an array of all connected players in the room
+        foreach (Player p in allPlayers) // loop goes through every player in the allPlayers array
         {
             if (p != PhotonNetwork.LocalPlayer) 
             {
