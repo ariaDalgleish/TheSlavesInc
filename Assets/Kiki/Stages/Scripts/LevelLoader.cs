@@ -14,19 +14,25 @@ public class LevelLoader : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        // Automatically sync the scene for all players when the MasterClient changes the scene
-        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = true; // Sync scenes across all clients
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        // Only MasterClient controls the scene load when the timer reaches the limit
-        if (PhotonNetwork.IsMasterClient && timer >= timeLimit && !isLoadingScene)
+        // Stage 2: Time reaches 0, load GameOver scene after 3 seconds
+        if (SceneManager.GetActiveScene().name == "Stage2" && timer >= timeLimit && !isLoadingScene && PhotonNetwork.IsMasterClient)
         {
-            isLoadingScene = true;  // Set the loading flag
-            StartCoroutine(WaitAndLoadScoreScene());  // Load the Score Scene
+            isLoadingScene = true;
+            StartCoroutine(WaitAndLoadGameOverScene());
+        }
+
+        // Stage 1: Time reaches 0, load ScoreScene
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name != "Stage2" && timer >= timeLimit && !isLoadingScene)
+        {
+            isLoadingScene = true;
+            StartCoroutine(WaitAndLoadScoreScene()); // Load the Score Scene
         }
 
         if (SceneManager.GetActiveScene().name == "ScoreScene")
@@ -41,14 +47,14 @@ public class LevelLoader : MonoBehaviourPunCallbacks
             // Only MasterClient triggers the scene load after all players press Q
             if (AllPlayersPressedQ() && PhotonNetwork.IsMasterClient && !isLoadingScene)
             {
-                isLoadingScene = true;  // Set the loading flag
+                isLoadingScene = true;
                 StartCoroutine(WaitAndLoadNextScene()); // Load Stage 2
             }
         }
     }
 
-    // Coroutine to wait and load the Score Scene when time is up
-    private IEnumerator WaitAndLoadScoreScene()
+    // Coroutine to wait and load the GameOver Scene in Stage 2
+    private IEnumerator WaitAndLoadGameOverScene()
     {
         // Stop receiving network messages while loading
         PhotonNetwork.IsMessageQueueRunning = false;
@@ -60,24 +66,36 @@ public class LevelLoader : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(transitionTime);  // Wait for the transition to finish
         }
 
-        // MasterClient loads the Score Scene, others automatically sync
-        PhotonNetwork.LoadLevel("ScoreScene");
+        yield return new WaitForSeconds(3f);  // Delay before loading GameOver scene
+        PhotonNetwork.LoadLevel("GameOver");  // Load GameOver scene
+    }
+
+    // Coroutine to wait and load the Score Scene
+    private IEnumerator WaitAndLoadScoreScene()
+    {
+        PhotonNetwork.IsMessageQueueRunning = false;
+
+        if (transition != null)
+        {
+            transition.SetTrigger("Start");
+            yield return new WaitForSeconds(transitionTime);
+        }
+
+        PhotonNetwork.LoadLevel("ScoreScene");  // MasterClient loads, clients sync automatically
     }
 
     // Coroutine to wait and load the next stage (Stage 2)
     public IEnumerator WaitAndLoadNextScene()
     {
-        // Stop receiving network messages while loading
         PhotonNetwork.IsMessageQueueRunning = false;
 
-        // Destroy enemies (if any exist)
         foreach (var enemy in FindObjectsOfType<EnemyMovement>())
         {
             Destroy(enemy.gameObject);
         }
 
         yield return new WaitForSeconds(3f);  // Delay before loading Stage 2
-        PhotonNetwork.LoadLevel("Stage2");  // MasterClient loads, clients sync automatically
+        PhotonNetwork.LoadLevel("Stage2");
     }
 
     // Check if all players have pressed the Q key

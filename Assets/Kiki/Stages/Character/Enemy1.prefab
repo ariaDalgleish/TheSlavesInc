@@ -213,7 +213,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f63c6897c3001fb499b49dfba9490a63,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2507283694596056053}
+      addedObject: {fileID: -8186049949932546027}
   m_SourcePrefab: {fileID: 100100000, guid: f63c6897c3001fb499b49dfba9490a63, type: 3}
 --- !u!1 &8344142312243225293 stripped
 GameObject:
@@ -302,9 +302,6 @@ MonoBehaviour:
   trailAreaPrefab: {fileID: 1522720971243521568, guid: ea6b5748086a96d4ba7e2088125e2a97,
     type: 3}
   trailSpawnInterval: 1
-  startColor: {r: 0.09507973, g: 0.078720175, b: 0.2735849, a: 1}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
-  trailMaterial: {fileID: 2100000, guid: 42a15025a1bdc1841b940407853ba6fa, type: 2}
 --- !u!23 &7862644303543988297
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -355,7 +352,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8344142312243225293}
   m_Mesh: {fileID: 0}
---- !u!114 &-2507283694596056053
+--- !u!114 &-8186049949932546027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
