@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Hide the puzzle clear panel
-    private void HidePuzzleClearScreen()
+    public void HidePuzzleClearScreen()
     {
         if (puzzleClearPanel != null)
         {
