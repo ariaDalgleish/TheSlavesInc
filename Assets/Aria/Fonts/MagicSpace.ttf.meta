@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 98aa953a1e5faf5479f9995cf2945a06
+guid: fcffc0ca8fadf544d8b8513d0b817429
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 50
-  forceTextureCase: 0
+  fontSize: 16
+  forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - a Astro Space
+  - MAGIC SPACE
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 98aa953a1e5faf5479f9995cf2945a06
+guid: 15cf1e7aa62aada4b97767a97823b146
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 50
-  forceTextureCase: 0
+  fontSize: 16
+  forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - a Astro Space
+  - KG Blank Space Sketch
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

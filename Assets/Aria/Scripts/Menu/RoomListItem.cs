@@ -4,10 +4,11 @@ using UnityEngine;
 using Photon.Realtime;
 using TMPro;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class RoomListItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TMP_Text roomNameText;
+    public Text roomNameText;
 
     public RoomInfo info;
 

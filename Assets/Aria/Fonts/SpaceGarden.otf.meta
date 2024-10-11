@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 98aa953a1e5faf5479f9995cf2945a06
+guid: 583a2489b47a2cd49b1c3153aa161d88
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 50
+  fontSize: 100
   forceTextureCase: 0
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - a Astro Space
+  - Space Garden
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
