@@ -1,8 +1,9 @@
+using Photon.Realtime;
 using UnityEngine;
 
 public class DynamicGlow : MonoBehaviour
 {
-    public Transform playerTransform; 
+    public Transform player; 
     public float detectionRange = 5f; 
     public float maxEmissionIntensity = 5f; 
     public float minEmissionIntensity = 0f; 
@@ -11,6 +12,16 @@ public class DynamicGlow : MonoBehaviour
 
     void Start()
     {
+        if (player == null)
+        {
+            // Find the player in the scene (assuming the player has a tag "Player")
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+        }
+
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null)
         {
@@ -24,10 +35,21 @@ public class DynamicGlow : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+        {
+            // Try to find the player again if it wasn't found initially
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+            return; // Skip the rest of the update until the player is found
+        }
+
         if (material == null) return;
 
         // Calculate the distance from the player to the object
-        float distance = Vector3.Distance(playerTransform.position, transform.position);
+        float distance = Vector3.Distance(player.position, transform.position);
         //Debug.Log($"Distance to player: {distance}");
 
         // Calculate emission intensity based on distance

@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 7110692464560661865}
   - component: {fileID: 766224900557229895}
   - component: {fileID: 6301600317437246387}
-  - component: {fileID: 7928553782950077656}
   m_Layer: 5
   m_Name: Pipe 11
   m_TagString: Untagged
@@ -159,21 +158,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7928553782950077656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053935679421749937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &2708463114722204235
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +170,6 @@ GameObject:
   - component: {fileID: 7717984335940601718}
   - component: {fileID: 1709127919206813505}
   - component: {fileID: 3559571262568840473}
-  - component: {fileID: 7287694809838989427}
   m_Layer: 5
   m_Name: Pipe 9
   m_TagString: Untagged
@@ -296,21 +279,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7287694809838989427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2708463114722204235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &3038469503222386090
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +291,6 @@ GameObject:
   - component: {fileID: 7634008128332603835}
   - component: {fileID: 3816862776072697474}
   - component: {fileID: 479058412481360896}
-  - component: {fileID: 8310240082656297693}
   m_Layer: 5
   m_Name: Pipe 6
   m_TagString: Untagged
@@ -433,21 +400,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8310240082656297693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3038469503222386090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &3215482143572262138
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +412,6 @@ GameObject:
   - component: {fileID: 1820644650635579095}
   - component: {fileID: 3680357208960462806}
   - component: {fileID: 7929456694393950777}
-  - component: {fileID: 5944923545520641454}
   m_Layer: 5
   m_Name: Pipe 7
   m_TagString: Untagged
@@ -570,21 +521,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5944923545520641454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3215482143572262138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &3728982228098687159
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +580,6 @@ GameObject:
   - component: {fileID: 5656267618108121134}
   - component: {fileID: 7415730268590389413}
   - component: {fileID: 3419347623623607068}
-  - component: {fileID: 4346813829111762714}
   m_Layer: 5
   m_Name: Pipe 10
   m_TagString: Untagged
@@ -754,21 +689,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4346813829111762714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830143962393686876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &4903291534829562597
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +701,6 @@ GameObject:
   - component: {fileID: 7847156069146118309}
   - component: {fileID: 3345931801773585097}
   - component: {fileID: 6830976269999161253}
-  - component: {fileID: 7912126408138457478}
   m_Layer: 5
   m_Name: DataSendingPuzzle
   m_TagString: Untagged
@@ -872,19 +791,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7912126408138457478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4903291534829562597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5d1ab64f92fac242bbd40f4ce8bb289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &5065158920213688275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +937,6 @@ GameObject:
   - component: {fileID: 6728118010693864895}
   - component: {fileID: 5855953651462814110}
   - component: {fileID: 5039541489647553660}
-  - component: {fileID: 3805093678864170180}
   m_Layer: 5
   m_Name: Pipe 8
   m_TagString: Untagged
@@ -1141,21 +1046,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3805093678864170180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5632744380209657150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &5675433731440442240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1058,6 @@ GameObject:
   - component: {fileID: 903240727932240962}
   - component: {fileID: 2782425019196190211}
   - component: {fileID: 7547948813156845877}
-  - component: {fileID: 2350869852012211338}
   m_Layer: 5
   m_Name: Pipe 3
   m_TagString: Untagged
@@ -1278,21 +1167,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2350869852012211338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5675433731440442240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &5698496741053539070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1425,6 @@ GameObject:
   - component: {fileID: 3915232657052899525}
   - component: {fileID: 5471456003496496696}
   - component: {fileID: 2252620713663216135}
-  - component: {fileID: 1469752609722394380}
   m_Layer: 5
   m_Name: Pipe 5
   m_TagString: Untagged
@@ -1661,21 +1534,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1469752609722394380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5987191253379537847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &6386377865439145966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,7 +1546,6 @@ GameObject:
   - component: {fileID: 1556807508576627948}
   - component: {fileID: 7281199601089300360}
   - component: {fileID: 8349108589164971293}
-  - component: {fileID: 5007403338433747310}
   m_Layer: 5
   m_Name: Pipe 1
   m_TagString: Untagged
@@ -1798,21 +1655,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5007403338433747310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6386377865439145966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &6876366228246280799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1667,6 @@ GameObject:
   - component: {fileID: 3403904551457816797}
   - component: {fileID: 2141400939884204588}
   - component: {fileID: 6975939230258240361}
-  - component: {fileID: 3572296094291034482}
   m_Layer: 5
   m_Name: Pipe 2
   m_TagString: Untagged
@@ -1935,21 +1776,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3572296094291034482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6876366228246280799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &7497172423800187326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,7 +1788,6 @@ GameObject:
   - component: {fileID: 6370325038170626421}
   - component: {fileID: 8708666835864605667}
   - component: {fileID: 2695873182071057353}
-  - component: {fileID: 1374339149046914022}
   m_Layer: 5
   m_Name: Pipe 12
   m_TagString: Untagged
@@ -2072,21 +1897,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1374339149046914022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497172423800187326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &7527456216435798463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,7 +1909,6 @@ GameObject:
   - component: {fileID: 3355627374332420853}
   - component: {fileID: 5920823083543713277}
   - component: {fileID: 2456541660709737373}
-  - component: {fileID: 237465103716858217}
   m_Layer: 5
   m_Name: Pipe 4
   m_TagString: Untagged
@@ -2209,21 +2018,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &237465103716858217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7527456216435798463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed019f15f68d47a42b9e0bd48044d49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctRotation: 0
-  isPlaced: 0
-  puzzleClearPanel: {fileID: 0}
 --- !u!1 &9036200614025859467
 GameObject:
   m_ObjectHideFlags: 0
