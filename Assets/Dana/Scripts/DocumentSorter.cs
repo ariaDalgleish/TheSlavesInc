@@ -12,7 +12,7 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
 
     public DurabilitySystem durabilitySystem; // Reference to the DurabilitySystem
 
-    private bool puzzleCompleted = false; // Track if the puzzle has been completed
+    //private bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     private PuzzleResetManager resetManager; // Reference to the reset manager
 
@@ -69,7 +69,7 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
             Debug.Log("Document reset: " + document.name);
         }
 
-        puzzleCompleted = false;
+        //puzzleCompleted = false;
         Debug.Log("Document Sorter reset.");
     }
 
@@ -97,9 +97,9 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
             if (documentPile.childCount == 0)
             {
                 ShowPuzzleClearScreen();
-
+                
                 durabilitySystem.IncreaseDurability(); // Increase Durability when puzzle is completed' above the 'Debug.Log("Puzzle cleared!");
-
+                //puzzleCompleted = true;
                 Debug.Log("Game Cleared!");
                 resetManager.StartResetCoroutine(this); // Start the reset coroutine via the reset manager
             }

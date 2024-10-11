@@ -13,7 +13,7 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
 
     private int currentIndex = 0;   // Index for cycling through newImages
     private bool interactable = true; // Track if the element is interactable
-    private bool puzzleCompleted = false; // Track if the puzzle has been completed
+    //private bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     private Sprite initialSprite; // Store the initial sprite for resetting
 
@@ -38,7 +38,7 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
         // Check if the current sprite matches the target sprite
         if (targetImage.sprite == targetSprite)
         {
-            puzzleCompleted = true; // Mark the puzzle as completed
+            //puzzleCompleted = true; // Mark the puzzle as completed
             gameManager?.CheckPuzzleCompletion(); // Notify GameManager
         }
     }
@@ -79,7 +79,7 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
         targetImage.sprite = initialSprite;
         currentIndex = 0;
         interactable = true;
-        puzzleCompleted = false; // Reset puzzle completed state
+        //puzzleCompleted = false; // Reset puzzle completed state
     }
 }
 

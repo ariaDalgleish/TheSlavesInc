@@ -11,7 +11,7 @@ public class DragDrop : MonoBehaviour
 
     private Vector2 objectInitPos;
     public GameObject puzzleClearPanel; // Reference to the puzzle clear panel
-    private bool puzzleCompleted = false; // Track if the puzzle has been completed
+    //private bool puzzleCompleted = false; // Track if the puzzle has been completed
 
     void Start()
     {
@@ -74,7 +74,7 @@ public class DragDrop : MonoBehaviour
             }
         }
 
-        puzzleCompleted = true;
+        //puzzleCompleted = true;
         ShowPuzzleClearScreen();
         Debug.Log("Game Cleared!"); // This will only run when all objects are locked
         // Trigger additional game clear actions here, if needed
