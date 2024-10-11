@@ -12,12 +12,18 @@ public class EnemyMovement : MonoBehaviour
     public float trailDuration = 3f; // Duration the trail stays
     private float changeDirectionTimer;
     private Vector3 movementDirection;
+    private Rigidbody rb; // Add a Rigidbody variable
 
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
+
         if (photonView.IsMine)
         {
+            rb.useGravity = true; // Enable gravity for the enemy
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; // Lock rotation on X and Z axes
+
             changeDirectionTimer = changeDirectionTime;
             movementDirection = RandomDirection();
             StartCoroutine(SpawnTrail());
@@ -27,17 +33,17 @@ public class EnemyMovement : MonoBehaviour
             // Disable unnecessary components for non-local enemies
             GetComponent<EnemyTrailManager>().enabled = false;
             GetComponent<SphereCollider>().enabled = false;
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().isKinematic = true;
+            rb.useGravity = false; // No need for gravity on non-local enemies
+            rb.isKinematic = true; // Make non-local enemies kinematic
             enabled = false;
         }
     }
 
-    private void Update()
+    private void FixedUpdate() // Changed Update to FixedUpdate
     {
         if (!photonView.IsMine) return;
 
-        changeDirectionTimer -= Time.deltaTime;
+        changeDirectionTimer -= Time.fixedDeltaTime;
         if (changeDirectionTimer <= 0)
         {
             movementDirection = RandomDirection();
@@ -52,7 +58,8 @@ public class EnemyMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
 
-        transform.Translate(movementDirection * moveSpeed * Time.deltaTime);
+        // Use Rigidbody to move the enemy
+        rb.MovePosition(rb.position + movementDirection * moveSpeed * Time.fixedDeltaTime); // Move using Rigidbody
     }
 
     private Vector3 RandomDirection()
