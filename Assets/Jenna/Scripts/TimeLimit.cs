@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime = 300f;
+    [SerializeField] float remainingTime = 300f;  // 5-minute timer
 
     public DurabilitySystem durabilitySystem;
     private bool isDurabilityStarted = false;
-    private bool isSceneLoadTriggered = false; // Flag for scene load trigger, changed the name to avoid conflicts
+    private bool isSceneLoadTriggered = false;  // Prevent multiple scene loads
 
     void Start()
     {
@@ -18,12 +18,11 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            remainingTime = 300f;
+            remainingTime = 300f;  // Initialize timer
             durabilitySystem.enabled = false;
         }
 
-        PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log("PhotonNetwork.AutomaticallySyncScene is set to: " + PhotonNetwork.AutomaticallySyncScene);
+        PhotonNetwork.AutomaticallySyncScene = true;  // Ensure all players sync scenes
     }
 
     void Update()
@@ -34,38 +33,47 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
             {
                 remainingTime -= Time.deltaTime;
 
+                // Start durability when timer starts
                 if (remainingTime < 300f && !durabilitySystem.isDecreasing && !isDurabilityStarted)
                 {
                     durabilitySystem.StartDecreasingDurability();
                     isDurabilityStarted = true;
-                    Debug.Log("Timer started. Durability system activated.");
                 }
             }
             else if (!isSceneLoadTriggered)
             {
                 remainingTime = 0;
                 durabilitySystem.StopDecreasingDurability();
-                Debug.Log("Time's up. Loading the ScoreScene.");
                 isSceneLoadTriggered = true;
 
-                Debug.Log("Current scene: " + SceneManager.GetActiveScene().name);
-
-                if (SceneManager.GetActiveScene().name != "ScoreScene")
-                {
-                   
-                    photonView.RPC("LoadScoreSceneForAll", RpcTarget.All);
-                }
-                else
-                {
-                    Debug.LogWarning("Already in the ScoreScene, skipping load.");
-                }
+                // Handle scene loading based on the current scene
+                HandleSceneLoading();
             }
         }
 
+        // Update the timer UI for all players
         UpdateTimerUI();
     }
 
-    void UpdateTimerUI()
+    // Scene transition logic based on the current scene
+    private void HandleSceneLoading()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Stage1")
+        {
+            Debug.Log("Time's up in Stage 1. Loading ScoreScene.");
+            photonView.RPC("LoadScoreSceneForAll", RpcTarget.All);
+        }
+        else if (currentScene == "Stage2")
+        {
+            Debug.Log("Time's up in Stage 2. Loading GameOver scene.");
+            photonView.RPC("LoadGameOverSceneForAll", RpcTarget.All);
+        }
+    }
+
+    // Update timer display
+    private void UpdateTimerUI()
     {
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
@@ -77,24 +85,38 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    // Sync the timer across the network
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(remainingTime);
+            stream.SendNext(remainingTime);  // MasterClient sends timer
         }
         else
         {
-            remainingTime = (float)stream.ReceiveNext();
+            remainingTime = (float)stream.ReceiveNext();  // Other clients receive timer
         }
     }
 
+    // RPC to load the ScoreScene for all players
     [PunRPC]
     void LoadScoreSceneForAll()
     {
-        Debug.Log("PhotonNetwork.LoadLevel called for ScoreScene.");
+        if (SceneManager.GetActiveScene().name != "ScoreScene")  // Ensure it doesn't get called again in the ScoreScene
+        {
+            Debug.Log("Loading ScoreScene for all players.");
+            PhotonNetwork.LoadLevel("ScoreScene");
+        }
+    }
 
-        // We only set the flag after calling PhotonNetwork.LoadLevel
-        PhotonNetwork.LoadLevel("ScoreScene");
+    // RPC to load the GameOver scene for all players
+    [PunRPC]
+    void LoadGameOverSceneForAll()
+    {
+        if (SceneManager.GetActiveScene().name != "GameOver")  // Ensure it doesn't get called again in the GameOver scene
+        {
+            Debug.Log("Loading GameOver scene for all players.");
+            PhotonNetwork.LoadLevel("GameOver");
+        }
     }
 }
