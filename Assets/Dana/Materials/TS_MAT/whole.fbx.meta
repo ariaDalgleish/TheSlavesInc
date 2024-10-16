@@ -22,6 +22,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: hologramE
+    second: {fileID: 2100000, guid: b2e30838dc859b64ab1bece7b5c84f1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: pasted__trim_C
     second: {fileID: 2100000, guid: e2d4be1f6244c4544bf91f9d11c63723, type: 2}
   - first:
