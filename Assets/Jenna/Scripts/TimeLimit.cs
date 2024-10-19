@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime = 300f;  // 5-minute timer
+    [SerializeField] float remainingTime = 300f;  // 300f = 5-minute timer
 
     public DurabilitySystem durabilitySystem;
     private bool isDurabilityStarted = false;

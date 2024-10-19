@@ -10,6 +10,7 @@ public class MenuGameManager : MonoBehaviour
     public GameObject menuUI;
     public GameObject timer;
     public GameObject health;
+    public GameObject activateButton;
     
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class MenuGameManager : MonoBehaviour
             menuUI.SetActive(true);
             AudioListener.pause = true;
             IsMenuOpened = true;
+            activateButton.SetActive(true);
         }
 
         else if (Input.GetKeyDown(KeyCode.Escape) && IsMenuOpened == true)
@@ -31,8 +33,10 @@ public class MenuGameManager : MonoBehaviour
             menuUI.SetActive(false);
             AudioListener.pause = false;
             IsMenuOpened = false;
+            activateButton.SetActive(false);
         }
     }
+
 
     public void LeaveGame()
     {
