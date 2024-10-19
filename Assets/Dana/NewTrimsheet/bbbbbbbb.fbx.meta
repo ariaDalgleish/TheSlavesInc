@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 92bd33dd070903c4fa0460af270a6188
+guid: 21492929466966f4c849bd8276890cfe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default_Material
+    second: {fileID: 2100000, guid: c23779ce42b73e04a8e5cd76562e9e03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trimsheet_Wall
+    second: {fileID: 2100000, guid: c23779ce42b73e04a8e5cd76562e9e03, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
