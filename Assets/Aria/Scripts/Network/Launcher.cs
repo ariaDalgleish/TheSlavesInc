@@ -5,7 +5,7 @@ using TMPro;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Linq;
-using System.Data;
+
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -174,6 +174,20 @@ public class Launcher : MonoBehaviourPunCallbacks
         Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer); // Pass on set up from PlayerListItem script
     }
 
+    //public async void stageChange()
+    //{
+    //    if (PhotonNetwork.IsMasterClient)
+    //    {
+    //        photonView.RPC("SyncLoadedScene", RpcTarget.AllBuffered);
+    //    }
+    //}
+
+    //private async void SyncLoadedScene()
+    //{
+    //    Debug.Log("Stage2 called");
+    //    //Load the Addressable sccene asset bundle on non-Master Clients
+    //    AsyncOperationHandle<SceneInstance> handle = Addressables.LoadSceneAsync(stage2)
+    //}
 
     //private void SpawnPlayer()
     //{
