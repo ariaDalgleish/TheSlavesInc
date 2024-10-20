@@ -10,6 +10,8 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] float remainingTime;  // 300f = 5-minute timer
     public GameObject nextStageScreen;
 
+    public ScoreManager scoreManager;
+
 
     public DurabilitySystem durabilitySystem;
     private bool isDurabilityStarted = false;
@@ -33,6 +35,9 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsMasterClient)
         {
             if (remainingTime > 0)
+
+                // Time's up, calculate the final score
+                scoreManager.CalculateFinalScore();
             {
                 
                 remainingTime -= Time.deltaTime;

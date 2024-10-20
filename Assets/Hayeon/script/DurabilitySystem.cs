@@ -1,6 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DurabilitySystem : MonoBehaviour
@@ -57,6 +59,12 @@ public class DurabilitySystem : MonoBehaviour
             currentDurability = maxDurability;
         }
         UpdateDurabilityBar();
+
+        // Notify ScoreManager when a puzzle is solved
+        if (PhotonNetwork.IsMasterClient) // Only master client should modify the score
+        {
+            ScoreManager.Instance.AddPuzzleSolvedScore();
+        }
     }
 
     private void UpdateDurabilityBar()
