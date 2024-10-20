@@ -67,3 +67,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef9dc86a0eb9ac488f1f9b21baf3df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSkins: []
