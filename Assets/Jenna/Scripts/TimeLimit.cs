@@ -10,7 +10,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 
     public DurabilitySystem durabilitySystem;
     private bool isDurabilityStarted = false;
-    private bool isSceneLoadTriggered = false;  // Prevent multiple scene loads
+    /*  private bool isSceneLoadTriggered = false;*/  // Prevent multiple scene loads
 
     void Start()
     {
@@ -40,15 +40,15 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
                     isDurabilityStarted = true;
                 }
             }
-            else if (!isSceneLoadTriggered)
-            {
-                remainingTime = 0;
-                durabilitySystem.StopDecreasingDurability();
-                isSceneLoadTriggered = true;
+            //else if ()
+            //{
+            //    remainingTime = 0;
+            //    durabilitySystem.StopDecreasingDurability();
+            //    //isSceneLoadTriggered = true;
 
-                // Handle scene loading based on the current scene
-                HandleSceneLoading();
-            }
+            //    // Handle scene loading based on the current scene
+            //    //HandleSceneLoading();
+            //}
         }
 
         // Update the timer UI for all players
@@ -56,21 +56,21 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     // Scene transition logic based on the current scene
-    private void HandleSceneLoading()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
+    //private void HandleSceneLoading()
+    //{
+    //    string currentScene = SceneManager.GetActiveScene().name;
 
-        if (currentScene == "Stage1")
-        {
-            Debug.Log("Time's up in Stage 1. Loading ScoreScene.");
-            photonView.RPC("LoadScoreSceneForAll", RpcTarget.All);
-        }
-        else if (currentScene == "Stage2")
-        {
-            Debug.Log("Time's up in Stage 2. Loading GameOver scene.");
-            photonView.RPC("LoadGameOverSceneForAll", RpcTarget.All);
-        }
-    }
+    //    if (currentScene == "Stage1")
+    //    {
+    //        Debug.Log("Time's up in Stage 1. Loading ScoreScene.");
+    //        photonView.RPC("LoadScoreSceneForAll", RpcTarget.All);
+    //    }
+    //    else if (currentScene == "Stage2")
+    //    {
+    //        Debug.Log("Time's up in Stage 2. Loading GameOver scene.");
+    //        photonView.RPC("LoadGameOverSceneForAll", RpcTarget.All);
+    //    }
+    //}
 
     // Update timer display
     private void UpdateTimerUI()
@@ -79,7 +79,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        if (remainingTime <= 0)
+        if (remainingTime <= 5)
         {
             timerText.color = Color.red;
         }
@@ -99,24 +99,24 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     // RPC to load the ScoreScene for all players
-    [PunRPC]
-    void LoadScoreSceneForAll()
-    {
-        if (SceneManager.GetActiveScene().name != "ScoreScene")  // Ensure it doesn't get called again in the ScoreScene
-        {
-            Debug.Log("Loading ScoreScene for all players.");
-            PhotonNetwork.LoadLevel("ScoreScene");
-        }
-    }
+    //[PunRPC]
+    //void LoadScoreSceneForAll()
+    //{
+    //    if (SceneManager.GetActiveScene().name != "ScoreScene")  // Ensure it doesn't get called again in the ScoreScene
+    //    {
+    //        Debug.Log("Loading ScoreScene for all players.");
+    //        PhotonNetwork.LoadLevel("ScoreScene");
+    //    }
+    //}
 
     // RPC to load the GameOver scene for all players
-    [PunRPC]
-    void LoadGameOverSceneForAll()
-    {
-        if (SceneManager.GetActiveScene().name != "GameOver")  // Ensure it doesn't get called again in the GameOver scene
-        {
-            Debug.Log("Loading GameOver scene for all players.");
-            PhotonNetwork.LoadLevel("GameOver");
-        }
-    }
+    //[PunRPC]
+    //void LoadGameOverSceneForAll()
+    //{
+    //    if (SceneManager.GetActiveScene().name != "GameOver")  // Ensure it doesn't get called again in the GameOver scene
+    //    {
+    //        Debug.Log("Loading GameOver scene for all players.");
+    //        PhotonNetwork.LoadLevel("GameOver");
+    //    }
+    //}
 }
