@@ -21,7 +21,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            remainingTime = 15f;  // Initialize timer
+            remainingTime = 300f;  // Initialize timer
             durabilitySystem.enabled = false;
         }
 

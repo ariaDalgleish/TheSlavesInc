@@ -81,19 +81,6 @@ public class NextStageController : MonoBehaviour
     }
 
 
-    //private void DisablePlayerMovement()
-    //{
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    //    if (player != null)
-    //    {
-    //        ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
-    //        if (movementScript != null)
-    //        {
-    //            movementScript.canMove = false; // Disable player movement
-    //        }
-    //    }
-    //}
-
     public void LeaveGame()
     {
         Debug.Log("GameLeft");
