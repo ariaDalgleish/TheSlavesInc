@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorRight : MonoBehaviour
 {
     public InteractableButton button;
-    float posX;
+    float posZ;
     Vector3 elevatorPos;
 
     // Start is called before the first frame update
@@ -17,15 +17,15 @@ public class DoorRight : MonoBehaviour
         {
             if (button.holdingButton == false)
             {
-                posX -= Time.deltaTime;
+                posZ += Time.deltaTime;
             }
             else
             {
-                posX += Time.deltaTime;
+                posZ -= Time.deltaTime;
             }
 
-            posX = Mathf.Clamp(posX, 8.574f, 10.14f);
-            elevatorPos.x = posX;
+            posZ = Mathf.Clamp(posZ, -13.6f, -12f);
+            elevatorPos.z = posZ;
 
             yield return null;
         }

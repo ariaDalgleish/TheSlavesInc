@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
+    PhotonView photonView;
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime = 300f;  // 300f = 5-minute timer
+    [SerializeField] float remainingTime;  // 300f = 5-minute timer
+    public GameObject nextStageScreen;
+
 
     public DurabilitySystem durabilitySystem;
     private bool isDurabilityStarted = false;
@@ -18,7 +21,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            remainingTime = 300f;  // Initialize timer
+            remainingTime = 15f;  // Initialize timer
             durabilitySystem.enabled = false;
         }
 
@@ -31,6 +34,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (remainingTime > 0)
             {
+                
                 remainingTime -= Time.deltaTime;
 
                 // Start durability when timer starts
@@ -39,20 +43,38 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
                     durabilitySystem.StartDecreasingDurability();
                     isDurabilityStarted = true;
                 }
-            }
-            //else if ()
-            //{
-            //    remainingTime = 0;
-            //    durabilitySystem.StopDecreasingDurability();
-            //    //isSceneLoadTriggered = true;
 
-            //    // Handle scene loading based on the current scene
-            //    //HandleSceneLoading();
-            //}
+
+
+            }
+            
+        }
+        
+        if (remainingTime <= 0)
+        {
+            remainingTime = 0;
+
+            durabilitySystem.StopDecreasingDurability();
+            nextStageScreen.SetActive(true);
+
+            DisablePlayerMovement();
+
         }
 
         // Update the timer UI for all players
         UpdateTimerUI();
+    }
+    private void DisablePlayerMovement()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            ADPlayerMovement movementScript = player.GetComponent<ADPlayerMovement>();
+            if (movementScript != null)
+            {
+                movementScript.canMove = false; // Disable player movement
+            }
+        }
     }
 
     // Scene transition logic based on the current scene
@@ -83,6 +105,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         {
             timerText.color = Color.red;
         }
+       
     }
 
     // Sync the timer across the network
