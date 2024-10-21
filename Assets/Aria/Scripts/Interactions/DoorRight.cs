@@ -24,7 +24,7 @@ public class DoorRight : MonoBehaviour
                 posZ -= Time.deltaTime;
             }
 
-            posZ = Mathf.Clamp(posZ, -13.6f, -12f);
+            posZ = Mathf.Clamp(posZ, -14.56f, -12.11f);
             elevatorPos.z = posZ;
 
             yield return null;

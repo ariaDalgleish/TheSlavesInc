@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ElementScript : MonoBehaviour, IPointerClickHandler
 {
+    AudioManager audioManager;
     public Image targetImage;       // The UI Image component to change
     public Sprite[] newImages;      // Array of sprites to cycle through
     public Sprite targetSprite;     // The target sprite for matching
@@ -21,6 +22,8 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         // Find the reset manager script in the Puzzle Panel
         resetManager = GetComponentInParent<PRMElement>();
 
@@ -31,6 +34,8 @@ public class ElementScript : MonoBehaviour, IPointerClickHandler
     // Method to change the image sprite
     public void ImageChange()
     {
+        audioManager.PlaySFX(audioManager.mouseClick);
+
         if (newImages.Length == 0 || !interactable) return; // Check if interactable
         targetImage.sprite = newImages[currentIndex];
         currentIndex = (currentIndex + 1) % newImages.Length;

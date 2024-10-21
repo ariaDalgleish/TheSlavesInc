@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DragDropPuzzleManager : MonoBehaviour
 {
+    AudioManager audioManager;
     public GameObject[] objectHolder; //left side
     public GameObject[] toDrag;  //right side
     public int minObjectsToShow = 4;
@@ -14,6 +15,8 @@ public class DragDropPuzzleManager : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         SetRandomLeftObjects();
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
     }
@@ -76,6 +79,8 @@ public class DragDropPuzzleManager : MonoBehaviour
     {
         if (puzzleClearPanel != null)
         {
+            audioManager.PlaySFX(audioManager.taskComplete);
+
             puzzleClearPanel.SetActive(true);
         }
     }

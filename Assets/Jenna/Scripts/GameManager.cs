@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    AudioManager audioManager;
     public Image[] topImages; // Array of top images
     public ElementScript[] bottomImageScripts; // Array of ElementScripts for bottom images
     public Sprite[] allSprites; // Array of all possible sprites
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         SetupPuzzle();
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
     }
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
     // Method to set up the puzzle
     public void SetupPuzzle()
     {
+
         // Create a list to store all possible sprites
         List<Sprite> allSpriteList = new List<Sprite>(allSprites);
 
@@ -135,6 +139,8 @@ public class GameManager : MonoBehaviour
     {
         if (puzzleClearPanel != null)
         {
+            audioManager.PlaySFX(audioManager.taskComplete);
+
             puzzleClearPanel.SetActive(true);
         }
     }

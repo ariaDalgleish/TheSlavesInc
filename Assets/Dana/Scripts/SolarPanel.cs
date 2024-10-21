@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SolarPanel : MonoBehaviour
 {
+    AudioManager audioManager;
     public Image gaugeBar;
     public float Gauge = 0f;
     public float MaxGauge = 100f;
@@ -23,7 +24,7 @@ public class SolarPanel : MonoBehaviour
     private void Start()
     {
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
-        
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
         if (durabilitySystem != null)
         {
@@ -50,6 +51,7 @@ public class SolarPanel : MonoBehaviour
         
         if (Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.B) && !isFull))
         {
+
             Gauge += (MaxGauge / 3f) * Time.deltaTime;
             if (Gauge >= MaxGauge)
             {
@@ -108,6 +110,8 @@ public class SolarPanel : MonoBehaviour
     {
         if (puzzleClearPanel != null)
         {
+            audioManager.PlaySFX(audioManager.taskComplete);
+
             puzzleClearPanel.SetActive(true);
         }
     }

@@ -12,6 +12,7 @@ TagManager:
   - Elevator
   - Puzzle
   - coin
+  - Audio
   layers:
   - Default
   - TransparentFX

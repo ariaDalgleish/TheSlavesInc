@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class DragDropPuzzle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    AudioManager audioManager;
     public GameObject targetObject;
     private bool isLocked = false;
     private Vector3 originalPosition;
@@ -10,6 +11,8 @@ public class DragDropPuzzle : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         originalPosition = transform.position; //save the initial position
     }
 
@@ -33,6 +36,8 @@ public class DragDropPuzzle : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             transform.position = targetObject.transform.position;
             isLocked = true;
+            audioManager.PlaySFX(audioManager.doubleDing);
+
         }
         else
         {

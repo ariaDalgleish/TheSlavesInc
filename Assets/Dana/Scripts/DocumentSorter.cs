@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DocumentSorter : MonoBehaviour, IPuzzle
 {
+    AudioManager audioManager;
     public Transform documentPile;
     public Transform wordStack;
     public Transform visualStack;
@@ -23,6 +24,8 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
 
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         resetManager = FindObjectOfType<PuzzleResetManager>(); // Find the reset manager in the scene
         Debug.Log("Puzzle Reset Manager found" + (resetManager != null));
 
@@ -43,11 +46,15 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
         if (Input.GetKeyDown(KeyCode.N))
         {
             SortDocument("WordType"); // Sort the document as a word type
+            audioManager.PlaySFX(audioManager.paper);
+
         }
         // If the player presses the B key
         else if (Input.GetKeyDown(KeyCode.M))
         {
             SortDocument("VisualType"); // Sort the document as a visual type
+            audioManager.PlaySFX(audioManager.paper);
+
         }
 
         // Check for 'E' key press to hide the panel
@@ -97,7 +104,8 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
             if (documentPile.childCount == 0)
             {
                 ShowPuzzleClearScreen();
-                
+                audioManager.PlaySFX(audioManager.taskComplete);
+
                 durabilitySystem.IncreaseDurability(); // Increase Durability when puzzle is completed' above the 'Debug.Log("Puzzle cleared!");
                 //puzzleCompleted = true;
                 Debug.Log("Game Cleared!");
@@ -114,6 +122,7 @@ public class DocumentSorter : MonoBehaviour, IPuzzle
     {
         if (puzzleClearPanel != null)
         {
+
             puzzleClearPanel.SetActive(true);
         }
     }

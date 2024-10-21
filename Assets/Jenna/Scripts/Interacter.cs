@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Interacter : MonoBehaviour
 {
     PhotonView pV;
-
+    AudioManager audioManager;
     public GameObject puzzlePanel;
     //public Button closeButton; // Reference to the close button
 
@@ -20,7 +20,7 @@ public class Interacter : MonoBehaviour
     {
         pV = GetComponent<PhotonView>();
         puzzlePanel.SetActive(false);
-
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // Assign the ClosePuzzlePanel method to the button's onClick event
         //closeButton.onClick.AddListener(ClosePuzzlePanel);
     }
@@ -70,8 +70,12 @@ public class Interacter : MonoBehaviour
         {
             Debug.Log("Panel interaction for Master Client or Player.");
 
+            audioManager.PlaySFX(audioManager.openPuzzle); // play sound effect
+
             isPanelActive = !puzzlePanel.activeSelf; // Properly toggle the panel's active state
             puzzlePanel.SetActive(isPanelActive);
+
+            
 
             Cursor.visible = isPanelActive; // Show cursor if the panel is active
             Cursor.lockState = isPanelActive ? CursorLockMode.None : CursorLockMode.Locked; // Unlock cursor if the panel is active

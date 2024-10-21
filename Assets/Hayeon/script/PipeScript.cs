@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PipeScript : MonoBehaviour, IPointerClickHandler
 {
+    AudioManager audioManager;
     float[] rotations = { 0, 90, 180, 270 };
 
     public float correctRotation;
@@ -19,6 +20,8 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         interacter = FindObjectOfType<Interacter>(); // Find the Interacter script in the scene
         puzzleClearManager = FindObjectOfType<PuzzleClearManager>(); // Find the Puzzle Clear Manager in the scene
         resetManager = FindObjectOfType<PRMDatasending>();
@@ -26,6 +29,8 @@ public class PipeScript : MonoBehaviour, IPointerClickHandler
         RandomizePipeRotation();
         CheckIfPlaced();
     }
+
+    
 
     private void Update()
     {

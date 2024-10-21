@@ -3,9 +3,12 @@ using UnityEngine;
 public class PuzzleClearManager : MonoBehaviour
 {
     public GameObject puzzleClearPanel; // Reference to the Puzzle Clear Panel
+    
+    AudioManager audioManager;
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // Ensure the panel is hidden initially
         if (puzzleClearPanel != null)
         {
@@ -27,6 +30,7 @@ public class PuzzleClearManager : MonoBehaviour
     {
         if (puzzleClearPanel != null)
         {
+            audioManager.PlaySFX(audioManager.taskComplete);
             puzzleClearPanel.SetActive(true);
             Debug.Log("Puzzle Clear Screen shown.");
         }
