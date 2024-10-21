@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
 {
-    PhotonView photonView;
+    
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;  // 300f = 5-minute timer
     public GameObject nextStageScreen;
@@ -24,7 +24,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsMasterClient)
         {
             remainingTime = 300f;  // Initialize timer
-            durabilitySystem.enabled = false;
+            //durabilitySystem.enabled = false;
         }
 
         PhotonNetwork.AutomaticallySyncScene = true;  // Ensure all players sync scenes
@@ -45,6 +45,7 @@ public class TimeLimit : MonoBehaviourPunCallbacks, IPunObservable
                 // Start durability when timer starts
                 if (remainingTime < 300f && !durabilitySystem.isDecreasing && !isDurabilityStarted)
                 {
+                   
                     durabilitySystem.StartDecreasingDurability();
                     isDurabilityStarted = true;
                 }

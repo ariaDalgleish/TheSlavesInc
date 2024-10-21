@@ -23,6 +23,16 @@ public class SolarPanel : MonoBehaviour
     private void Start()
     {
         puzzleClearPanel.SetActive(false); // Ensure the panel is hidden initially
+        
+
+        if (durabilitySystem != null)
+        {
+            // Increase durability
+        }
+        else
+        {
+            Debug.LogWarning("Durability is not assigned.");
+        }
 
         // If resetManager is not assigned in the inspector, try to find it
         if (resetManager == null)
@@ -37,6 +47,7 @@ public class SolarPanel : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.B) && !isFull))
         {
             Gauge += (MaxGauge / 3f) * Time.deltaTime;

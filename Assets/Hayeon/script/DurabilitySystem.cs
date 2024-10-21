@@ -14,13 +14,13 @@ public class DurabilitySystem : MonoBehaviour
     public float increaseAmount = 25f; // Durability increase amount when a puzzle is solved
     public bool isDecreasing = false; // Flag to control durability decrease
 
-    private void Start()
+    public void Start()
     {
         currentDurability = maxDurability;
         UpdateDurabilityBar();
     }
 
-    private void Update()
+    public void Update()
     {
         // Only decrease durability if the isDecreasing flag is true
         if (!isDecreasing) return;
@@ -60,11 +60,12 @@ public class DurabilitySystem : MonoBehaviour
         }
         UpdateDurabilityBar();
 
-        // Notify ScoreManager when a puzzle is solved
-        if (PhotonNetwork.IsMasterClient) // Only master client should modify the score
-        {
-            ScoreManager.Instance.AddPuzzleSolvedScore();
-        }
+        //// Notify ScoreManager when a puzzle is solved
+        //if (PhotonNetwork.IsMasterClient) // Only master client should modify the score
+        //{
+        //    ScoreManager.Instance.AddPuzzleSolvedScore();
+        //}
+
     }
 
     private void UpdateDurabilityBar()
